@@ -1,1759 +1,1177 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Ahmed Taha Ghodhbhani - Software Engineering student focused on full-stack web development, mobile apps, AI integration, REST APIs, and database-backed systems.">
-<title>Ahmed Taha Ghodhbhani | Software Engineering Portfolio</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --page: #f5f3ee;
-    --surface: #ffffff;
-    --surface-soft: #ebe7df;
-    --ink: #17201c;
-    --muted: #5f6863;
-    --subtle: #8a918c;
-    --line: #d9d4ca;
-    --line-strong: #bdb5a7;
-    --green: #1f6f50;
-    --blue: #245c94;
-    --clay: #9c5f3f;
-    --shadow: 0 22px 60px rgba(23, 32, 28, 0.08);
-  }
-
-  * {
-    box-sizing: border-box;
-  }
-
-  html {
-    scroll-behavior: smooth;
-    -webkit-text-size-adjust: 100%;
-  }
-
-  body {
-    margin: 0;
-    background:
-      linear-gradient(90deg, rgba(23, 32, 28, 0.035) 1px, transparent 1px),
-      linear-gradient(180deg, rgba(23, 32, 28, 0.025) 1px, transparent 1px),
-      var(--page);
-    background-size: 48px 48px;
-    color: var(--ink);
-    font-family: Inter, Arial, sans-serif;
-    line-height: 1.55;
-    overflow-x: hidden;
-  }
-
-  body.menu-open {
-    overflow: hidden;
-  }
-
-  a {
-    color: inherit;
-  }
-
-  .site-header {
-    position: sticky;
-    top: 0;
-    z-index: 20;
-    border-bottom: 1px solid rgba(217, 212, 202, 0.85);
-    background: rgba(245, 243, 238, 0.92);
-    backdrop-filter: blur(14px);
-  }
-
-  .nav {
-    width: min(1160px, calc(100% - 40px));
-    margin: 0 auto;
-    min-height: 72px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 28px;
-  }
-
-  .brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-    font-weight: 800;
-  }
-
-  .brand-mark {
-    width: 38px;
-    height: 38px;
-    border: 1px solid var(--ink);
-    display: grid;
-    place-items: center;
-    background: var(--ink);
-    color: var(--page);
-    font-size: 0.85rem;
-    transition: transform 180ms ease, background 180ms ease;
-  }
-
-  .brand:hover .brand-mark {
-    transform: translateY(-2px);
-    background: var(--green);
-  }
-
-  .brand-text {
-    display: grid;
-    line-height: 1.05;
-  }
-
-  .brand-text span:last-child {
-    color: var(--muted);
-    font-size: 0.78rem;
-    font-weight: 600;
-    margin-top: 3px;
-  }
-
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-  }
-
-  .menu-toggle {
-    display: none;
-    width: 42px;
-    height: 42px;
-    border: 1px solid var(--ink);
-    background: var(--page);
-    color: var(--ink);
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    cursor: pointer;
-    border-radius: 12px;
-    -webkit-tap-highlight-color: transparent;
-    transition: transform 160ms ease, background 160ms ease, box-shadow 160ms ease;
-  }
-
-  .menu-toggle:hover {
-    transform: translateY(-1px);
-    background: var(--surface);
-    box-shadow: 0 10px 24px rgba(23, 32, 28, 0.1);
-  }
-
-  .menu-toggle span {
-    position: relative;
-    width: 18px;
-    height: 2px;
-    background: currentColor;
-    transition: background 160ms ease;
-  }
-
-  .menu-toggle span::before,
-  .menu-toggle span::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    width: 18px;
-    height: 2px;
-    background: currentColor;
-    transition: transform 180ms ease, top 180ms ease;
-  }
-
-  .menu-toggle span::before {
-    top: -6px;
-  }
-
-  .menu-toggle span::after {
-    top: 6px;
-  }
-
-  body.menu-open .menu-toggle span {
-    background: transparent;
-  }
-
-  body.menu-open .menu-toggle span::before {
-    top: 0;
-    transform: rotate(45deg);
-  }
-
-  body.menu-open .menu-toggle span::after {
-    top: 0;
-    transform: rotate(-45deg);
-  }
-
-  .menu-backdrop {
-    display: none;
-  }
-
-  .nav-links a {
-    color: var(--muted);
-    font-size: 0.88rem;
-    font-weight: 700;
-    text-decoration: none;
-    transition: color 160ms ease, border-color 160ms ease, background 160ms ease;
-  }
-
-  .nav-links a:hover {
-    color: var(--ink);
-  }
-
-  .nav-links .nav-cta {
-    border: 1px solid var(--ink);
-    color: var(--ink);
-    padding: 9px 14px;
-    background: transparent;
-  }
-
-  .container {
-    width: min(1160px, calc(100% - 40px));
-    margin: 0 auto;
-  }
-
-  .hero {
-    padding: 88px 0 72px;
-  }
-
-  .hero .eyebrow,
-  .hero h1,
-  .hero .lead,
-  .hero-actions,
-  .profile-panel {
-    opacity: 0;
-    animation: fade-up 720ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-  }
-
-  .hero .eyebrow {
-    animation-delay: 80ms;
-  }
-
-  .hero h1 {
-    animation-delay: 180ms;
-  }
-
-  .hero .lead {
-    animation-delay: 300ms;
-  }
-
-  .hero-actions {
-    animation-delay: 420ms;
-  }
-
-  .profile-panel {
-    animation-delay: 520ms;
-  }
-
-  .hero-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.75fr);
-    gap: 56px;
-    align-items: end;
-  }
-
-  .eyebrow {
-    margin: 0 0 20px;
-    color: var(--green);
-    font-size: 0.78rem;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  h1,
-  h2,
-  h3,
-  p {
-    margin-top: 0;
-  }
-
-  h1 {
-    max-width: 880px;
-    margin-bottom: 24px;
-    font-size: clamp(3rem, 7vw, 6.7rem);
-    line-height: 0.95;
-    font-weight: 800;
-  }
-
-  .lead {
-    max-width: 720px;
-    color: var(--muted);
-    font-size: clamp(1.06rem, 1.6vw, 1.25rem);
-  }
-
-  .hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 32px;
-  }
-
-  .button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 46px;
-    padding: 0 18px;
-    border: 1px solid var(--ink);
-    background: var(--ink);
-    color: var(--page);
-    font-weight: 800;
-    text-decoration: none;
-    transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  .button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 26px rgba(23, 32, 28, 0.12);
-  }
-
-  .button.secondary {
-    background: transparent;
-    color: var(--ink);
-  }
-
-  .button.secondary:hover {
-    background: var(--surface-soft);
-  }
-
-  .profile-panel {
-    border: 1px solid var(--line-strong);
-    background: rgba(255, 255, 255, 0.68);
-    box-shadow: var(--shadow);
-    transform-origin: center;
-  }
-
-  .profile-top {
-    padding: 22px;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .profile-name {
-    margin: 0 0 8px;
-    font-size: 1.45rem;
-    line-height: 1.1;
-    font-weight: 800;
-  }
-
-  .profile-role {
-    margin: 0;
-    color: var(--muted);
-    font-weight: 600;
-  }
-
-  .profile-list {
-    display: grid;
-  }
-
-  .profile-row {
-    display: grid;
-    grid-template-columns: 110px 1fr;
-    gap: 16px;
-    padding: 15px 22px;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .profile-row:last-child {
-    border-bottom: 0;
-  }
-
-  .profile-row span:first-child {
-    color: var(--subtle);
-    font-size: 0.75rem;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .profile-row span:last-child,
-  .profile-row a {
-    color: var(--ink);
-    font-size: 0.94rem;
-    font-weight: 700;
-    text-decoration: none;
-    overflow-wrap: anywhere;
-  }
-
-  .section {
-    padding: 72px 0;
-    border-top: 1px solid var(--line);
-  }
-
-  .section-head,
-  .highlight,
-  .skill-block,
-  .project,
-  .timeline-card,
-  .cert-card,
-  .language-card,
-  .contact-panel {
-    animation: fade-up linear both;
-    animation-timeline: view();
-    animation-range: entry 0% cover 24%;
-  }
-
-  .section-head {
-    display: grid;
-    grid-template-columns: 0.36fr 1fr;
-    gap: 40px;
-    margin-bottom: 34px;
-  }
-
-  .section-kicker {
-    color: var(--green);
-    font-size: 0.78rem;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  h2 {
-    margin-bottom: 12px;
-    font-size: clamp(2rem, 3.3vw, 3.2rem);
-    line-height: 1;
-    font-weight: 800;
-  }
-
-  .section-copy {
-    max-width: 760px;
-    color: var(--muted);
-    font-size: 1.03rem;
-  }
-
-  .highlights {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    border: 1px solid var(--line-strong);
-    background: rgba(255, 255, 255, 0.45);
-  }
-
-  .highlight {
-    min-height: 148px;
-    padding: 22px;
-    border-right: 1px solid var(--line);
-    transition: transform 180ms ease, background 180ms ease;
-  }
-
-  .highlight:hover {
-    transform: translateY(-4px);
-    background: rgba(255, 255, 255, 0.72);
-  }
-
-  .highlight:last-child {
-    border-right: 0;
-  }
-
-  .highlight strong {
-    display: block;
-    margin-bottom: 12px;
-    font-size: 1.15rem;
-  }
-
-  .highlight span {
-    color: var(--muted);
-    font-size: 0.94rem;
-  }
-
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-
-  .skill-block,
-  .project,
-  .timeline-card,
-  .cert-card,
-  .language-card {
-    border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.62);
-  }
-
-  .skill-block {
-    padding: 24px;
-    transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
-  }
-
-  .skill-block:hover {
-    transform: translateY(-4px);
-    border-color: var(--line-strong);
-    box-shadow: 0 16px 34px rgba(23, 32, 28, 0.07);
-  }
-
-  .skill-block h3,
-  .project h3,
-  .timeline-card h3,
-  .cert-card h3 {
-    margin-bottom: 12px;
-    font-size: 1.08rem;
-  }
-
-  .pill-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .pill {
-    border: 1px solid var(--line-strong);
-    background: var(--page);
-    color: var(--ink);
-    padding: 7px 10px;
-    font-size: 0.82rem;
-    font-weight: 700;
-    transition: transform 150ms ease, border-color 150ms ease, background 150ms ease;
-  }
-
-  .pill:hover {
-    transform: translateY(-2px);
-    border-color: var(--green);
-    background: rgba(31, 111, 80, 0.07);
-  }
-
-  .projects-grid {
-    display: grid;
-    gap: 14px;
-  }
-
-  .project {
-    display: grid;
-    grid-template-columns: 110px 1fr;
-    min-height: 210px;
-    transition: transform 190ms ease, border-color 190ms ease, box-shadow 190ms ease;
-  }
-
-  .project:hover {
-    transform: translateY(-5px);
-    border-color: var(--line-strong);
-    box-shadow: 0 18px 40px rgba(23, 32, 28, 0.08);
-  }
-
-  .project-index {
-    padding: 24px;
-    border-right: 1px solid var(--line);
-    color: var(--subtle);
-    font-weight: 800;
-    transition: color 180ms ease, background 180ms ease;
-  }
-
-  .project:hover .project-index {
-    color: var(--green);
-    background: rgba(31, 111, 80, 0.06);
-  }
-
-  .project-body {
-    padding: 24px;
-  }
-
-  .project-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 14px;
-  }
-
-  .tag {
-    border: 1px solid var(--line);
-    color: var(--muted);
-    padding: 4px 8px;
-    font-size: 0.76rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    transition: transform 150ms ease;
-  }
-
-  .project:hover .tag {
-    transform: translateY(-1px);
-  }
-
-  .tag.primary {
-    border-color: rgba(31, 111, 80, 0.38);
-    color: var(--green);
-    background: rgba(31, 111, 80, 0.07);
-  }
-
-  .tag.blue {
-    border-color: rgba(36, 92, 148, 0.34);
-    color: var(--blue);
-    background: rgba(36, 92, 148, 0.07);
-  }
-
-  .tag.clay {
-    border-color: rgba(156, 95, 63, 0.34);
-    color: var(--clay);
-    background: rgba(156, 95, 63, 0.07);
-  }
-
-  .project p {
-    max-width: 780px;
-    margin-bottom: 18px;
-    color: var(--muted);
-  }
-
-  .project ul,
-  .timeline-card ul {
-    margin: 0;
-    padding-left: 18px;
-    color: var(--muted);
-  }
-
-  .project li,
-  .timeline-card li {
-    margin-bottom: 8px;
-  }
-
-  .timeline-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-
-  .timeline-card {
-    padding: 26px;
-    transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
-  }
-
-  .timeline-card:hover,
-  .cert-card:hover,
-  .language-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--line-strong);
-    box-shadow: 0 16px 34px rgba(23, 32, 28, 0.07);
-  }
-
-  .timeline-date {
-    margin-bottom: 10px;
-    color: var(--green);
-    font-size: 0.78rem;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .timeline-subtitle {
-    margin-bottom: 18px;
-    color: var(--muted);
-    font-weight: 700;
-  }
-
-  .gpa {
-    display: inline-flex;
-    margin-top: 18px;
-    border: 1px solid var(--line-strong);
-    background: var(--page);
-  }
-
-  .gpa span {
-    padding: 8px 11px;
-    font-weight: 800;
-  }
-
-  .gpa span:first-child {
-    border-right: 1px solid var(--line-strong);
-    color: var(--muted);
-  }
-
-  .cert-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-
-  .cert-card {
-    padding: 22px;
-    min-height: 158px;
-    transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
-  }
-
-  .cert-provider {
-    margin-bottom: 12px;
-    color: var(--green);
-    font-size: 0.78rem;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .cert-card p {
-    margin: 0;
-    color: var(--muted);
-    font-size: 0.9rem;
-  }
-
-  .language-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-
-  .language-card {
-    padding: 20px;
-    transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
-  }
-
-  .language-card strong {
-    display: block;
-    margin-bottom: 6px;
-    font-size: 1.04rem;
-  }
-
-  .language-card span {
-    color: var(--muted);
-    font-weight: 700;
-  }
-
-  .contact {
-    padding: 72px 0 90px;
-    border-top: 1px solid var(--line);
-  }
-
-  .contact-panel {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 28px;
-    align-items: center;
-    border: 1px solid var(--ink);
-    background: var(--ink);
-    color: var(--page);
-    padding: 34px;
-  }
-
-  .contact-panel h2 {
-    margin-bottom: 10px;
-    color: var(--page);
-  }
-
-  .contact-panel p {
-    max-width: 650px;
-    margin-bottom: 0;
-    color: rgba(245, 243, 238, 0.72);
-  }
-
-  .contact-actions {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: 10px;
-  }
-
-  .contact-actions a {
-    border: 1px solid rgba(245, 243, 238, 0.34);
-    padding: 11px 13px;
-    color: var(--page);
-    font-size: 0.9rem;
-    font-weight: 800;
-    text-decoration: none;
-    transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
-  }
-
-  .contact-actions a:hover {
-    background: rgba(245, 243, 238, 0.1);
-    transform: translateY(-2px);
-  }
-
-  @keyframes fade-up {
-    from {
-      opacity: 0;
-      transform: translateY(22px);
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ahmed Taha Ghodhbhani - Software Engineering student focused on full-stack web application development, REST APIs, authentication, databases, AI integration, and supporting mobile app work.">
+  <meta name="theme-color" content="#09090b">
+  <title>Ahmed Taha Ghodhbhani | Software Engineering Portfolio</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #fafafa;
+      --bg-card: #ffffff;
+      --bg-muted: #f4f4f5;
+      --text: #27272a;
+      --text-strong: #09090b;
+      --text-muted: #71717a;
+      --border: #e4e4e7;
+      --border-strong: #a1a1aa;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --accent-bg: #eff6ff;
+      --accent-text: #1e40af;
+      --accent-border: #bfdbfe;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --shadow: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.02);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+      --radius: 12px;
+      --radius-sm: 6px;
+      --max-width: 1200px;
+      --transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    to {
-      opacity: 1;
-      transform: translateY(0);
+
+    [data-theme="dark"] {
+      --bg: #09090b;
+      --bg-card: #141417;
+      --bg-muted: #1c1c1f;
+      --text: #d4d4d8;
+      --text-strong: #fafafa;
+      --text-muted: #a1a1aa;
+      --border: #27272a;
+      --border-strong: #52525b;
+      --primary: #3b82f6;
+      --primary-hover: #60a5fa;
+      --accent-bg: #172554;
+      --accent-text: #93c5fd;
+      --accent-border: #1e3a8a;
+      --shadow: 0 0 0 1px rgba(0,0,0,0.5);
+      --shadow-md: 0 4px 20px rgba(0,0,0,0.3);
     }
-  }
 
-  @keyframes soft-float {
-    0%, 100% {
-      transform: translateY(0);
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-    50% {
-      transform: translateY(-8px);
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 100px;
     }
-  }
 
-  .profile-panel {
-    animation-name: fade-up, soft-float;
-    animation-duration: 720ms, 6s;
-    animation-delay: 520ms, 1.4s;
-    animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1), ease-in-out;
-    animation-fill-mode: forwards, none;
-    animation-iteration-count: 1, infinite;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-      scroll-behavior: auto !important;
-      animation-duration: 1ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 1ms !important;
-    }
-  }
-
-  footer {
-    border-top: 1px solid var(--line);
-    padding: 28px 0;
-    color: var(--muted);
-    font-size: 0.9rem;
-  }
-
-  .footer-inner {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-  }
-
-  @media (max-width: 900px) {
     body {
-      background-size: 40px 40px;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
-    .site-header {
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    /* Focus & Accessibility States */
+    a, button {
+      transition: var(--transition);
+    }
+    
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 4px;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 20px;
+      background: var(--primary);
+      color: white;
+      padding: 10px 20px;
+      z-index: 1000;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .skip-link:focus {
+      top: 20px;
+    }
+
+    /* Layout Components */
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Navigation Header */
+    .header {
       position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250, 250, 250, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    [data-theme="dark"] .header {
+      background: rgba(9, 9, 11, 0.8);
+    }
+    [data-theme="light"] .header {
+      background: rgba(250, 250, 250, 0.8);
     }
 
     .nav {
-      min-height: auto;
-      padding: 16px 0;
+      display: flex;
       align-items: center;
-      flex-direction: row;
-      gap: 14px;
+      justify-content: space-between;
+      height: 72px;
     }
 
-    .nav-links {
-      gap: 16px;
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-strong);
+      font-weight: 700;
+      font-size: 1.1rem;
     }
 
-    .nav-links a {
-      flex: 0 0 auto;
+    .logo-box {
+      background: var(--text-strong);
+      color: var(--bg);
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-sm);
+      font-weight: 800;
+      font-size: 0.95rem;
     }
 
-    .nav-links .nav-cta {
-      padding: 0 14px;
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 32px;
     }
 
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 500;
+    }
+
+    .nav-link:hover {
+      color: var(--text-strong);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-strong);
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-toggle:hover {
+      background: var(--bg-muted);
+      border-color: var(--border-strong);
+    }
+
+    .btn-menu {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-strong);
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      position: relative;
+      z-index: 200;
+    }
+
+    /* Hero Section */
     .hero {
-      padding: 52px 0 60px;
-    }
-
-    .hero-grid,
-    .section-head,
-    .timeline-grid,
-    .contact-panel {
-      grid-template-columns: 1fr;
+      padding: 96px 0 80px 0;
     }
 
     .hero-grid {
-      gap: 34px;
-      align-items: start;
-    }
-
-    h1 {
-      max-width: 680px;
-      line-height: 0.98;
-    }
-
-    h2 {
-      line-height: 1.04;
-    }
-
-    .section-head {
-      gap: 12px;
-      margin-bottom: 26px;
-    }
-
-    .profile-panel {
-      max-width: 560px;
-      width: 100%;
-    }
-
-    .highlights,
-    .cert-grid,
-    .language-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .highlight:nth-child(2) {
-      border-right: 0;
-    }
-
-    .highlight:nth-child(-n+2) {
-      border-bottom: 1px solid var(--line);
-    }
-
-    .contact-actions {
-      justify-content: flex-start;
-    }
-  }
-
-  @media (max-width: 640px) {
-    body {
-      background:
-        linear-gradient(90deg, rgba(23, 32, 28, 0.03) 1px, transparent 1px),
-        linear-gradient(180deg, rgba(23, 32, 28, 0.025) 1px, transparent 1px),
-        var(--page);
-      background-size: 32px 32px;
-    }
-
-    .container,
-    .nav {
-      width: min(100% - 32px, 1160px);
-    }
-
-    .site-header {
-      box-shadow: 0 10px 26px rgba(23, 32, 28, 0.06);
-    }
-
-    .nav {
-      padding: 12px 0 10px;
-      gap: 10px;
-      justify-content: space-between;
-    }
-
-    .brand {
-      width: auto;
-      min-width: 0;
-      gap: 10px;
-    }
-
-    .brand-mark {
-      width: 34px;
-      height: 34px;
-      font-size: 0.78rem;
-      flex: 0 0 auto;
-    }
-
-    .brand-text {
-      min-width: 0;
-    }
-
-    .brand-text span:first-child {
-      max-width: calc(100vw - 126px);
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      font-size: 0.96rem;
-    }
-
-    .brand-text span:last-child {
-      font-size: 0.72rem;
-    }
-
-    .menu-toggle {
-      display: inline-flex;
-      position: relative;
-      z-index: 60;
-    }
-
-    body.menu-open .menu-toggle {
-      position: fixed;
-      top: 24px;
-      right: 24px;
-      background: var(--surface);
-      box-shadow: 0 12px 30px rgba(23, 32, 28, 0.14);
-    }
-
-    .menu-backdrop {
-      display: block;
-      position: fixed;
-      inset: 0;
-      z-index: 40;
-      background: rgba(23, 32, 28, 0.48);
-      backdrop-filter: blur(8px);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 180ms ease;
-    }
-
-    body.menu-open .menu-backdrop {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .nav-links {
-      position: fixed;
-      top: 12px;
-      right: 12px;
-      bottom: 12px;
-      z-index: 50;
-      width: min(86vw, 350px);
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      gap: 10px;
-      padding: 86px 14px 16px;
-      border: 1px solid rgba(23, 32, 28, 0.12);
-      border-radius: 22px;
-      background: #fffdf8;
-      box-shadow: -24px 24px 70px rgba(23, 32, 28, 0.24);
-      transform: translateX(calc(100% + 18px));
-      transition: transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
-    }
-
-    .nav-links::before {
-      content: "Navigation";
-      position: absolute;
-      top: 24px;
-      left: 18px;
-      color: var(--ink);
-      font-size: 1.02rem;
-      font-weight: 800;
-    }
-
-    .nav-links::after {
-      content: "Ahmed Taha Ghodhbhani";
-      margin-top: auto;
-      border-top: 1px solid var(--line);
-      padding: 16px 4px 2px;
-      color: var(--muted);
-      font-size: 0.82rem;
-      font-weight: 700;
-    }
-
-    body.menu-open .nav-links {
-      transform: translateX(0);
-    }
-
-    .nav-links a,
-    .nav-links .nav-cta {
-      min-height: 52px;
-      width: 100%;
-      display: flex;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 64px;
       align-items: center;
-      border: 0;
-      border-radius: 14px;
-      background: transparent;
-      color: var(--ink);
-      padding: 0 16px;
-      font-size: 1rem;
+    }
+
+    .tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-bg);
+      color: var(--accent-text);
+      border: 1px solid var(--accent-border);
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      margin-bottom: 24px;
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 5vw, 3.75rem);
       font-weight: 800;
-      transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+      line-height: 1.1;
+      color: var(--text-strong);
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
     }
 
-    .nav-links a:hover {
-      background: var(--surface-soft);
-      color: var(--ink);
-      transform: translateX(2px);
+    .hero-desc {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+      max-width: 620px;
     }
 
-    .nav-links .nav-cta {
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
       justify-content: center;
-      background: var(--ink);
-      color: var(--page);
-      margin-top: 6px;
-      box-shadow: 0 14px 28px rgba(23, 32, 28, 0.16);
+      padding: 12px 24px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      gap: 8px;
     }
 
-    .nav-links .nav-cta:hover {
-      background: var(--green);
-      color: #fff;
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+      border: 1px solid var(--primary);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
       transform: translateY(-1px);
     }
 
-    .hero {
-      padding: 34px 0 48px;
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-strong);
+      border: 1px solid var(--border);
     }
 
-    .hero-grid {
-      gap: 26px;
+    .btn-secondary:hover {
+      background: var(--bg-muted);
+      border-color: var(--border-strong);
+      transform: translateY(-1px);
     }
 
-    h1 {
-      font-size: clamp(2.35rem, 13vw, 3.75rem);
-      margin-bottom: 18px;
-      overflow-wrap: anywhere;
+    /* System Quick Specs Block */
+    .hero-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
     }
 
-    h2 {
-      font-size: clamp(1.8rem, 9vw, 2.55rem);
-      margin-bottom: 10px;
+    .card-header {
+      background: var(--bg-muted);
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    h3 {
-      line-height: 1.18;
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--border-strong);
+    }
+    .dot-active { background: #10b981; }
+
+    .card-header-title {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-strong);
     }
 
-    .eyebrow,
-    .section-kicker,
-    .timeline-date,
-    .cert-provider {
-      font-size: 0.72rem;
-      letter-spacing: 0.06em;
+    .info-list {
+      list-style: none;
     }
 
-    .lead,
-    .section-copy {
-      font-size: 1rem;
-      line-height: 1.65;
-    }
-
-    .hero-actions,
-    .contact-actions {
+    .info-item {
       display: grid;
-      gap: 10px;
+      grid-template-columns: 100px 1fr;
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
     }
 
-    .button,
-    .contact-actions a {
-      width: 100%;
-      min-height: 48px;
+    .info-item:last-child {
+      border-bottom: none;
     }
 
-    .profile-top,
-    .project-body,
-    .timeline-card,
-    .skill-block,
-    .cert-card,
-    .language-card {
-      padding: 20px;
+    .info-label {
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
-    .profile-name {
-      font-size: 1.24rem;
+    .info-value {
+      color: var(--text-strong);
+      font-weight: 500;
     }
 
-    .profile-row {
-      grid-template-columns: 1fr;
-      gap: 4px;
-      padding: 13px 20px;
-    }
-
-    .highlights,
-    .skills-grid,
-    .cert-grid,
-    .language-grid,
-    .project {
-      grid-template-columns: 1fr;
-    }
-
-    .highlight {
-      min-height: auto;
-      padding: 20px;
-    }
-
-    .highlight,
-    .highlight:nth-child(2) {
-      border-right: 0;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .highlight:last-child {
-      border-bottom: 0;
-    }
-
-    .project-index {
-      border-right: 0;
-      border-bottom: 1px solid var(--line);
-      padding: 14px 20px;
-      background: rgba(255, 255, 255, 0.48);
-    }
-
-    .project {
-      min-height: 0;
-    }
-
-    .project-meta {
-      gap: 6px;
-      margin-bottom: 12px;
-    }
-
-    .tag {
-      padding: 4px 7px;
-      font-size: 0.68rem;
-    }
-
-    .project p {
-      margin-bottom: 14px;
-    }
-
-    .project ul,
-    .timeline-card ul {
-      padding-left: 17px;
-    }
-
-    .project li,
-    .timeline-card li {
-      margin-bottom: 7px;
-    }
-
-    .section,
-    .contact {
-      padding: 50px 0;
+    /* Section Global Baseline */
+    .section {
+      padding: 96px 0;
+      border-top: 1px solid var(--border);
     }
 
     .section-head {
-      gap: 10px;
-      margin-bottom: 22px;
+      margin-bottom: 56px;
+      max-width: 700px;
     }
 
-    .pill-list {
-      gap: 7px;
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      margin-bottom: 12px;
+      display: block;
     }
 
-    .pill {
-      padding: 7px 9px;
+    .section-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-strong);
+      letter-spacing: -0.02em;
+    }
+
+    /* Projects Architecture */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: var(--shadow);
+    }
+
+    .project-card:hover {
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .project-top {
+      margin-bottom: 24px;
+    }
+
+    .project-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .project-scope {
+      font-family: var(--font-mono);
       font-size: 0.78rem;
+      color: var(--text-muted);
+      background: var(--bg-muted);
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
     }
 
-    .gpa {
-      width: 100%;
+    .project-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text-strong);
+      margin-bottom: 12px;
     }
 
-    .gpa span:last-child {
-      flex: 1;
-      text-align: center;
+    .project-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
     }
 
-    .contact-panel {
-      padding: 24px 20px;
-      gap: 22px;
+    .project-tasks {
+      padding-left: 18px;
+      font-size: 0.9rem;
+      color: var(--text);
     }
 
-    .contact-panel p {
-      line-height: 1.65;
+    .project-tasks li {
+      margin-bottom: 8px;
     }
 
-    .contact-actions a {
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: auto;
+      padding-top: 24px;
+    }
+
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      background: var(--bg-muted);
+      color: var(--text-strong);
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+    }
+
+    /* Skills Grid Matrix */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .skills-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+
+    .skills-card h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-strong);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* Timeline & Background Architecture */
+    .timeline-layout {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 48px;
+    }
+
+    .edu-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+    }
+
+    .edu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .edu-title h3 {
+      font-size: 1.25rem;
+      color: var(--text-strong);
+      font-weight: 700;
+    }
+
+    .edu-inst {
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-top: 2px;
+    }
+
+    .edu-date {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      background: var(--bg-muted);
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+    }
+
+    .edu-details {
+      padding-left: 18px;
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+    }
+    .edu-details li { margin-bottom: 8px; }
+
+    .gpa-tag {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-    }
-
-    .footer-inner {
-      flex-direction: column;
       gap: 8px;
-      font-size: 0.84rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      font-size: 0.9rem;
+    }
+    .gpa-lbl {
+      background: var(--bg-muted);
+      padding: 6px 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .gpa-val {
+      padding: 6px 12px;
+      color: var(--text-strong);
+      font-weight: 700;
     }
 
-    .profile-panel {
-      animation-name: fade-up;
-      animation-duration: 620ms;
-      animation-delay: 420ms;
-      animation-iteration-count: 1;
+    /* Credentials Sub-system */
+    .cert-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
     }
 
-    .section-head,
-    .highlight,
-    .skill-block,
-    .project,
-    .timeline-card,
-    .cert-card,
-    .language-card,
+    .cert-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .cert-issuer {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .cert-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-strong);
+      margin-bottom: 12px;
+    }
+
+    .cert-id {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      word-break: break-all;
+      background: var(--bg-muted);
+      padding: 6px;
+      border-radius: var(--radius-sm);
+    }
+
+    /* Contact Block panel */
     .contact-panel {
-      animation-range: entry 0% cover 16%;
+      background: var(--text-strong);
+      color: var(--bg);
+      border-radius: var(--radius);
+      padding: 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 48px;
     }
 
-    .button:hover,
-    .highlight:hover,
-    .skill-block:hover,
-    .project:hover,
-    .timeline-card:hover,
-    .cert-card:hover,
-    .language-card:hover,
-    .contact-actions a:hover {
-      transform: none;
-      box-shadow: none;
+    .contact-text h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
     }
 
-    .nav-links a:hover,
-    .nav-links .nav-cta:hover,
-    .menu-toggle:hover {
-      transform: none;
-    }
-  }
-
-  @media (max-width: 380px) {
-    .container,
-    .nav {
-      width: min(100% - 24px, 1160px);
+    .contact-text p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 520px;
     }
 
-    .nav-links {
-      top: 8px;
-      right: 8px;
-      bottom: 8px;
-      width: min(88vw, 310px);
-      padding-left: 14px;
-      padding-right: 14px;
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      min-width: 340px;
     }
 
-    body.menu-open .menu-toggle {
-      top: 20px;
-      right: 20px;
+    .contact-btn {
+      background: transparent;
+      border: 1px solid rgba(9, 9, 11, 0.22);
+      color: var(--bg);
+      text-align: center;
+      padding: 12px;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
     }
 
-    h1 {
-      font-size: clamp(2.08rem, 12.5vw, 3rem);
+    [data-theme="dark"] .contact-btn {
+      background: transparent;
+      border-color: rgba(9, 9, 11, 0.28);
+    }
+    [data-theme="light"] .contact-btn {
+      background: transparent;
+      border-color: rgba(250, 250, 250, 0.34);
     }
 
-    .profile-top,
-    .project-body,
-    .timeline-card,
-    .skill-block,
-    .cert-card,
-    .language-card,
-    .highlight,
-    .contact-panel {
-      padding: 18px;
+    .contact-btn:hover {
+      background: var(--bg);
+      color: var(--text-strong);
+      border-color: var(--bg);
     }
 
-    .profile-row {
-      padding-left: 18px;
-      padding-right: 18px;
+    /* Footer structure */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0;
+      font-size: 0.88rem;
+      color: var(--text-muted);
     }
-  }
-</style>
+
+    .footer-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Animation Reveal Engines */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+      html {
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* Responsive Breakthrough Systems */
+    @media (max-width: 1024px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+      .projects-grid { grid-template-columns: 1fr; gap: 24px; }
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+      .timeline-layout { grid-template-columns: 1fr; gap: 32px; }
+      .cert-list { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: var(--bg-card);
+        border-left: 1px solid var(--border);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 96px 32px;
+        gap: 24px;
+        z-index: 150;
+        transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      body.menu-open .nav-menu { right: 0; }
+      .btn-menu { display: block; }
+      
+      .contact-panel { flex-direction: column; align-items: stretch; padding: 32px; gap: 32px; }
+      .contact-grid { min-width: 100%; }
+      .cert-list { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .skills-grid { grid-template-columns: 1fr; }
+      .hero-btns .btn { width: 100%; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .info-item { grid-template-columns: 1fr; gap: 4px; }
+      .footer-flex { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
 </head>
 <body>
-  <header class="site-header">
-    <nav class="nav" aria-label="Main navigation">
-      <a class="brand" href="#top" aria-label="Ahmed Taha Ghodhbhani home">
-        <span class="brand-mark">AT</span>
-        <span class="brand-text">
-          <span>Ahmed Taha Ghodhbhani</span>
-          <span>Software Engineering Student</span>
-        </span>
+
+  <a class="skip-link" href="#main-content">Skip to Main Content</a>
+
+  <header class="header">
+    <div class="container nav">
+      <a class="logo" href="#top" aria-label="Ahmed Taha Home">
+        <span class="logo-box" aria-hidden="true">AT</span>
+        <span>Ahmed Taha Ghodhbhani</span>
       </a>
-      <button class="menu-toggle" type="button" aria-label="Open menu" aria-controls="navLinks" aria-expanded="false">
-        <span aria-hidden="true"></span>
-      </button>
-      <div class="nav-links" id="navLinks">
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#education">Education</a>
-        <a href="#certifications">Certifications</a>
-        <a class="nav-cta" href="#contact">Contact</a>
+
+      <nav class="nav-menu" id="navMenu" aria-label="Primary Site Navigation">
+        <a class="nav-link" href="#projects">Projects</a>
+        <a class="nav-link" href="#skills">Skills</a>
+        <a class="nav-link" href="#education">Background</a>
+        <a class="nav-link" href="#certifications">Certification</a>
+        <a class="nav-link" href="#contact">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="btn-toggle" id="themeToggle" type="button" aria-label="Toggle theme" title="Toggle theme">
+          <svg class="theme-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93 1.41 1.41M17.66 17.66 1.41 1.41M2 12h2M20 12h2M6.34 17.66-1.41 1.41M19.07 4.93-1.41 1.41"></path></svg>
+        </button>
+        <button class="btn-menu" id="menuToggle" type="button" aria-label="Toggle contextual mobile configuration drawer" aria-controls="navMenu" aria-expanded="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="18" x2="20" y2="18"></line></svg>
+        </button>
       </div>
-    </nav>
-    <button class="menu-backdrop" type="button" aria-label="Close menu"></button>
+    </div>
   </header>
 
-  <main id="top">
-    <section class="hero">
-      <div class="container">
-        <div class="hero-grid">
-          <div>
-            <p class="eyebrow">Full-stack web, mobile, AI integration</p>
-            <h1>Software engineering portfolio for practical systems.</h1>
-            <p class="lead">
-              I build database-backed web and mobile applications with clear architecture,
-              reliable authentication, REST APIs, and focused user flows. Currently studying
-              Software Engineering at the University of Bahrain.
-            </p>
-            <div class="hero-actions">
-              <a class="button" href="#projects">View selected work</a>
-              <a class="button secondary" href="mailto:ahmedtahaghodhbhani@gmail.com">Email me</a>
-            </div>
+  <main id="main-content">
+    
+    <section class="hero" id="top">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <div class="tagline">Full-Stack Web Apps | REST APIs | AI Integration</div>
+          <h1 class="hero-title">Software engineering student building practical web applications.</h1>
+          <p class="hero-desc">
+            I am a Software Engineering student at the University of Bahrain focused on full-stack web application development, REST APIs, authentication, databases, and AI integration, with supporting experience in mobile apps.
+          </p>
+          <div class="hero-btns">
+            <a class="btn btn-primary" href="#projects">View projects</a>
+            <a class="btn btn-secondary" href="mailto:ahmedtahaghodhbhani@gmail.com">Email me</a>
           </div>
-
-          <aside class="profile-panel" aria-label="Profile summary">
-            <div class="profile-top">
-              <p class="profile-name">Ahmed Taha Ghodhbhani</p>
-              <p class="profile-role">Software Engineering student based in Riffa, Bahrain.</p>
-            </div>
-            <div class="profile-list">
-              <div class="profile-row">
-                <span>Focus</span>
-                <span>Full-stack, mobile, AI, databases</span>
-              </div>
-              <div class="profile-row">
-                <span>Education</span>
-                <span>B.Sc. Software Engineering, UOB</span>
-              </div>
-              <div class="profile-row">
-                <span>GPA</span>
-                <span>3.19 / 4.00</span>
-              </div>
-              <div class="profile-row">
-                <span>Location</span>
-                <span>Riffa, Bahrain</span>
-              </div>
-              <div class="profile-row">
-                <span>Email</span>
-                <a href="mailto:ahmedtahaghodhbhani@gmail.com">ahmedtahaghodhbhani@gmail.com</a>
-              </div>
-            </div>
-          </aside>
         </div>
+
+        <aside class="hero-card reveal" aria-label="Profile summary">
+          <div class="card-header">
+            <div class="dot dot-active"></div>
+            <div class="card-header-title">Profile</div>
+          </div>
+          <ul class="info-list">
+            <li class="info-item">
+              <span class="info-label">Engineer</span>
+              <span class="info-value">Ahmed Taha Ghodhbhani</span>
+            </li>
+            <li class="info-item">
+              <span class="info-label">Education</span>
+              <span class="info-value">B.Sc. Software Engineering, University of Bahrain</span>
+            </li>
+            <li class="info-item">
+              <span class="info-label">Focus</span>
+              <span class="info-value">Full-stack web apps, REST APIs, authentication, databases, AI integration</span>
+            </li>
+            <li class="info-item">
+              <span class="info-label">Location</span>
+              <span class="info-value">Riffa, Bahrain</span>
+            </li>
+          </ul>
+        </aside>
       </div>
     </section>
 
-    <section class="section" id="about">
+    <section class="section" id="projects">
       <div class="container">
-        <div class="section-head">
-          <div class="section-kicker">About</div>
-          <div>
-            <h2>Engineering with product sense.</h2>
-            <p class="section-copy">
-              My work sits where practical software engineering meets useful product thinking:
-              clean interfaces, secure data operations, role-based access, and systems that
-              can be explained, tested, and improved by a team.
-            </p>
-          </div>
+        <div class="section-head reveal">
+          <span class="section-label">Projects</span>
+          <h2 class="section-title">Selected software projects</h2>
         </div>
 
-        <div class="highlights">
-          <div class="highlight">
-            <strong>Production-style builds</strong>
-            <span>Projects use real authentication, database design, APIs, admin flows, and user roles.</span>
-          </div>
-          <div class="highlight">
-            <strong>AI integration</strong>
-            <span>Gemini API, structured prompts, chatbot editing, and personalized recommendation workflows.</span>
-          </div>
-          <div class="highlight">
-            <strong>Team-ready habits</strong>
-            <span>Git/GitHub, documentation, collaboration, problem solving, and attention to detail.</span>
-          </div>
-          <div class="highlight">
-            <strong>Strong foundations</strong>
-            <span>Coursework in algorithms, databases, testing, security, cloud, mobile, and distributed computing.</span>
-          </div>
+        <div class="projects-grid">
+          
+          <article class="project-card reveal">
+            <div class="project-top">
+              <div class="project-meta">
+                <span class="project-scope">Senior Project</span>
+              </div>
+              <h3 class="project-title">Alsaeh Tourism Recommender System for Bahrain</h3>
+              <p class="project-desc">AI-powered tourism recommender that generates personalized day-by-day itineraries for Bahrain using Gemini API and structured prompt workflows.</p>
+              <ul class="project-tasks">
+                <li>Built a Next.js frontend, FastAPI backend, and Supabase PostgreSQL database.</li>
+                <li>Implemented authentication, saved plans, chatbot-based itinerary editing, admin dataset management, and usage reports.</li>
+              </ul>
+            </div>
+            <div class="project-tags">
+              <span class="tag">Next.js</span><span class="tag">FastAPI</span><span class="tag">Supabase</span><span class="tag">PostgreSQL</span><span class="tag">Gemini API</span>
+            </div>
+          </article>
+
+          <article class="project-card reveal">
+            <div class="project-top">
+              <div class="project-meta">
+                <span class="project-scope">Flutter / Firebase</span>
+              </div>
+              <h3 class="project-title">Care Center App</h3>
+              <p class="project-desc">Mobile application for medical equipment rentals and donations with Firebase authentication, database integration, and role-based navigation.</p>
+              <ul class="project-tasks">
+                <li>Created user flows for Admin, Renter, and Guest users.</li>
+                <li>Integrated Flutter, Dart, Firebase authentication, and database-backed app features.</li>
+              </ul>
+            </div>
+            <div class="project-tags">
+              <span class="tag">Flutter</span><span class="tag">Dart</span><span class="tag">Firebase</span><span class="tag">RBAC Security</span>
+            </div>
+          </article>
+
+          <article class="project-card reveal">
+            <div class="project-top">
+              <div class="project-meta">
+                <span class="project-scope">PHP / MySQL</span>
+              </div>
+              <h3 class="project-title">Car Rental System</h3>
+              <p class="project-desc">Responsive web application for car browsing, booking, and management using PHP, MySQL PDO, secure database operations, and a clean user interface.</p>
+              <ul class="project-tasks">
+                <li>Used MySQL PDO to support safer database operations.</li>
+                <li>Built practical browsing, booking, and management flows.</li>
+              </ul>
+            </div>
+            <div class="project-tags">
+              <span class="tag">PHP</span><span class="tag">MySQL PDO</span><span class="tag">CRUD</span>
+            </div>
+          </article>
+
+          <article class="project-card reveal">
+            <div class="project-top">
+              <div class="project-meta">
+                <span class="project-scope">Web Application</span>
+              </div>
+              <h3 class="project-title">IT College Room Booking System</h3>
+              <p class="project-desc">Reservation system for students and faculty to manage room booking, view room equipment, and improve scheduling workflows within the IT College.</p>
+              <ul class="project-tasks">
+                <li>Collaborated on booking logic, room availability, and user-facing reservation flows.</li>
+              </ul>
+            </div>
+            <div class="project-tags">
+              <span class="tag">Room Booking</span><span class="tag">UI/UX</span><span class="tag">Team Project</span>
+            </div>
+          </article>
+
+          <article class="project-card reveal" style="grid-column: span 1;">
+            <div class="project-top">
+              <div class="project-meta">
+                <span class="project-scope">JavaScript / API</span>
+              </div>
+              <h3 class="project-title">Weather App</h3>
+              <p class="project-desc">JavaScript web app that retrieves and displays real-time weather data from the OpenWeatherMap API.</p>
+              <ul class="project-tasks">
+                <li>Used browser-side JavaScript to fetch API data and render weather information dynamically.</li>
+              </ul>
+            </div>
+            <div class="project-tags">
+              <span class="tag">Vanilla JavaScript</span><span class="tag">OpenWeatherMap API</span><span class="tag">Async Rendering</span>
+            </div>
+          </article>
+
         </div>
       </div>
     </section>
 
     <section class="section" id="skills">
       <div class="container">
-        <div class="section-head">
-          <div class="section-kicker">Skills</div>
-          <div>
-            <h2>Tools I use to ship software.</h2>
-            <p class="section-copy">
-              A practical stack across front end, back end, mobile, databases, and API-driven features.
-            </p>
-          </div>
+        <div class="section-head reveal">
+          <span class="section-label">Technical Skills</span>
+          <h2 class="section-title">Tools and core areas</h2>
         </div>
 
         <div class="skills-grid">
-          <div class="skill-block">
+          <div class="skills-card reveal">
             <h3>Languages</h3>
-            <div class="pill-list">
-              <span class="pill">Java</span>
-              <span class="pill">Python</span>
-              <span class="pill">JavaScript</span>
-              <span class="pill">PHP</span>
-              <span class="pill">Dart</span>
-              <span class="pill">SQL</span>
-              <span class="pill">HTML</span>
-              <span class="pill">CSS</span>
+            <div class="skills-list">
+              <span class="tag">Java</span><span class="tag">Python</span><span class="tag">JavaScript</span><span class="tag">PHP</span><span class="tag">Dart</span><span class="tag">SQL</span><span class="tag">HTML/CSS</span>
             </div>
           </div>
-          <div class="skill-block">
+          <div class="skills-card reveal">
             <h3>Frameworks and Platforms</h3>
-            <div class="pill-list">
-              <span class="pill">Next.js</span>
-              <span class="pill">React</span>
-              <span class="pill">FastAPI</span>
-              <span class="pill">Flutter</span>
-              <span class="pill">Firebase</span>
-              <span class="pill">Supabase</span>
+            <div class="skills-list">
+              <span class="tag">Next.js</span><span class="tag">React</span><span class="tag">FastAPI</span><span class="tag">Supabase</span><span class="tag">PostgreSQL</span><span class="tag">MySQL</span><span class="tag">Flutter</span><span class="tag">Firebase</span>
             </div>
           </div>
-          <div class="skill-block">
-            <h3>Data and APIs</h3>
-            <div class="pill-list">
-              <span class="pill">PostgreSQL</span>
-              <span class="pill">MySQL</span>
-              <span class="pill">REST APIs</span>
-              <span class="pill">Gemini API</span>
-              <span class="pill">Database Design</span>
+          <div class="skills-card reveal">
+            <h3>Tools</h3>
+            <div class="skills-list">
+              <span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">REST APIs</span><span class="tag">Gemini API</span>
             </div>
           </div>
-          <div class="skill-block">
+          <div class="skills-card reveal">
             <h3>Core Areas</h3>
-            <div class="pill-list">
-              <span class="pill">Full-Stack Development</span>
-              <span class="pill">Mobile Apps</span>
-              <span class="pill">AI Integration</span>
-              <span class="pill">Authentication</span>
-              <span class="pill">RBAC</span>
-              <span class="pill">UI/UX</span>
-              <span class="pill">Software Testing</span>
-              <span class="pill">Git/GitHub</span>
+            <div class="skills-list">
+              <span class="tag">Full-Stack Web Development</span><span class="tag">REST API Development</span><span class="tag">Authentication</span><span class="tag">Database Design</span><span class="tag">AI Integration</span><span class="tag">Role-Based Access Control</span><span class="tag">UI/UX</span><span class="tag">Software Testing</span><span class="tag">Mobile App Development</span>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="projects">
-      <div class="container">
-        <div class="section-head">
-          <div class="section-kicker">Projects</div>
-          <div>
-            <h2>Selected work from the CV.</h2>
-            <p class="section-copy">
-              These projects show the systems I have been building: recommendation workflows,
-              mobile apps, booking tools, and API-backed interfaces.
-            </p>
-          </div>
-        </div>
-
-        <div class="projects-grid">
-          <article class="project">
-            <div class="project-index">01</div>
-            <div class="project-body">
-              <div class="project-meta">
-                <span class="tag primary">Senior Project</span>
-                <span class="tag">Next.js</span>
-                <span class="tag">FastAPI</span>
-                <span class="tag">Supabase</span>
-                <span class="tag">Gemini API</span>
-              </div>
-              <h3>Alsaeh Tourism Recommender System for Bahrain</h3>
-              <p>
-                AI-powered tourism planner that generates personalized day-by-day itineraries
-                for Bahrain using structured prompt workflows and saved user plans.
-              </p>
-              <ul>
-                <li>Built a Next.js frontend with a FastAPI backend and Supabase PostgreSQL database.</li>
-                <li>Implemented authentication, saved plans, chatbot-based itinerary editing, and admin dataset management.</li>
-                <li>Added reporting flows to help understand usage and manage tourism data.</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="project">
-            <div class="project-index">02</div>
-            <div class="project-body">
-              <div class="project-meta">
-                <span class="tag blue">Mobile</span>
-                <span class="tag">Flutter</span>
-                <span class="tag">Dart</span>
-                <span class="tag">Firebase</span>
-                <span class="tag">RBAC</span>
-              </div>
-              <h3>Care Center App</h3>
-              <p>
-                Mobile application for medical equipment rentals and donations with different
-                flows for Admin, Renter, and Guest users.
-              </p>
-              <ul>
-                <li>Integrated Firebase authentication and database features.</li>
-                <li>Designed role-based navigation so each user type sees the right actions.</li>
-                <li>Structured the app around a real service workflow rather than a static demo.</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="project">
-            <div class="project-index">03</div>
-            <div class="project-body">
-              <div class="project-meta">
-                <span class="tag clay">Web App</span>
-                <span class="tag">PHP</span>
-                <span class="tag">MySQL</span>
-                <span class="tag">PDO</span>
-              </div>
-              <h3>Car Rental System</h3>
-              <p>
-                Responsive car rental platform for browsing, booking, and user management,
-                with attention to secure database operations.
-              </p>
-              <ul>
-                <li>Used PHP and MySQL PDO for reliable data access and safer queries.</li>
-                <li>Built booking and account flows around practical rental system requirements.</li>
-                <li>Focused on a clean interface and maintainable CRUD structure.</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="project">
-            <div class="project-index">04</div>
-            <div class="project-body">
-              <div class="project-meta">
-                <span class="tag clay">Web App</span>
-                <span class="tag">Scheduling</span>
-                <span class="tag">Team Project</span>
-                <span class="tag">UI/UX</span>
-              </div>
-              <h3>IT College Room Booking System</h3>
-              <p>
-                Reservation system for students and faculty to manage room bookings, view
-                room equipment, and improve scheduling workflows inside the IT College.
-              </p>
-              <ul>
-                <li>Collaborated with a team on reservation logic and user-facing booking flows.</li>
-                <li>Centered the interface around clarity, availability, and scheduling confidence.</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="project">
-            <div class="project-index">05</div>
-            <div class="project-body">
-              <div class="project-meta">
-                <span class="tag blue">API</span>
-                <span class="tag">JavaScript</span>
-                <span class="tag">OpenWeatherMap</span>
-                <span class="tag">Async</span>
-              </div>
-              <h3>Weather App</h3>
-              <p>
-                JavaScript web app that retrieves and displays real-time weather data from
-                the OpenWeatherMap API.
-              </p>
-              <ul>
-                <li>Implemented API fetching, dynamic rendering, and user-friendly weather output.</li>
-                <li>Practiced clean browser-side JavaScript without unnecessary framework overhead.</li>
-              </ul>
-            </div>
-          </article>
         </div>
       </div>
     </section>
 
     <section class="section" id="education">
       <div class="container">
-        <div class="section-head">
-          <div class="section-kicker">Background</div>
-          <div>
-            <h2>Education and strengths.</h2>
-            <p class="section-copy">
-              Academic software engineering foundation with leadership habits that support reliable team work.
-            </p>
-          </div>
+        <div class="section-head reveal">
+          <span class="section-label">Education</span>
+          <h2 class="section-title">Academic background and soft skills</h2>
         </div>
 
-        <div class="timeline-grid">
-          <article class="timeline-card">
-            <div class="timeline-date">Sep 2022 - Present</div>
-            <h3>B.Sc. Software Engineering</h3>
-            <div class="timeline-subtitle">University of Bahrain, Riffa</div>
-            <ul>
-              <li>Relevant coursework: Data Structures, Algorithms, Database Management Systems, Software Testing, Computer Security, Cloud Computing, Mobile Application Development, and Parallel and Distributed Computing.</li>
-            </ul>
-            <div class="gpa">
-              <span>GPA</span>
-              <span>3.19 / 4.00</span>
+        <div class="timeline-layout">
+          <div class="edu-block reveal">
+            <div class="edu-header">
+              <div class="edu-title">
+                <h3>B.Sc. Software Engineering</h3>
+                <div class="edu-inst">University of Bahrain</div>
+              </div>
+              <span class="edu-date">Sep 2022 - Present</span>
             </div>
-          </article>
-
-          <article class="timeline-card">
-            <div class="timeline-date">Leadership and soft skills</div>
-            <h3>How I work</h3>
-            <div class="timeline-subtitle">Collaborative, detail-oriented, and documentation-minded.</div>
-            <ul>
-              <li>Team collaboration, problem solving, verbal and written communication.</li>
-              <li>Attention to detail, initiative, responsibility, and technical documentation.</li>
-              <li>Comfortable moving between design discussions, implementation, testing, and cleanup.</li>
+            <ul class="edu-details">
+              <li>Relevant coursework: Data Structures, Algorithms, Database Management Systems, Software Testing, Computer Security, Cloud Computing, Mobile Application Development, Parallel and Distributed Computing.</li>
             </ul>
-          </article>
+            <div class="gpa-tag">
+              <span class="gpa-lbl">Cumulative GPA</span>
+              <span class="gpa-val">3.19 / 4.00</span>
+            </div>
+          </div>
+
+          <div class="edu-block reveal">
+            <div class="edu-header">
+              <div class="edu-title">
+                <h3>Leadership &amp; Soft Skills</h3>
+                <div class="edu-inst">Professional traits</div>
+              </div>
+            </div>
+            <ul class="edu-details" style="list-style: none; padding-left: 0;">
+              <li style="margin-bottom: 12px;"><strong>Team collaboration:</strong> Comfortable working with others, communicating clearly, and solving problems in group projects.</li>
+              <li style="margin-bottom: 12px;"><strong>Technical documentation:</strong> Detail-oriented, responsible, and able to document setup processes and implementation decisions.</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
 
     <section class="section" id="certifications">
       <div class="container">
-        <div class="section-head">
-          <div class="section-kicker">Credentials</div>
-          <div>
-            <h2>Certifications.</h2>
-            <p class="section-copy">
-              Additional training across GPU computing, mobile development, and parallel computing.
-            </p>
-          </div>
+        <div class="section-head reveal">
+          <span class="section-label">Certifications</span>
+          <h2 class="section-title">Verified qualifications</h2>
         </div>
 
-        <div class="cert-grid">
-          <article class="cert-card">
-            <div class="cert-provider">NVIDIA</div>
-            <h3>Fundamentals of Accelerated Computing with Modern CUDA C</h3>
-            <p>Credential ID: yqoD1rXzTDCvi9UuxbXGMg</p>
-          </article>
-          <article class="cert-card">
-            <div class="cert-provider">Coursera</div>
-            <h3>Getting Started with Flutter and Dart</h3>
-            <p>Credential ID: AFO0IHGYEXR8</p>
-          </article>
-          <article class="cert-card">
-            <div class="cert-provider">Coursera</div>
-            <h3>Parallel Computing with MPI</h3>
-            <p>Credential ID: 93V8XG0UVO96</p>
-          </article>
+        <div class="cert-list">
+          <div class="cert-card reveal">
+            <div>
+              <div class="cert-issuer">NVIDIA</div>
+              <h3 class="cert-title">Fundamentals of Accelerated Computing with Modern CUDA C</h3>
+            </div>
+            <div class="cert-id">ID: yqoD1rXzTDCvi9UuxbXGMg</div>
+          </div>
+
+          <div class="cert-card reveal">
+            <div>
+              <div class="cert-issuer">Coursera</div>
+              <h3 class="cert-title">Getting Started with Flutter and Dart</h3>
+            </div>
+            <div class="cert-id">ID: AFO0IHGYEXR8</div>
+          </div>
+
+          <div class="cert-card reveal">
+            <div>
+              <div class="cert-issuer">Coursera</div>
+              <h3 class="cert-title">Parallel Computing with MPI</h3>
+            </div>
+            <div class="cert-id">ID: 93V8XG0UVO96</div>
+          </div>
         </div>
       </div>
     </section>
 
     <section class="section" id="languages">
       <div class="container">
-        <div class="section-head">
-          <div class="section-kicker">Languages</div>
-          <div>
-            <h2>Communication.</h2>
-            <p class="section-copy">
-              Comfortable working across Arabic and English, with basic French.
-            </p>
-          </div>
+        <div class="section-head reveal">
+          <span class="section-label">Languages</span>
+          <h2 class="section-title">Communication</h2>
         </div>
-
-        <div class="language-grid">
-          <div class="language-card">
-            <strong>Arabic</strong>
-            <span>Native</span>
+        <div class="cert-list" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+          <div class="cert-card reveal" style="padding: 20px;">
+            <h3 style="font-size:1.1rem; margin-bottom:4px; color:var(--text-strong);">Arabic</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem; font-weight:500;">Native</p>
           </div>
-          <div class="language-card">
-            <strong>English</strong>
-            <span>IELTS Academic Band 6.0</span>
+          <div class="cert-card reveal" style="padding: 20px;">
+            <h3 style="font-size:1.1rem; margin-bottom:4px; color:var(--text-strong);">English</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem; font-weight:500;">IELTS Academic Band 6.0</p>
           </div>
-          <div class="language-card">
-            <strong>French</strong>
-            <span>A1</span>
+          <div class="cert-card reveal" style="padding: 20px;">
+            <h3 style="font-size:1.1rem; margin-bottom:4px; color:var(--text-strong);">French</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem; font-weight:500;">A1</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="contact" id="contact">
+    <section class="section" id="contact">
       <div class="container">
-        <div class="contact-panel">
-          <div>
-            <h2>Open to internships and collaborations.</h2>
-            <p>
-              I am interested in software engineering opportunities where I can build useful
-              systems, learn from experienced engineers, and contribute across the stack.
-            </p>
+        <div class="contact-panel reveal">
+          <div class="contact-text">
+            <h2>Open to internships and junior software roles.</h2>
+            <p>I am seeking software engineering opportunities where I can contribute across the technical stack and continue learning from experienced engineers.</p>
           </div>
-          <div class="contact-actions">
-            <a href="mailto:ahmedtahaghodhbhani@gmail.com">Email</a>
-            <a href="tel:+97339916761">Call</a>
-            <a href="https://github.com/AhmedGTaha" target="_blank" rel="noreferrer">GitHub</a>
-            <a href="https://www.linkedin.com/in/ahmed-taha" target="_blank" rel="noreferrer">LinkedIn</a>
+          <div class="contact-grid">
+            <a class="contact-btn" href="mailto:ahmedtahaghodhbhani@gmail.com">Email</a>
+            <a class="contact-btn" href="tel:+97339916761">Phone</a>
+            <a class="contact-btn" href="https://github.com/AhmedGTaha" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a class="contact-btn" href="https://www.linkedin.com/in/ahmed-taha-b4a205395/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           </div>
         </div>
       </div>
     </section>
+
   </main>
 
-  <footer>
-    <div class="container footer-inner">
-      <span>Ahmed Taha Ghodhbhani</span>
-      <span>Riffa, Bahrain | Software Engineering, University of Bahrain</span>
+  <footer class="footer">
+    <div class="container footer-flex">
+      <span>2026 Ahmed Taha Ghodhbhani</span>
+      <span>Riffa, Bahrain | University of Bahrain Software Engineering</span>
     </div>
   </footer>
+
   <script>
-    const menuToggle = document.querySelector('.menu-toggle');
-    const menuBackdrop = document.querySelector('.menu-backdrop');
-    const navLinks = document.querySelector('.nav-links');
+    document.addEventListener('DOMContentLoaded', () => {
+      const htmlEl = document.documentElement;
+      const themeToggle = document.getElementById('themeToggle');
+      const menuToggle = document.getElementById('menuToggle');
+      const navMenu = document.getElementById('navMenu');
+      const body = document.body;
 
-    function setMenu(open) {
-      document.body.classList.toggle('menu-open', open);
-      menuToggle.setAttribute('aria-expanded', String(open));
-      menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-    }
+      // Theme setup
+      const getSystemTheme = () => window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      const cachedTheme = localStorage.getItem('portfolio-theme');
+      
+      const applyTheme = (theme, persist = false) => {
+        htmlEl.setAttribute('data-theme', theme);
+        if (persist) {
+          localStorage.setItem('portfolio-theme', theme);
+        }
+        updateThemeToggleIcon(theme);
+      };
 
-    menuToggle.addEventListener('click', () => {
-      setMenu(!document.body.classList.contains('menu-open'));
-    });
+      const updateThemeToggleIcon = (theme) => {
+        themeToggle.innerHTML = theme === 'dark' 
+          ? `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>`
+          : `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93 1.41 1.41M17.66 17.66 1.41 1.41M2 12h2M20 12h2M6.34 17.66-1.41 1.41M19.07 4.93-1.41 1.41"></path></svg>`;
+      };
 
-    menuBackdrop.addEventListener('click', () => setMenu(false));
+      applyTheme(cachedTheme || getSystemTheme());
 
-    navLinks.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => setMenu(false));
-    });
+      themeToggle.addEventListener('click', () => {
+        const currentTheme = htmlEl.getAttribute('data-theme');
+        applyTheme(currentTheme === 'dark' ? 'light' : 'dark', true);
+      });
 
-    window.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') {
-        setMenu(false);
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        if (!localStorage.getItem('portfolio-theme')) {
+          applyTheme(e.matches ? 'dark' : 'light');
+        }
+      });
+
+      // Mobile drawer navigation
+      const toggleMenu = (forcedState) => {
+        const isOpen = typeof forcedState === 'boolean' ? !forcedState : body.classList.contains('menu-open');
+        if (isOpen) {
+          body.classList.remove('menu-open');
+          menuToggle.setAttribute('aria-expanded', 'false');
+        } else {
+          body.classList.add('menu-open');
+          menuToggle.setAttribute('aria-expanded', 'true');
+        }
+      };
+
+      menuToggle.addEventListener('click', () => toggleMenu());
+      
+      // Close mobile drawer on navigation click.
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => toggleMenu(false));
+      });
+
+      // Close mobile drawer with Escape.
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && body.classList.contains('menu-open')) {
+          toggleMenu(false);
+        }
+      });
+
+      // Reveal animations
+      if ('IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.05,
+          rootMargin: '0px 0px -40px 0px'
+        });
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+      } else {
+        document.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
       }
     });
   </script>
