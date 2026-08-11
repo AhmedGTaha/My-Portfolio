@@ -465,6 +465,23 @@
       padding-top: 24px;
     }
 
+    .project-visit-link {
+      display: inline-flex;
+      align-items: center;
+      align-self: flex-start;
+      gap: 6px;
+      margin-top: 20px;
+      color: var(--primary);
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .project-visit-link:hover {
+      color: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
     .tag {
       font-family: var(--font-mono);
       font-size: 0.75rem;
@@ -953,10 +970,6 @@
             <div class="project-top">
               <div class="project-meta">
                 <span class="project-scope">Senior Project</span>
-                <a class="product-link-action" href="https://www.alsaeh.net" target="_blank" rel="noopener noreferrer" aria-label="Visit Alsaeh website (opens in a new tab)">
-                  <span>Visit product</span>
-                  <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg>
-                </a>
               </div>
               <h3 class="project-title">Alsaeh Tourism Recommender System for Bahrain</h3>
               <p class="project-desc">Bilingual AI tourism platform that generates personalized Bahrain itineraries and supports conversational editing.</p>
@@ -968,6 +981,10 @@
             <div class="project-tags">
               <span class="tag">Next.js</span><span class="tag">FastAPI</span><span class="tag">Supabase</span><span class="tag">PostgreSQL</span><span class="tag">Gemini API</span>
             </div>
+            <a class="project-visit-link" href="https://www.alsaeh.net" target="_blank" rel="noopener noreferrer" aria-label="Visit Alsaeh website (opens in a new tab)">
+              <span>Visit product</span>
+              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg>
+            </a>
           </article>
 
           <article class="project-card reveal">
