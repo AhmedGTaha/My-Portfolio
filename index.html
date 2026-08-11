@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Ahmed Taha Ghodhbhani - Software Engineering graduate focused on full-stack web development, mobile applications, AI integration, REST APIs, and database-backed systems.">
+  <meta name="description" content="Ahmed Taha Ghodhbhani - Software developer experienced in full-stack, database-driven, and AI-integrated applications, including production SaaS platforms.">
   <meta name="theme-color" content="#09090b">
-  <title>Ahmed Taha Ghodhbhani | Software Engineering Graduate Portfolio</title>
+  <title>Ahmed Taha Ghodhbhani | Software Developer Portfolio</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -521,6 +521,14 @@
       padding: 32px;
     }
 
+    .experience-block {
+      max-width: 920px;
+    }
+
+    .education-layout {
+      grid-template-columns: 1fr;
+    }
+
     .edu-header {
       display: flex;
       justify-content: space-between;
@@ -719,6 +727,8 @@
 
     /* Responsive Breakthrough Systems */
     @media (max-width: 1024px) {
+      .nav-menu { gap: 18px; }
+      .logo > span:last-child { display: none; }
       .hero-grid { grid-template-columns: 1fr; gap: 48px; }
       .projects-grid { grid-template-columns: 1fr; gap: 24px; }
       .skills-grid { grid-template-columns: repeat(2, 1fr); }
@@ -756,6 +766,7 @@
       .hero-btns .btn { width: 100%; }
       .contact-grid { grid-template-columns: 1fr; }
       .info-item { grid-template-columns: 1fr; gap: 4px; }
+      .edu-header { flex-direction: column; gap: 12px; }
       .footer-flex { flex-direction: column; gap: 12px; text-align: center; }
     }
   </style>
@@ -772,6 +783,7 @@
       </a>
 
       <nav class="nav-menu" id="navMenu" aria-label="Primary Site Navigation">
+        <a class="nav-link" href="#experience">Experience</a>
         <a class="nav-link" href="#projects">Projects</a>
         <a class="nav-link" href="#skills">Skills</a>
         <a class="nav-link" href="#education">Background</a>
@@ -796,10 +808,10 @@
     <section class="hero" id="top">
       <div class="container hero-grid">
         <div class="reveal">
-          <div class="tagline">Full-Stack Development | Mobile Apps | AI Integration</div>
-          <h1 class="hero-title">Software engineering graduate building practical and scalable systems.</h1>
+          <div class="tagline">Software Developer | Full-Stack | AI Integration</div>
+          <h1 class="hero-title">Building production-ready software from idea to deployment.</h1>
           <p class="hero-desc">
-            I am a Software Engineering graduate from the University of Bahrain focused on full-stack web development, mobile applications, AI integration, REST APIs, and database-backed systems.
+            Software Engineering graduate with professional experience building full-stack, database-driven, and AI-integrated applications. I developed and delivered a multi-organization recruitment SaaS purchased and adopted by Script IT Solutions.
           </p>
           <div class="hero-btns">
             <a class="btn btn-primary" href="#projects">View projects</a>
@@ -814,7 +826,7 @@
           </div>
           <ul class="info-list">
             <li class="info-item">
-              <span class="info-label">Engineer</span>
+              <span class="info-label">Developer</span>
               <span class="info-value">Ahmed Taha Ghodhbhani</span>
             </li>
             <li class="info-item">
@@ -822,8 +834,8 @@
               <span class="info-value">B.Sc. Software Engineering, University of Bahrain</span>
             </li>
             <li class="info-item">
-              <span class="info-label">Focus</span>
-              <span class="info-value">Full-stack development, mobile apps, AI integration, REST APIs, database-backed systems</span>
+              <span class="info-label">Experience</span>
+              <span class="info-value">Production SaaS, full-stack development, AI integration, testing, and cloud deployment</span>
             </li>
             <li class="info-item">
               <span class="info-label">Location</span>
@@ -831,6 +843,34 @@
             </li>
           </ul>
         </aside>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-label">Professional Experience</span>
+          <h2 class="section-title">Software delivered for real-world use</h2>
+        </div>
+
+        <article class="edu-block experience-block reveal">
+          <div class="edu-header">
+            <div class="edu-title">
+              <h3>Software Developer Intern</h3>
+              <div class="edu-inst">Script IT Solutions · Bahrain</div>
+            </div>
+            <span class="edu-date">Jul 2026 - Aug 2026</span>
+          </div>
+          <ul class="edu-details">
+            <li>Designed and delivered <strong>Flawless Interviews</strong>, a multi-organization AI recruitment SaaS purchased by the company and adopted in its recruitment workflow.</li>
+            <li>Built workflows for job publishing, CV processing, AI-assisted ranking, WhatsApp screening, interviewer review, candidate communication, and interview scheduling.</li>
+            <li>Implemented custom authentication, role-based access control, organization data isolation, authorization controls, and automated tests.</li>
+            <li>Deployed the production platform using Vercel and Neon.</li>
+          </ul>
+          <div class="project-tags">
+            <span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">PostgreSQL</span><span class="tag">Drizzle ORM</span><span class="tag">Tailwind CSS</span><span class="tag">Gemini AI</span><span class="tag">Resend</span>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -849,10 +889,10 @@
                 <span class="project-scope">Senior Project</span>
               </div>
               <h3 class="project-title">Alsaeh Tourism Recommender System for Bahrain</h3>
-              <p class="project-desc">AI-powered tourism recommender that generates personalized day-by-day itineraries for Bahrain using Gemini API and structured prompt workflows.</p>
+              <p class="project-desc">Bilingual AI tourism platform that generates personalized Bahrain itineraries and supports conversational editing.</p>
               <ul class="project-tasks">
-                <li>Built a Next.js frontend, FastAPI backend, and Supabase PostgreSQL database.</li>
-                <li>Implemented authentication, saved plans, chatbot-based itinerary editing, admin dataset management, and usage reports.</li>
+                <li>Collaborated on a Next.js frontend, FastAPI backend, and Supabase PostgreSQL database.</li>
+                <li>Implemented chatbot editing, saved plans, exports, and administrative reports.</li>
               </ul>
             </div>
             <div class="project-tags">
@@ -863,17 +903,34 @@
           <article class="project-card reveal">
             <div class="project-top">
               <div class="project-meta">
-                <span class="project-scope">Flutter / Firebase</span>
+                <span class="project-scope">Go / WebSockets</span>
               </div>
-              <h3 class="project-title">Care Center App</h3>
-              <p class="project-desc">Mobile application for medical equipment rentals and donations with Firebase authentication, database integration, and role-based navigation.</p>
+              <h3 class="project-title">Real-Time Forum</h3>
+              <p class="project-desc">Single-page community application with REST APIs, moderation, and real-time private messaging.</p>
               <ul class="project-tasks">
-                <li>Developed role-based flows for Admin, Renter, and Guest users.</li>
-                <li>Integrated Flutter, Dart, Firebase authentication, and database-backed app features.</li>
+                <li>Built authentication, posts, comments, and moderation with Go, vanilla JavaScript, and SQLite.</li>
+                <li>Added WebSocket messaging, online presence, and persisted chat history.</li>
               </ul>
             </div>
             <div class="project-tags">
-              <span class="tag">Flutter</span><span class="tag">Dart</span><span class="tag">Firebase</span><span class="tag">RBAC Security</span>
+              <span class="tag">Go</span><span class="tag">JavaScript</span><span class="tag">SQLite</span><span class="tag">REST APIs</span><span class="tag">WebSockets</span>
+            </div>
+          </article>
+
+          <article class="project-card reveal">
+            <div class="project-top">
+              <div class="project-meta">
+                <span class="project-scope">Flutter / Firebase</span>
+              </div>
+              <h3 class="project-title">Care Center Medical Equipment App</h3>
+              <p class="project-desc">Rental and donation application for managing medical equipment throughout its lifecycle.</p>
+              <ul class="project-tasks">
+                <li>Developed role-based access, reservation approvals, and equipment lifecycle tracking.</li>
+                <li>Added notifications, overdue monitoring, and usage analytics.</li>
+              </ul>
+            </div>
+            <div class="project-tags">
+              <span class="tag">Flutter</span><span class="tag">Dart</span><span class="tag">Firebase</span><span class="tag">Role-Based Access</span>
             </div>
           </article>
 
@@ -883,30 +940,13 @@
                 <span class="project-scope">PHP / MySQL</span>
               </div>
               <h3 class="project-title">Car Rental System</h3>
-              <p class="project-desc">Responsive web application for car browsing, booking, and user management using PHP, MySQL PDO, secure database operations, and a clean user interface.</p>
+              <p class="project-desc">Responsive platform for vehicle browsing, availability, bookings, user profiles, and administrative management.</p>
               <ul class="project-tasks">
-                <li>Used MySQL PDO to support safer database operations.</li>
-                <li>Built practical browsing, booking, and management flows.</li>
+                <li>Used MySQL PDO for secure database access across customer and administrative workflows.</li>
               </ul>
             </div>
             <div class="project-tags">
-              <span class="tag">PHP</span><span class="tag">MySQL PDO</span><span class="tag">CRUD</span>
-            </div>
-          </article>
-
-          <article class="project-card reveal">
-            <div class="project-top">
-              <div class="project-meta">
-                <span class="project-scope">Web Application</span>
-              </div>
-              <h3 class="project-title">IT College Room Booking System</h3>
-              <p class="project-desc">Reservation system for students and faculty to manage room booking, view room equipment, and improve scheduling workflows within the IT College.</p>
-              <ul class="project-tasks">
-                <li>Collaborated on booking logic, room availability, and user-facing reservation flows.</li>
-              </ul>
-            </div>
-            <div class="project-tags">
-              <span class="tag">Room Booking</span><span class="tag">UI/UX</span><span class="tag">Team Project</span>
+              <span class="tag">PHP</span><span class="tag">MySQL</span><span class="tag">JavaScript</span><span class="tag">Bootstrap</span><span class="tag">PDO</span>
             </div>
           </article>
         </div>
@@ -924,25 +964,25 @@
           <div class="skills-card reveal">
             <h3>Languages</h3>
             <div class="skills-list">
-              <span class="tag">Java</span><span class="tag">Python</span><span class="tag">JavaScript</span><span class="tag">PHP</span><span class="tag">Dart</span><span class="tag">SQL</span><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Go</span>
+              <span class="tag">Java</span><span class="tag">TypeScript</span><span class="tag">JavaScript</span><span class="tag">Python</span><span class="tag">PHP</span><span class="tag">Dart</span><span class="tag">SQL</span><span class="tag">Go</span><span class="tag">HTML</span><span class="tag">CSS</span>
             </div>
           </div>
           <div class="skills-card reveal">
-            <h3>Frameworks and Platforms</h3>
+            <h3>Frameworks</h3>
             <div class="skills-list">
-              <span class="tag">Next.js</span><span class="tag">React</span><span class="tag">FastAPI</span><span class="tag">Supabase</span><span class="tag">PostgreSQL</span><span class="tag">MySQL</span><span class="tag">Flutter</span><span class="tag">Firebase</span>
+              <span class="tag">Next.js</span><span class="tag">React</span><span class="tag">FastAPI</span><span class="tag">Flutter</span><span class="tag">Tailwind CSS</span><span class="tag">Bootstrap</span>
             </div>
           </div>
           <div class="skills-card reveal">
-            <h3>Tools</h3>
+            <h3>Data &amp; Cloud</h3>
             <div class="skills-list">
-              <span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">REST APIs</span><span class="tag">Gemini API</span>
+              <span class="tag">PostgreSQL</span><span class="tag">MySQL</span><span class="tag">SQLite</span><span class="tag">Firebase</span><span class="tag">Supabase</span><span class="tag">Neon</span><span class="tag">Vercel</span>
             </div>
           </div>
           <div class="skills-card reveal">
-            <h3>Core Areas</h3>
+            <h3>APIs, Testing &amp; Tools</h3>
             <div class="skills-list">
-              <span class="tag">Full-Stack Development</span><span class="tag">Mobile App Development</span><span class="tag">AI Integration</span><span class="tag">Authentication</span><span class="tag">Role-Based Access Control</span><span class="tag">Database Design</span><span class="tag">UI/UX</span><span class="tag">Software Testing</span>
+              <span class="tag">REST APIs</span><span class="tag">Gemini API</span><span class="tag">Resend</span><span class="tag">WhatsApp Integration</span><span class="tag">WebSockets</span><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">Vitest</span><span class="tag">Playwright</span>
             </div>
           </div>
         </div>
@@ -953,38 +993,25 @@
       <div class="container">
         <div class="section-head reveal">
           <span class="section-label">Education</span>
-          <h2 class="section-title">Academic background and soft skills</h2>
+          <h2 class="section-title">Academic background</h2>
         </div>
 
-        <div class="timeline-layout">
+        <div class="timeline-layout education-layout">
           <div class="edu-block reveal">
             <div class="edu-header">
               <div class="edu-title">
                 <h3>B.Sc. Software Engineering</h3>
                 <div class="edu-inst">University of Bahrain</div>
               </div>
-              <span class="edu-date">Sep 2022 - Sep 2026</span>
+              <span class="edu-date">September 2026</span>
             </div>
             <ul class="edu-details">
-              <li>Relevant coursework: Data Structures, Algorithms, Database Management Systems, Software Testing, Computer Security, Cloud Computing, Mobile Application Development, Parallel and Distributed Computing.</li>
+              <li>Relevant coursework: Data Structures &amp; Algorithms, Database Management, Software Testing, Architecture, Requirements Engineering, Security, Cloud Computing, and Mobile Development.</li>
             </ul>
             <div class="gpa-tag">
               <span class="gpa-lbl">Cumulative GPA</span>
               <span class="gpa-val">3.21 / 4.00</span>
             </div>
-          </div>
-
-          <div class="edu-block reveal">
-            <div class="edu-header">
-              <div class="edu-title">
-                <h3>Leadership &amp; Soft Skills</h3>
-                <div class="edu-inst">Professional traits</div>
-              </div>
-            </div>
-            <ul class="edu-details" style="list-style: none; padding-left: 0;">
-              <li style="margin-bottom: 12px;"><strong>Team collaboration:</strong> Comfortable working with others, communicating clearly, and solving problems in group projects.</li>
-              <li style="margin-bottom: 12px;"><strong>Ownership:</strong> Detail-oriented, responsible, and able to take initiative while documenting setup processes and implementation decisions.</li>
-            </ul>
           </div>
         </div>
       </div>
@@ -1052,8 +1079,8 @@
       <div class="container">
         <div class="contact-panel reveal">
           <div class="contact-text">
-            <h2>Open to junior software engineering roles.</h2>
-            <p>I am seeking software engineering opportunities where I can contribute across the technical stack, build reliable user-facing systems, and continue learning from experienced engineers.</p>
+            <h2>Let’s build reliable software together.</h2>
+            <p>I am open to software developer opportunities where I can contribute across the stack, ship production-ready systems, and keep growing with an experienced team.</p>
           </div>
           <div class="contact-grid">
             <a class="contact-btn" href="mailto:ahmedtahaghodhbani@gmail.com">Email</a>
@@ -1070,7 +1097,7 @@
   <footer class="footer">
     <div class="container footer-flex">
       <span>2026 Ahmed Taha Ghodhbhani</span>
-      <span>Riffa, Bahrain | Software Engineering Graduate, University of Bahrain</span>
+      <span>Riffa, Bahrain | Software Developer</span>
     </div>
   </footer>
 
