@@ -523,20 +523,6 @@
       transform: translateY(-1px);
     }
 
-    .project-action.is-disabled {
-      color: var(--text-muted);
-      background: var(--bg-muted);
-      border-color: var(--border);
-      cursor: not-allowed;
-      opacity: 0.58;
-    }
-
-    .project-action.is-disabled:hover,
-    .gallery-action[aria-disabled="true"]:hover {
-      border-color: var(--border);
-      transform: none;
-    }
-
     .project-desc {
       font-size: 0.95rem;
       color: var(--text-muted);
@@ -1046,12 +1032,6 @@
       transform: translateY(-1px);
     }
 
-    .gallery-action[aria-disabled="true"] {
-      color: var(--text-muted);
-      cursor: not-allowed;
-      opacity: 0.55;
-    }
-
     .gallery-view {
       min-height: 0;
       display: grid;
@@ -1135,6 +1115,7 @@
     }
 
     .gallery-actions[hidden],
+    .gallery-action[hidden],
     .gallery-subtitle[hidden],
     .gallery-nav[hidden],
     .gallery-footer[hidden] {
@@ -1434,7 +1415,6 @@
               <div class="project-meta">
                 <span class="project-scope">Senior Project</span>
                 <div class="project-card-actions" aria-label="Alsaeh links">
-                  <span class="project-action is-disabled" aria-disabled="true" title="Public repository unavailable">GitHub</span>
                   <a class="project-action" href="https://www.alsaeh.net" target="_blank" rel="noopener noreferrer">Live</a>
                 </div>
               </div>
@@ -1477,7 +1457,6 @@
                 <span class="project-scope">Flutter / Firebase</span>
                 <div class="project-card-actions" aria-label="Care Center links">
                   <a class="project-action" href="https://github.com/AhmedGTaha/care_center_app" target="_blank" rel="noopener noreferrer">GitHub</a>
-                  <span class="project-action is-disabled" aria-disabled="true" title="Live deployment unavailable">Live</span>
                 </div>
               </div>
               <h3 class="project-title">Care Center Medical Equipment App</h3>
@@ -1498,7 +1477,6 @@
                 <span class="project-scope">PHP / MySQL</span>
                 <div class="project-card-actions" aria-label="Car Rental System links">
                   <a class="project-action" href="https://github.com/AhmedGTaha/Rentivo" target="_blank" rel="noopener noreferrer">GitHub</a>
-                  <span class="project-action is-disabled" aria-disabled="true" title="Live deployment unavailable">Live</span>
                 </div>
               </div>
               <h3 class="project-title"><button class="project-title-button" type="button" data-gallery="rentivo" aria-haspopup="dialog" aria-controls="projectGalleryModal">Car Rental System</button></h3>
@@ -1816,20 +1794,16 @@
       let galleryIsClosing = false;
 
       const setGalleryAction = (element, url, label, projectTitle) => {
-        if (url) {
-          element.href = url;
-          element.removeAttribute('aria-disabled');
-          element.removeAttribute('tabindex');
-          element.removeAttribute('title');
-          element.setAttribute('aria-label', `Open ${projectTitle} ${label} in a new tab`);
+        element.hidden = !url;
+
+        if (!url) {
+          element.removeAttribute('href');
+          element.removeAttribute('aria-label');
           return;
         }
 
-        element.removeAttribute('href');
-        element.setAttribute('aria-disabled', 'true');
-        element.setAttribute('tabindex', '-1');
-        element.setAttribute('title', `${label} unavailable`);
-        element.setAttribute('aria-label', `${label} unavailable for ${projectTitle}`);
+        element.href = url;
+        element.setAttribute('aria-label', `Open ${projectTitle} ${label} in a new tab`);
       };
 
       const preloadAdjacentScreenshots = () => {
@@ -1896,7 +1870,7 @@
         gallerySubtitle.textContent = gallery.subtitle || '';
         gallerySubtitle.hidden = !gallery.subtitle;
         galleryClose.setAttribute('aria-label', `Close ${gallery.title}`);
-        galleryActions.hidden = isCredential;
+        galleryActions.hidden = isCredential || (!gallery.github && !gallery.live);
         galleryPrevious.hidden = !hasMultipleImages;
         galleryNext.hidden = !hasMultipleImages;
         galleryFooter.hidden = !hasMultipleImages;
@@ -1963,12 +1937,6 @@
       galleryNext.addEventListener('click', () => moveGallery(1));
       galleryBackdrop.addEventListener('click', (event) => {
         if (event.target === galleryBackdrop) closeGallery();
-      });
-
-      [galleryGithub, galleryLive].forEach(action => {
-        action.addEventListener('click', event => {
-          if (action.getAttribute('aria-disabled') === 'true') event.preventDefault();
-        });
       });
 
       document.addEventListener('keydown', event => {
