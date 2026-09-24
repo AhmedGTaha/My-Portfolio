@@ -75,7 +75,8 @@
       transition: background-color 0.3s ease, color 0.3s ease;
     }
 
-    body.menu-open {
+    body.menu-open,
+    body.modal-open {
       overflow: hidden;
     }
 
@@ -422,6 +423,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 16px;
       margin-bottom: 16px;
     }
 
@@ -439,6 +441,72 @@
       font-weight: 700;
       color: var(--text-strong);
       margin-bottom: 12px;
+    }
+
+    .project-title-button {
+      display: inline;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      line-height: inherit;
+      letter-spacing: inherit;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .project-title-button:hover {
+      color: var(--primary);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 4px;
+    }
+
+    .project-card-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .project-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 32px;
+      padding: 5px 10px;
+      gap: 5px;
+      color: var(--primary);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 0.78rem;
+      font-weight: 700;
+      line-height: 1;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+
+    .project-action:hover {
+      background: var(--bg-muted);
+      border-color: var(--primary);
+      transform: translateY(-1px);
+    }
+
+    .project-action.is-disabled {
+      color: var(--text-muted);
+      background: var(--bg-muted);
+      border-color: var(--border);
+      cursor: not-allowed;
+      opacity: 0.58;
+    }
+
+    .project-action.is-disabled:hover,
+    .gallery-action[aria-disabled="true"]:hover {
+      border-color: var(--border);
+      transform: none;
     }
 
     .project-desc {
@@ -535,6 +603,42 @@
     }
 
     .product-link-card:hover {
+      border-color: var(--primary);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-1px);
+    }
+
+    .product-link-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: stretch;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .product-link-row .product-link-card {
+      margin-top: 0;
+    }
+
+    .product-gallery-trigger {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-width: 142px;
+      padding: 16px 20px;
+      color: var(--text-strong);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font: inherit;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .product-gallery-trigger:hover {
+      color: var(--primary);
       border-color: var(--primary);
       box-shadow: var(--shadow-md);
       transform: translateY(-1px);
@@ -754,6 +858,234 @@
       align-items: center;
     }
 
+    /* Reusable Project Gallery */
+    .gallery-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      overflow-y: auto;
+      background: rgba(9, 9, 11, 0.72);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      opacity: 0;
+      transition: opacity 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .gallery-backdrop[hidden] {
+      display: none;
+    }
+
+    .gallery-backdrop.is-open {
+      opacity: 1;
+    }
+
+    .gallery-modal {
+      width: min(1120px, 100%);
+      max-height: calc(100vh - 48px);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      color: var(--text);
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      transform: translateY(18px) scale(0.98);
+      transition: opacity 0.24s cubic-bezier(0.16, 1, 0.3, 1), transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .gallery-backdrop.is-open .gallery-modal {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .gallery-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 20px 24px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .gallery-heading {
+      min-width: 0;
+    }
+
+    .gallery-eyebrow {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--primary);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .gallery-title {
+      color: var(--text-strong);
+      font-size: clamp(1.15rem, 3vw, 1.5rem);
+      line-height: 1.3;
+    }
+
+    .gallery-close,
+    .gallery-nav {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      color: var(--text-strong);
+      background: var(--bg-muted);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+    }
+
+    .gallery-close {
+      width: 40px;
+      height: 40px;
+    }
+
+    .gallery-close:hover,
+    .gallery-nav:hover {
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .gallery-actions {
+      display: flex;
+      gap: 10px;
+      padding: 14px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .gallery-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-width: 96px;
+      padding: 9px 14px;
+      color: var(--text-strong);
+      background: var(--bg-muted);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .gallery-action:hover {
+      color: var(--primary);
+      border-color: var(--primary);
+      transform: translateY(-1px);
+    }
+
+    .gallery-action[aria-disabled="true"] {
+      color: var(--text-muted);
+      cursor: not-allowed;
+      opacity: 0.55;
+    }
+
+    .gallery-view {
+      min-height: 0;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 24px 12px;
+    }
+
+    .gallery-stage {
+      height: min(64vh, 680px);
+      max-height: calc(100vh - 250px);
+      min-height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #101014;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+    }
+
+    [data-theme="light"] .gallery-stage {
+      background: #e4e4e7;
+    }
+
+    .gallery-image {
+      display: block;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .gallery-nav {
+      width: 44px;
+      height: 44px;
+    }
+
+    .gallery-footer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 24px 18px;
+    }
+
+    .gallery-dots {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .gallery-dot {
+      width: 10px;
+      height: 10px;
+      padding: 0;
+      border: 1px solid var(--border-strong);
+      border-radius: 50%;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .gallery-dot:hover {
+      border-color: var(--primary);
+      transform: scale(1.18);
+    }
+
+    .gallery-dot[aria-pressed="true"] {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .gallery-counter {
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
     /* Animation Reveal Engines */
     .reveal {
       opacity: 0;
@@ -770,6 +1102,10 @@
       .reveal {
         opacity: 1 !important;
         transform: none !important;
+        transition: none !important;
+      }
+      .gallery-backdrop,
+      .gallery-modal {
         transition: none !important;
       }
       html {
@@ -811,6 +1147,25 @@
       .contact-panel { flex-direction: column; align-items: stretch; padding: 32px; gap: 32px; }
       .contact-grid { min-width: 100%; }
       .cert-list { grid-template-columns: 1fr; }
+      .project-meta { align-items: flex-start; }
+      .product-link-row { grid-template-columns: 1fr; }
+      .product-gallery-trigger { width: 100%; }
+      .gallery-backdrop { padding: 12px; }
+      .gallery-modal { max-height: calc(100vh - 24px); }
+      .gallery-header { padding: 16px; }
+      .gallery-actions { padding: 12px 16px; }
+      .gallery-view {
+        grid-template-columns: 40px minmax(0, 1fr) 40px;
+        gap: 8px;
+        padding: 14px 12px 10px;
+      }
+      .gallery-stage {
+        height: min(58vh, 520px);
+        max-height: calc(100vh - 250px);
+        min-height: 180px;
+      }
+      .gallery-nav { width: 40px; height: 40px; }
+      .gallery-footer { padding: 4px 16px 14px; }
     }
 
     @media (max-width: 480px) {
@@ -820,6 +1175,20 @@
       .info-item { grid-template-columns: 1fr; gap: 4px; }
       .edu-header { flex-direction: column; gap: 12px; }
       .product-link-action span { display: none; }
+      .project-meta { flex-direction: column; }
+      .project-card-actions { justify-content: flex-start; }
+      .project-action { min-width: 76px; }
+      .gallery-backdrop { padding: 8px; }
+      .gallery-modal { max-height: calc(100vh - 16px); }
+      .gallery-actions { flex-wrap: wrap; }
+      .gallery-action { flex: 1; }
+      .gallery-view {
+        grid-template-columns: 36px minmax(0, 1fr) 36px;
+        gap: 6px;
+        padding-inline: 8px;
+      }
+      .gallery-nav { width: 36px; height: 36px; }
+      .gallery-stage { max-height: calc(100vh - 275px); }
       .footer-flex { flex-direction: column; gap: 12px; text-align: center; }
     }
   </style>
@@ -925,17 +1294,23 @@
             <div class="project-tags">
               <span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">PostgreSQL</span><span class="tag">Drizzle ORM</span><span class="tag">Tailwind CSS</span><span class="tag">Gemini AI</span><span class="tag">Resend</span>
             </div>
-            <a class="product-link-card" href="https://flawless.onl" target="_blank" rel="noopener noreferrer" aria-label="Visit Flawless Interviews website (opens in a new tab)">
-              <img class="product-icon" src="images/flawless-interviews/app-icon.png" width="48" height="48" alt="Flawless Interviews icon" loading="lazy">
-              <span class="product-link-copy">
-                <span class="product-link-title">Flawless Interviews</span>
-                <span class="product-link-url">flawless.onl</span>
-              </span>
-              <span class="product-link-action">
-                <span>Visit product</span>
-                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg>
-              </span>
-            </a>
+            <div class="product-link-row">
+              <a class="product-link-card" href="https://flawless.onl" target="_blank" rel="noopener noreferrer" aria-label="Visit Flawless Interviews website (opens in a new tab)">
+                <img class="product-icon" src="images/flawless-interviews/app-icon.png" width="48" height="48" alt="Flawless Interviews icon" loading="lazy">
+                <span class="product-link-copy">
+                  <span class="product-link-title">Flawless Interviews</span>
+                  <span class="product-link-url">flawless.onl</span>
+                </span>
+                <span class="product-link-action">
+                  <span>Live</span>
+                  <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg>
+                </span>
+              </a>
+              <button class="product-gallery-trigger" type="button" data-gallery="flawless" aria-haspopup="dialog" aria-controls="projectGalleryModal">
+                View gallery
+                <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="8.5" cy="10" r="1.5"></circle><path d="m21 15-5-5L5 19"></path></svg>
+              </button>
+            </div>
           </article>
         </div>
       </div>
@@ -953,12 +1328,12 @@
             <div class="project-top">
               <div class="project-meta">
                 <span class="project-scope">Professional Product Prototype</span>
-                <a class="product-link-action" href="https://canvas-pi-one.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="View Canvas prototype (opens in a new tab)">
-                  <span>View prototype</span>
-                  <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg>
-                </a>
+                <div class="project-card-actions" aria-label="Canvas links">
+                  <a class="project-action" href="https://github.com/AhmedGTaha/canvas" target="_blank" rel="noopener noreferrer">GitHub</a>
+                  <a class="project-action" href="https://canvas-pi-one.vercel.app/" target="_blank" rel="noopener noreferrer">Live</a>
+                </div>
               </div>
-              <h3 class="project-title">Canvas | AI-Assisted Website Builder</h3>
+              <h3 class="project-title"><button class="project-title-button" type="button" data-gallery="canvas" aria-haspopup="dialog" aria-controls="projectGalleryModal">Canvas | AI-Assisted Website Builder</button></h3>
               <p class="project-desc">An AI-assisted website-building platform designed for non-technical users to create and evolve complete frontend websites through natural-language instructions while maintaining structured pages, reusable sections, safe previews, and reversible history.</p>
               <ul class="project-tasks">
                 <li>Built workspaces and projects, a hierarchical page tree, AI page and element-level editing, reusable sections, project-aware AI context, media management, and a sandboxed responsive live preview.</li>
@@ -974,12 +1349,12 @@
             <div class="project-top">
               <div class="project-meta">
                 <span class="project-scope">Senior Project</span>
-                <a class="product-link-action" href="https://www.alsaeh.net" target="_blank" rel="noopener noreferrer" aria-label="Visit Alsaeh website (opens in a new tab)">
-                  <span>Visit product</span>
-                  <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg>
-                </a>
+                <div class="project-card-actions" aria-label="Alsaeh links">
+                  <span class="project-action is-disabled" aria-disabled="true" title="Public repository unavailable">GitHub</span>
+                  <a class="project-action" href="https://www.alsaeh.net" target="_blank" rel="noopener noreferrer">Live</a>
+                </div>
               </div>
-              <h3 class="project-title">Alsaeh Tourism Recommender System for Bahrain</h3>
+              <h3 class="project-title"><button class="project-title-button" type="button" data-gallery="alsaeh" aria-haspopup="dialog" aria-controls="projectGalleryModal">Alsaeh Tourism Recommender System for Bahrain</button></h3>
               <p class="project-desc">Bilingual AI tourism platform that generates personalized Bahrain itineraries and supports conversational editing.</p>
               <ul class="project-tasks">
                 <li>Collaborated on a Next.js frontend, FastAPI backend, and Supabase PostgreSQL database.</li>
@@ -995,12 +1370,12 @@
             <div class="project-top">
               <div class="project-meta">
                 <span class="project-scope">Go / WebSockets</span>
-                <a class="product-link-action" href="https://real-time-forum-lac.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="Visit Real-Time Forum app (opens in a new tab)">
-                  <span>Visit app</span>
-                  <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg>
-                </a>
+                <div class="project-card-actions" aria-label="Real-Time Forum links">
+                  <a class="project-action" href="https://github.com/AhmedGTaha/real-time-forum" target="_blank" rel="noopener noreferrer">GitHub</a>
+                  <a class="project-action" href="https://real-time-forum-lac.vercel.app/" target="_blank" rel="noopener noreferrer">Live</a>
+                </div>
               </div>
-              <h3 class="project-title">Real-Time Forum</h3>
+              <h3 class="project-title"><button class="project-title-button" type="button" data-gallery="realtimeForum" aria-haspopup="dialog" aria-controls="projectGalleryModal">Real-Time Forum</button></h3>
               <p class="project-desc">Single-page community application with REST APIs, moderation, and real-time private messaging.</p>
               <ul class="project-tasks">
                 <li>Built authentication, posts, comments, and moderation with Go, vanilla JavaScript, and SQLite.</li>
@@ -1016,6 +1391,10 @@
             <div class="project-top">
               <div class="project-meta">
                 <span class="project-scope">Flutter / Firebase</span>
+                <div class="project-card-actions" aria-label="Care Center links">
+                  <a class="project-action" href="https://github.com/AhmedGTaha/care_center_app" target="_blank" rel="noopener noreferrer">GitHub</a>
+                  <span class="project-action is-disabled" aria-disabled="true" title="Live deployment unavailable">Live</span>
+                </div>
               </div>
               <h3 class="project-title">Care Center Medical Equipment App</h3>
               <p class="project-desc">Rental and donation application for managing medical equipment throughout its lifecycle.</p>
@@ -1033,8 +1412,12 @@
             <div class="project-top">
               <div class="project-meta">
                 <span class="project-scope">PHP / MySQL</span>
+                <div class="project-card-actions" aria-label="Car Rental System links">
+                  <a class="project-action" href="https://github.com/AhmedGTaha/Rentivo" target="_blank" rel="noopener noreferrer">GitHub</a>
+                  <span class="project-action is-disabled" aria-disabled="true" title="Live deployment unavailable">Live</span>
+                </div>
               </div>
-              <h3 class="project-title">Car Rental System</h3>
+              <h3 class="project-title"><button class="project-title-button" type="button" data-gallery="rentivo" aria-haspopup="dialog" aria-controls="projectGalleryModal">Car Rental System</button></h3>
               <p class="project-desc">Responsive platform for vehicle browsing, availability, bookings, user profiles, and administrative management.</p>
               <ul class="project-tasks">
                 <li>Used MySQL PDO for secure database access across customer and administrative workflows.</li>
@@ -1196,6 +1579,43 @@
     </div>
   </footer>
 
+  <div class="gallery-backdrop" id="projectGalleryModal" hidden>
+    <section class="gallery-modal" role="dialog" aria-modal="true" aria-labelledby="galleryTitle">
+      <header class="gallery-header">
+        <div class="gallery-heading">
+          <span class="gallery-eyebrow">Project gallery</span>
+          <h2 class="gallery-title" id="galleryTitle"></h2>
+        </div>
+        <button class="gallery-close" id="galleryClose" type="button" aria-label="Close project gallery">
+          <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+        </button>
+      </header>
+
+      <div class="gallery-actions" aria-label="Project links">
+        <a class="gallery-action" id="galleryGithub" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+        <a class="gallery-action" id="galleryLive" target="_blank" rel="noopener noreferrer">Live <span aria-hidden="true">↗</span></a>
+      </div>
+
+      <div class="gallery-view">
+        <button class="gallery-nav" id="galleryPrevious" type="button" aria-label="Previous screenshot">
+          <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg>
+        </button>
+        <div class="gallery-stage">
+          <img class="gallery-image" id="galleryImage" alt="">
+        </div>
+        <button class="gallery-nav" id="galleryNext" type="button" aria-label="Next screenshot">
+          <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+        </button>
+      </div>
+
+      <footer class="gallery-footer">
+        <div class="gallery-dots" id="galleryDots" role="group" aria-label="Choose a screenshot"></div>
+        <div class="gallery-counter" id="galleryCounter" aria-hidden="true"></div>
+        <p class="sr-only" id="galleryStatus" aria-live="polite"></p>
+      </footer>
+    </section>
+  </div>
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const htmlEl = document.documentElement;
@@ -1203,6 +1623,265 @@
       const menuToggle = document.getElementById('menuToggle');
       const navMenu = document.getElementById('navMenu');
       const body = document.body;
+
+      const projectGalleries = {
+        canvas: {
+          title: 'Canvas | AI-Assisted Website Builder',
+          github: 'https://github.com/AhmedGTaha/canvas',
+          live: 'https://canvas-pi-one.vercel.app/',
+          images: [
+            { src: 'images/canvas-website-builder/ai-page-editor.jpg', alt: 'Canvas AI page editor showing a Bahrain National Day website preview and assistant panel' },
+            { src: 'images/canvas-website-builder/brand-theme-settings.jpg', alt: 'Canvas brand and theme settings with color palettes and a responsive preview' },
+            { src: 'images/canvas-website-builder/reusable-section-library.jpg', alt: 'Canvas reusable section library with navigation layout choices' },
+            { src: 'images/canvas-website-builder/version-history-checkpoint.jpg', alt: 'Canvas version history and checkpoint controls beside a website preview' },
+            { src: 'images/canvas-website-builder/website-export-panel.jpg', alt: 'Canvas website export panel showing a validated ZIP ready to download' },
+            { src: 'images/canvas-website-builder/ai-model-settings.jpg', alt: 'Canvas AI settings page for choosing a provider and model' },
+            { src: 'images/canvas-website-builder/ai-usage-dashboard.jpg', alt: 'Canvas AI usage dashboard with request, latency, token, and validation metrics' }
+          ]
+        },
+        alsaeh: {
+          title: 'Alsaeh Tourism Recommender System for Bahrain',
+          github: null,
+          live: 'https://www.alsaeh.net',
+          images: [
+            { src: 'images/alsaeh-tourism/landing-page.jpg', alt: 'Alsaeh tourism planner landing page introducing personalized Bahrain itineraries' },
+            { src: 'images/alsaeh-tourism/plans-dashboard.jpg', alt: 'Alsaeh dashboard listing a saved Bahrain travel plan' },
+            { src: 'images/alsaeh-tourism/create-plan-form.jpg', alt: 'Alsaeh form for creating an AI-generated Bahrain travel plan' },
+            { src: 'images/alsaeh-tourism/itinerary-ai-assistant.jpg', alt: 'Alsaeh generated itinerary with the AI trip assistant panel' },
+            { src: 'images/alsaeh-tourism/admin-analytics-dashboard.jpg', alt: 'Alsaeh administration analytics dashboard with usage charts' },
+            { src: 'images/alsaeh-tourism/about-project-page.jpg', alt: 'Alsaeh about page explaining the project, objectives, architecture, and team' }
+          ]
+        },
+        realtimeForum: {
+          title: 'Real-Time Forum',
+          github: 'https://github.com/AhmedGTaha/real-time-forum',
+          live: 'https://real-time-forum-lac.vercel.app/',
+          images: [
+            { src: 'images/realtime-forum/sign-in-page.jpg', alt: 'Real-Time Forum sign-in screen in dark mode' },
+            { src: 'images/realtime-forum/forum-home-and-chat.jpg', alt: 'Real-Time Forum home feed with new-post form and private chat' },
+            { src: 'images/realtime-forum/my-posts-and-messages.jpg', alt: 'Real-Time Forum personal posts view with messaging panel' },
+            { src: 'images/realtime-forum/forum-dashboard.jpg', alt: 'Real-Time Forum dashboard showing posts and private messages' },
+            { src: 'images/realtime-forum/admin-dashboard.jpg', alt: 'Real-Time Forum administration dashboard for accounts, posts, and comments' }
+          ]
+        },
+        rentivo: {
+          title: 'Car Rental System',
+          github: 'https://github.com/AhmedGTaha/Rentivo',
+          live: null,
+          images: [
+            { src: 'images/rentivo-car-rental/landing-page.webp', alt: 'Rentivo landing page featuring a Toyota Corolla rental in Bahrain' },
+            { src: 'images/rentivo-car-rental/vehicle-catalog.webp', alt: 'Rentivo vehicle catalog with search, filters, and rental listings' },
+            { src: 'images/rentivo-car-rental/vehicle-details.webp', alt: 'Rentivo Porsche 911 vehicle details and booking panel' },
+            { src: 'images/rentivo-car-rental/booking-details-admin.webp', alt: 'Rentivo agency booking details with rental timeline, pricing, and customer information' },
+            { src: 'images/rentivo-car-rental/bookings-list-admin.webp', alt: 'Rentivo agency bookings list with status and payment filters' },
+            { src: 'images/rentivo-car-rental/agency-dashboard.webp', alt: 'Rentivo agency dashboard with fleet metrics and recent bookings' },
+            { src: 'images/rentivo-car-rental/fleet-management.webp', alt: 'Rentivo fleet management table showing vehicle status, location, and daily rate' }
+          ]
+        },
+        flawless: {
+          title: 'Flawless Interviews',
+          github: null,
+          live: 'https://flawless.onl',
+          images: [
+            { src: 'images/flawless-interviews/landing-page.jpg', alt: 'Flawless Interviews landing page introducing its recruitment workspace' },
+            { src: 'images/flawless-interviews/recruitment-overview-dashboard.jpg', alt: 'Flawless recruitment overview dashboard with application pipeline metrics' },
+            { src: 'images/flawless-interviews/candidate-ai-match-summary.jpg', alt: 'Flawless AI candidate match summary with strengths and weaknesses' },
+            { src: 'images/flawless-interviews/jobs-list.jpg', alt: 'Flawless jobs list with publishing status and pending actions' },
+            { src: 'images/flawless-interviews/candidate-workflow-board.jpg', alt: 'Flawless candidate workflow board for screening and interview stages' },
+            { src: 'images/flawless-interviews/screenings-list.jpg', alt: 'Flawless employer screenings list with candidate progress states' },
+            { src: 'images/flawless-interviews/candidate-screening-progress.jpg', alt: 'Flawless candidate view showing screening and interview progress' }
+          ]
+        }
+      };
+
+      const galleryBackdrop = document.getElementById('projectGalleryModal');
+      const galleryTitle = document.getElementById('galleryTitle');
+      const galleryClose = document.getElementById('galleryClose');
+      const galleryGithub = document.getElementById('galleryGithub');
+      const galleryLive = document.getElementById('galleryLive');
+      const galleryPrevious = document.getElementById('galleryPrevious');
+      const galleryNext = document.getElementById('galleryNext');
+      const galleryImage = document.getElementById('galleryImage');
+      const galleryDots = document.getElementById('galleryDots');
+      const galleryCounter = document.getElementById('galleryCounter');
+      const galleryStatus = document.getElementById('galleryStatus');
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      let activeGallery = null;
+      let activeScreenshotIndex = 0;
+      let galleryOpener = null;
+      let galleryCloseTimer = null;
+      let galleryIsClosing = false;
+
+      const setGalleryAction = (element, url, label, projectTitle) => {
+        if (url) {
+          element.href = url;
+          element.removeAttribute('aria-disabled');
+          element.removeAttribute('tabindex');
+          element.removeAttribute('title');
+          element.setAttribute('aria-label', `Open ${projectTitle} ${label} in a new tab`);
+          return;
+        }
+
+        element.removeAttribute('href');
+        element.setAttribute('aria-disabled', 'true');
+        element.setAttribute('tabindex', '-1');
+        element.setAttribute('title', `${label} unavailable`);
+        element.setAttribute('aria-label', `${label} unavailable for ${projectTitle}`);
+      };
+
+      const preloadAdjacentScreenshots = () => {
+        if (!activeGallery || activeGallery.images.length < 2) return;
+
+        const total = activeGallery.images.length;
+        const adjacentIndexes = [
+          (activeScreenshotIndex - 1 + total) % total,
+          (activeScreenshotIndex + 1) % total
+        ];
+
+        adjacentIndexes.forEach(index => {
+          const preloadImage = new Image();
+          preloadImage.src = activeGallery.images[index].src;
+        });
+      };
+
+      const renderScreenshot = (index) => {
+        if (!activeGallery) return;
+
+        const total = activeGallery.images.length;
+        activeScreenshotIndex = (index + total) % total;
+        const screenshot = activeGallery.images[activeScreenshotIndex];
+
+        galleryImage.src = screenshot.src;
+        galleryImage.alt = screenshot.alt;
+        galleryCounter.textContent = `${activeScreenshotIndex + 1} / ${total}`;
+        galleryStatus.textContent = `Showing screenshot ${activeScreenshotIndex + 1} of ${total}: ${screenshot.alt}`;
+
+        galleryDots.querySelectorAll('.gallery-dot').forEach((dot, dotIndex) => {
+          dot.setAttribute('aria-pressed', String(dotIndex === activeScreenshotIndex));
+        });
+
+        preloadAdjacentScreenshots();
+      };
+
+      const renderGalleryDots = () => {
+        galleryDots.replaceChildren();
+
+        activeGallery.images.forEach((_, index) => {
+          const dot = document.createElement('button');
+          dot.className = 'gallery-dot';
+          dot.type = 'button';
+          dot.setAttribute('aria-label', `View screenshot ${index + 1} of ${activeGallery.images.length}`);
+          dot.addEventListener('click', () => renderScreenshot(index));
+          galleryDots.appendChild(dot);
+        });
+      };
+
+      const openGallery = (projectKey, opener) => {
+        const gallery = projectGalleries[projectKey];
+        if (!gallery) return;
+
+        window.clearTimeout(galleryCloseTimer);
+        activeGallery = gallery;
+        galleryOpener = opener;
+        galleryIsClosing = false;
+        galleryTitle.textContent = gallery.title;
+        setGalleryAction(galleryGithub, gallery.github, 'GitHub', gallery.title);
+        setGalleryAction(galleryLive, gallery.live, 'Live site', gallery.title);
+        renderGalleryDots();
+        renderScreenshot(0);
+
+        galleryBackdrop.hidden = false;
+        body.classList.add('modal-open');
+        void galleryBackdrop.offsetWidth;
+        galleryBackdrop.classList.add('is-open');
+        galleryClose.focus({ preventScroll: true });
+      };
+
+      const finishClosingGallery = () => {
+        galleryBackdrop.hidden = true;
+        galleryBackdrop.classList.remove('is-open');
+        galleryImage.removeAttribute('src');
+        galleryImage.alt = '';
+        body.classList.remove('modal-open');
+        activeGallery = null;
+        galleryIsClosing = false;
+
+        if (galleryOpener && document.contains(galleryOpener)) {
+          galleryOpener.focus({ preventScroll: true });
+        }
+        galleryOpener = null;
+      };
+
+      const closeGallery = () => {
+        if (galleryBackdrop.hidden || galleryIsClosing) return;
+
+        galleryIsClosing = true;
+        galleryBackdrop.classList.remove('is-open');
+
+        if (reduceMotion.matches) {
+          finishClosingGallery();
+          return;
+        }
+
+        galleryCloseTimer = window.setTimeout(finishClosingGallery, 260);
+      };
+
+      const moveGallery = (direction) => {
+        renderScreenshot(activeScreenshotIndex + direction);
+      };
+
+      document.querySelectorAll('[data-gallery]').forEach(trigger => {
+        trigger.addEventListener('click', () => openGallery(trigger.dataset.gallery, trigger));
+      });
+
+      galleryClose.addEventListener('click', closeGallery);
+      galleryPrevious.addEventListener('click', () => moveGallery(-1));
+      galleryNext.addEventListener('click', () => moveGallery(1));
+      galleryBackdrop.addEventListener('click', (event) => {
+        if (event.target === galleryBackdrop) closeGallery();
+      });
+
+      [galleryGithub, galleryLive].forEach(action => {
+        action.addEventListener('click', event => {
+          if (action.getAttribute('aria-disabled') === 'true') event.preventDefault();
+        });
+      });
+
+      document.addEventListener('keydown', event => {
+        if (galleryBackdrop.hidden || galleryIsClosing) return;
+
+        if (event.key === 'Escape') {
+          event.preventDefault();
+          closeGallery();
+          return;
+        }
+
+        if (event.key === 'ArrowLeft') {
+          event.preventDefault();
+          moveGallery(-1);
+          return;
+        }
+
+        if (event.key === 'ArrowRight') {
+          event.preventDefault();
+          moveGallery(1);
+          return;
+        }
+
+        if (event.key !== 'Tab') return;
+
+        const focusableElements = Array.from(galleryBackdrop.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'));
+        const firstFocusable = focusableElements[0];
+        const lastFocusable = focusableElements[focusableElements.length - 1];
+
+        if (event.shiftKey && document.activeElement === firstFocusable) {
+          event.preventDefault();
+          lastFocusable.focus();
+        } else if (!event.shiftKey && document.activeElement === lastFocusable) {
+          event.preventDefault();
+          firstFocusable.focus();
+        }
+      });
 
       // Theme setup
       const getSystemTheme = () => window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
