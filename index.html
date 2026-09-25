@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" dir="ltr" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +7,20 @@
   <meta name="theme-color" content="#09090b">
   <meta name="application-name" content="Ahmed Taha Ghodhbani Portfolio">
   <meta name="apple-mobile-web-app-title" content="Ahmed Portfolio">
+  <script>
+    (() => {
+      const savedLanguage = localStorage.getItem('portfolio-language');
+      const browserLanguages = Array.isArray(navigator.languages) && navigator.languages.length
+        ? navigator.languages
+        : [navigator.language || 'en'];
+      const language = savedLanguage === 'ar' || savedLanguage === 'en'
+        ? savedLanguage
+        : (browserLanguages[0] || 'en').toLowerCase().startsWith('ar') ? 'ar' : 'en';
+
+      document.documentElement.lang = language;
+      document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
+    })();
+  </script>
   <title>Ahmed Taha Ghodhbani | Software Engineer &amp; Full-Stack Developer</title>
   <link rel="canonical" href="https://ahmedgtaha.github.io/My-Portfolio/">
   <link rel="icon" type="image/png" sizes="32x32" href="images/branding/favicon-32.png">
@@ -34,7 +48,7 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -52,6 +66,7 @@
       --accent-text: #1e40af;
       --accent-border: #bfdbfe;
       --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-arabic: 'Noto Sans Arabic', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
       --shadow: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.02);
       --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
@@ -100,6 +115,40 @@
       transition: background-color 0.3s ease, color 0.3s ease;
     }
 
+    html[lang="ar"] body {
+      font-family: var(--font-arabic);
+    }
+
+    html[lang="ar"]:not(.i18n-ready) body {
+      visibility: hidden;
+    }
+
+    html[dir="rtl"] .tag:not([data-i18n]),
+    html[dir="rtl"] .product-link-url,
+    html[dir="rtl"] .cert-id,
+    html[dir="rtl"] .technical-text {
+      direction: ltr;
+      unicode-bidi: isolate;
+    }
+
+    html[lang="ar"] .section-label,
+    html[lang="ar"] .info-label,
+    html[lang="ar"] .card-header-title,
+    html[lang="ar"] .skills-card h3,
+    html[lang="ar"] .gallery-eyebrow,
+    html[lang="ar"] .edu-date {
+      font-family: var(--font-arabic);
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    html[dir="rtl"] .project-title,
+    html[dir="rtl"] .cert-title,
+    html[dir="rtl"] .gallery-title {
+      unicode-bidi: plaintext;
+      text-align: start;
+    }
+
     body.menu-open,
     body.modal-open {
       overflow: hidden;
@@ -118,7 +167,7 @@
     .skip-link {
       position: absolute;
       top: -100px;
-      left: 20px;
+      inset-inline-start: 20px;
       background: var(--primary);
       color: white;
       padding: 10px 20px;
@@ -135,8 +184,8 @@
     .container {
       width: 100%;
       max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 24px;
+      margin-inline: auto;
+      padding-inline: 24px;
     }
 
     /* Navigation Header */
@@ -242,7 +291,7 @@
     .theme-menu {
       position: absolute;
       top: calc(100% + 10px);
-      right: 0;
+      inset-inline-end: 0;
       z-index: 300;
       width: 176px;
       padding: 6px;
@@ -270,7 +319,7 @@
       font: inherit;
       font-size: 0.88rem;
       font-weight: 600;
-      text-align: left;
+      text-align: start;
       cursor: pointer;
     }
 
@@ -580,7 +629,7 @@
       font: inherit;
       line-height: inherit;
       letter-spacing: inherit;
-      text-align: left;
+      text-align: start;
       cursor: pointer;
     }
 
@@ -635,7 +684,7 @@
     }
 
     .project-tasks {
-      padding-left: 18px;
+      padding-inline-start: 18px;
       font-size: 0.9rem;
       color: var(--text);
     }
@@ -827,7 +876,7 @@
       border: 0;
       font: inherit;
       line-height: inherit;
-      text-align: left;
+      text-align: start;
       cursor: pointer;
     }
 
@@ -860,7 +909,7 @@
     }
 
     .edu-details {
-      padding-left: 18px;
+      padding-inline-start: 18px;
       font-size: 0.95rem;
       margin-bottom: 24px;
     }
@@ -909,7 +958,7 @@
       min-height: 100%;
       color: inherit;
       font: inherit;
-      text-align: left;
+      text-align: start;
       appearance: none;
       cursor: pointer;
       transition: var(--transition);
@@ -1272,6 +1321,18 @@
       color: var(--text-muted);
       font-family: var(--font-mono);
       font-size: 0.76rem;
+      direction: ltr;
+      unicode-bidi: isolate;
+    }
+
+    .gpa-val {
+      direction: ltr;
+      unicode-bidi: isolate;
+    }
+
+    html[dir="rtl"] .btn-primary svg,
+    html[dir="rtl"] .gallery-nav svg {
+      transform: scaleX(-1);
     }
 
     .gallery-actions[hidden],
@@ -1347,20 +1408,20 @@
       .nav-menu {
         position: fixed;
         top: 0;
-        right: -100%;
+        inset-inline-end: -100%;
         width: 280px;
         height: 100vh;
         background: var(--bg-card);
-        border-left: 1px solid var(--border);
+        border-inline-start: 1px solid var(--border);
         flex-direction: column;
         align-items: flex-start;
         padding: 96px 32px;
         gap: 24px;
         z-index: 150;
-        transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        transition: inset-inline-end 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       }
 
-      body.menu-open .nav-menu { right: 0; }
+      body.menu-open .nav-menu { inset-inline-end: 0; }
       .btn-menu { display: block; }
       
       .contact-panel { flex-direction: column; align-items: stretch; padding: 32px; gap: 32px; }
@@ -1415,51 +1476,52 @@
 </head>
 <body>
 
-  <a class="skip-link" href="#main-content">Skip to Main Content</a>
+  <a class="skip-link" href="#main-content" data-i18n="a11y.skip">Skip to Main Content</a>
 
   <header class="header">
     <div class="container nav">
-      <a class="logo" href="#top" aria-label="Ahmed Taha Home">
+      <a class="logo" href="#top" aria-label="Ahmed Taha Home" data-i18n-aria-label="a11y.home">
         <span class="logo-avatar-frame">
           <img class="logo-avatar" src="images/profile/ahmed-taha-headshot.webp" width="38" height="38" alt="Ahmed Taha Ghodhbani">
         </span>
         <span>Ahmed Taha Ghodhbani</span>
       </a>
 
-      <nav class="nav-menu" id="navMenu" aria-label="Primary Site Navigation">
-        <a class="nav-link" href="#experience">Experience</a>
-        <a class="nav-link" href="#projects">Projects</a>
-        <a class="nav-link" href="#skills">Skills</a>
-        <a class="nav-link" href="#education">Background</a>
-        <a class="nav-link" href="#certifications">Certification</a>
-        <a class="nav-link" href="#languages">Languages</a>
-        <a class="nav-link" href="#contact">Contact</a>
+      <nav class="nav-menu" id="navMenu" aria-label="Primary Site Navigation" data-i18n-aria-label="a11y.primaryNav">
+        <a class="nav-link" href="#experience" data-i18n="nav.experience">Experience</a>
+        <a class="nav-link" href="#projects" data-i18n="nav.projects">Projects</a>
+        <a class="nav-link" href="#skills" data-i18n="nav.skills">Skills</a>
+        <a class="nav-link" href="#education" data-i18n="nav.background">Background</a>
+        <a class="nav-link" href="#certifications" data-i18n="nav.certification">Certification</a>
+        <a class="nav-link" href="#languages" data-i18n="nav.languages">Languages</a>
+        <a class="nav-link" href="#contact" data-i18n="nav.contact">Contact</a>
       </nav>
 
       <div class="nav-actions">
+        <button class="btn-toggle language-toggle" id="languageToggle" type="button" aria-label="Switch language to Arabic" title="Switch language to Arabic">AR</button>
         <div class="theme-picker" id="themePicker">
           <button class="btn-toggle" id="themeToggle" type="button" aria-label="Choose color theme" aria-haspopup="menu" aria-controls="themeMenu" aria-expanded="false" title="Choose color theme">
             <span id="themeToggleIcon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></span>
           </button>
-          <div class="theme-menu" id="themeMenu" role="menu" aria-label="Color theme" hidden>
+          <div class="theme-menu" id="themeMenu" role="menu" aria-label="Color theme" data-i18n-aria-label="theme.menu" hidden>
             <button class="theme-option" type="button" role="menuitemradio" aria-checked="false" data-theme-option="system">
               <span class="theme-option-icon" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"></rect><path d="M8 21h8M12 18v3"></path></svg></span>
-              <span>System</span>
+              <span data-i18n="theme.system">System</span>
               <span class="theme-option-check" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"></path></svg></span>
             </button>
             <button class="theme-option" type="button" role="menuitemradio" aria-checked="false" data-theme-option="light">
               <span class="theme-option-icon" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.41M17.66 6.34l1.41-1.41"></path></svg></span>
-              <span>Light</span>
+              <span data-i18n="theme.light">Light</span>
               <span class="theme-option-check" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"></path></svg></span>
             </button>
             <button class="theme-option" type="button" role="menuitemradio" aria-checked="false" data-theme-option="dark">
               <span class="theme-option-icon" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></span>
-              <span>Dark</span>
+              <span data-i18n="theme.dark">Dark</span>
               <span class="theme-option-check" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"></path></svg></span>
             </button>
           </div>
         </div>
-        <button class="btn-menu" id="menuToggle" type="button" aria-label="Toggle contextual mobile configuration drawer" aria-controls="navMenu" aria-expanded="false">
+        <button class="btn-menu" id="menuToggle" type="button" aria-label="Toggle mobile navigation" data-i18n-aria-label="a11y.mobileNav" aria-controls="navMenu" aria-expanded="false">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="18" x2="20" y2="18"></line></svg>
         </button>
       </div>
@@ -1471,47 +1533,47 @@
     <section class="hero" id="top">
       <div class="container hero-grid">
         <div class="reveal">
-          <div class="tagline">Software Engineer | Full-Stack Developer</div>
-          <h1 class="hero-title">Building production-ready software from idea to deployment.</h1>
-          <p class="hero-desc">
+          <div class="tagline" data-i18n="hero.tagline">Software Engineer | Full-Stack Developer</div>
+          <h1 class="hero-title" data-i18n="hero.title">Building production-ready software from idea to deployment.</h1>
+          <p class="hero-desc" data-i18n="hero.description">
             Software Engineering graduate with professional experience delivering production full-stack, database-driven, and AI-integrated applications. Built and delivered a multi-organization recruitment SaaS purchased and adopted by Script IT Solutions.
           </p>
           <div class="hero-btns">
-            <a class="btn btn-primary" href="#projects">
+            <a class="btn btn-primary" href="#projects" data-i18n-text="hero.viewProjects">
               View projects
               <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
             </a>
-            <a class="btn btn-secondary" href="mailto:ahmedtahaghodhbani@gmail.com">
+            <a class="btn btn-secondary" href="mailto:ahmedtahaghodhbani@gmail.com" data-i18n-text="hero.emailMe">
               <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
               Email me
             </a>
           </div>
         </div>
 
-        <aside class="hero-card reveal" aria-label="Profile summary">
+        <aside class="hero-card reveal" aria-label="Profile summary" data-i18n-aria-label="profile.summary">
           <div class="card-header">
             <div class="dot dot-active"></div>
-            <div class="card-header-title">Profile</div>
+            <div class="card-header-title" data-i18n="profile.title">Profile</div>
           </div>
           <div class="hero-portrait">
             <img src="images/profile/ahmed-taha-headshot.webp" width="1254" height="1254" alt="Ahmed Taha Ghodhbani" fetchpriority="high">
           </div>
           <ul class="info-list">
             <li class="info-item">
-              <span class="info-label">Developer</span>
+              <span class="info-label" data-i18n="profile.developer">Developer</span>
               <span class="info-value">Ahmed Taha Ghodhbani</span>
             </li>
             <li class="info-item">
-              <span class="info-label">Education</span>
-              <span class="info-value">B.Sc. Software Engineering, University of Bahrain</span>
+              <span class="info-label" data-i18n="profile.education">Education</span>
+              <span class="info-value" data-i18n="profile.educationValue">B.Sc. Software Engineering, University of Bahrain</span>
             </li>
             <li class="info-item">
-              <span class="info-label">Experience</span>
-              <span class="info-value">Production full-stack, database-driven, and AI-integrated applications</span>
+              <span class="info-label" data-i18n="profile.experience">Experience</span>
+              <span class="info-value" data-i18n="profile.experienceValue">Production full-stack, database-driven, and AI-integrated applications</span>
             </li>
             <li class="info-item">
-              <span class="info-label">Location</span>
-              <span class="info-value">Riffa, Bahrain</span>
+              <span class="info-label" data-i18n="profile.location">Location</span>
+              <span class="info-value" data-i18n="profile.locationValue">Riffa, Bahrain</span>
             </li>
           </ul>
         </aside>
@@ -1521,42 +1583,42 @@
     <section class="section" id="experience">
       <div class="container">
         <div class="section-head reveal">
-          <span class="section-label">Professional Experience</span>
-          <h2 class="section-title">Software delivered for real-world use</h2>
+          <span class="section-label" data-i18n="experience.label">Professional Experience</span>
+          <h2 class="section-title" data-i18n="experience.title">Software delivered for real-world use</h2>
         </div>
 
         <div class="timeline-layout education-layout">
           <article class="edu-block reveal">
             <div class="edu-header">
               <div class="edu-title">
-                <h3>Software Developer Intern</h3>
-                <div class="edu-inst">Script IT Solutions · Bahrain</div>
+                <h3 data-i18n="experience.role">Software Developer Intern</h3>
+                <div class="edu-inst" data-i18n="experience.company">Script IT Solutions · Bahrain</div>
               </div>
-              <span class="edu-date">Jul 2026 - Aug 2026</span>
+              <span class="edu-date" data-i18n="experience.date">Jul 2026 - Aug 2026</span>
             </div>
             <ul class="edu-details">
-              <li>Designed and delivered <strong>Flawless Interviews</strong>, a multi-organization AI recruitment SaaS purchased by Script IT Solutions and adopted in its recruitment workflow.</li>
-              <li>Engineered end-to-end workflows for job publishing, CV processing, AI-assisted candidate ranking, WhatsApp screening, interviewer review, candidate communication, and interview scheduling.</li>
-              <li>Developed the full-stack platform using Next.js, React, TypeScript, PostgreSQL, Tailwind CSS, Gemini AI, and Resend, with custom authentication, Google Authentication, and role-based access control (RBAC).</li>
-              <li>Implemented Vitest, Playwright, authorization controls, and organization-level data isolation, then deployed the platform using Vercel and Neon.</li>
-              <li>Designed and developed <strong>Canvas</strong>, an AI-assisted website builder prototype with AI editing, live preview, reusable sections, collaboration, version history, and validated export.</li>
+              <li data-i18n-html="experience.item1">Designed and delivered <strong>Flawless Interviews</strong>, a multi-organization AI recruitment SaaS purchased by Script IT Solutions and adopted in its recruitment workflow.</li>
+              <li data-i18n="experience.item2">Engineered end-to-end workflows for job publishing, CV processing, AI-assisted candidate ranking, WhatsApp screening, interviewer review, candidate communication, and interview scheduling.</li>
+              <li data-i18n="experience.item3">Developed the full-stack platform using Next.js, React, TypeScript, PostgreSQL, Tailwind CSS, Gemini AI, and Resend, with custom authentication, Google Authentication, and role-based access control (RBAC).</li>
+              <li data-i18n="experience.item4">Implemented Vitest, Playwright, authorization controls, and organization-level data isolation, then deployed the platform using Vercel and Neon.</li>
+              <li data-i18n-html="experience.item5">Designed and developed <strong>Canvas</strong>, an AI-assisted website builder prototype with AI editing, live preview, reusable sections, collaboration, version history, and validated export.</li>
             </ul>
             <div class="project-tags">
               <span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">PostgreSQL</span><span class="tag">Drizzle ORM</span><span class="tag">Tailwind CSS</span><span class="tag">Gemini AI</span><span class="tag">Resend</span><span class="tag">Vitest</span><span class="tag">Playwright</span><span class="tag">Vercel</span><span class="tag">Neon</span>
             </div>
             <div class="product-link-row">
-              <a class="product-link-card" href="https://flawless.onl" target="_blank" rel="noopener noreferrer" aria-label="Visit Flawless Interviews website (opens in a new tab)">
-                <img class="product-icon" src="images/flawless-interviews/app-icon.png" width="48" height="48" alt="Flawless Interviews icon" loading="lazy">
+              <a class="product-link-card" href="https://flawless.onl" target="_blank" rel="noopener noreferrer" aria-label="Visit Flawless Interviews website (opens in a new tab)" data-i18n-aria-label="experience.flawlessLink">
+                <img class="product-icon" src="images/flawless-interviews/app-icon.png" width="48" height="48" alt="Flawless Interviews icon" data-i18n-alt="experience.flawlessIcon" loading="lazy">
                 <span class="product-link-copy">
                   <span class="product-link-title">Flawless Interviews</span>
                   <span class="product-link-url">flawless.onl</span>
                 </span>
                 <span class="product-link-action">
-                  <span>Live</span>
+                  <span data-i18n="actions.live">Live</span>
                   <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg>
                 </span>
               </a>
-              <button class="product-gallery-trigger" type="button" data-gallery="flawless" aria-haspopup="dialog" aria-controls="projectGalleryModal">
+              <button class="product-gallery-trigger" type="button" data-gallery="flawless" data-i18n-text="actions.viewGallery" aria-haspopup="dialog" aria-controls="projectGalleryModal">
                 View gallery
                 <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="8.5" cy="10" r="1.5"></circle><path d="m21 15-5-5L5 19"></path></svg>
               </button>
@@ -1569,25 +1631,25 @@
     <section class="section" id="projects">
       <div class="container">
         <div class="section-head reveal">
-          <span class="section-label">Projects</span>
-          <h2 class="section-title">Selected production-style projects</h2>
+          <span class="section-label" data-i18n="projects.label">Projects</span>
+          <h2 class="section-title" data-i18n="projects.title">Selected production-style projects</h2>
         </div>
 
         <div class="projects-grid">
           <article class="project-card reveal">
             <div class="project-top">
               <div class="project-meta">
-                <span class="project-scope">Professional Product Prototype</span>
-                <div class="project-card-actions" aria-label="Canvas links">
+                <span class="project-scope" data-i18n="projects.canvas.scope">Professional Product Prototype</span>
+                <div class="project-card-actions" aria-label="Canvas links" data-i18n-aria-label="projects.canvas.links">
                   <a class="project-action" href="https://github.com/AhmedGTaha/canvas" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3.3-.4 6.8-1.6 6.8-7A5.4 5.4 0 0 0 19.4 4 5 5 0 0 0 19.3.5S18.2.1 15 1.8a13.4 13.4 0 0 0-7 0C4.8.1 3.7.5 3.7.5A5 5 0 0 0 3.6 4a5.4 5.4 0 0 0-1.4 3.7c0 5.4 3.5 6.6 6.8 7A4.8 4.8 0 0 0 8 18v4"></path><path d="M8 19c-3 .9-3-1.5-4-2"></path></svg>GitHub</a>
-                  <a class="project-action" href="https://canvas-pi-one.vercel.app/" target="_blank" rel="noopener noreferrer">Live<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg></a>
+                  <a class="project-action" href="https://canvas-pi-one.vercel.app/" target="_blank" rel="noopener noreferrer" data-i18n-text="actions.live">Live<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg></a>
                 </div>
               </div>
-              <h3 class="project-title"><button class="project-title-button" type="button" data-gallery="canvas" aria-haspopup="dialog" aria-controls="projectGalleryModal">Canvas | AI-Assisted Website Builder<svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="8.5" cy="10" r="1.5"></circle><path d="m21 15-5-5L5 19"></path></svg></button></h3>
-              <p class="project-desc">An AI-assisted website-building platform designed for non-technical users to create and evolve complete frontend websites through natural-language instructions while maintaining structured pages, reusable sections, safe previews, and reversible history.</p>
+              <h3 class="project-title"><button class="project-title-button" type="button" data-gallery="canvas" data-i18n-text="projects.canvas.name" aria-haspopup="dialog" aria-controls="projectGalleryModal">Canvas | AI-Assisted Website Builder<svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="8.5" cy="10" r="1.5"></circle><path d="m21 15-5-5L5 19"></path></svg></button></h3>
+              <p class="project-desc" data-i18n="projects.canvas.description">An AI-assisted website-building platform designed for non-technical users to create and evolve complete frontend websites through natural-language instructions while maintaining structured pages, reusable sections, safe previews, and reversible history.</p>
               <ul class="project-tasks">
-                <li>Built workspaces and projects, a hierarchical page tree, AI page and element-level editing, reusable sections, project-aware AI context, media management, and a sandboxed responsive live preview.</li>
-                <li>Implemented durable AI generation jobs, immutable version history, Undo/Redo, checkpoints, collaboration controls, generated-source security validation, and validated Next.js + TypeScript ZIP export.</li>
+                <li data-i18n="projects.canvas.item1">Built workspaces and projects, a hierarchical page tree, AI page and element-level editing, reusable sections, project-aware AI context, media management, and a sandboxed responsive live preview.</li>
+                <li data-i18n="projects.canvas.item2">Implemented durable AI generation jobs, immutable version history, Undo/Redo, checkpoints, collaboration controls, generated-source security validation, and validated Next.js + TypeScript ZIP export.</li>
               </ul>
             </div>
             <div class="project-tags">
@@ -1598,17 +1660,17 @@
           <article class="project-card reveal">
             <div class="project-top">
               <div class="project-meta">
-                <span class="project-scope">Senior Project</span>
-                <div class="project-card-actions" aria-label="Alsaeh links">
+                <span class="project-scope" data-i18n="projects.alsaeh.scope">Senior Project</span>
+                <div class="project-card-actions" aria-label="Alsaeh links" data-i18n-aria-label="projects.alsaeh.links">
                   <a class="project-action" href="https://github.com/HADrawer/Senior-Project" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3.3-.4 6.8-1.6 6.8-7A5.4 5.4 0 0 0 19.4 4 5 5 0 0 0 19.3.5S18.2.1 15 1.8a13.4 13.4 0 0 0-7 0C4.8.1 3.7.5 3.7.5A5 5 0 0 0 3.6 4a5.4 5.4 0 0 0-1.4 3.7c0 5.4 3.5 6.6 6.8 7A4.8 4.8 0 0 0 8 18v4"></path><path d="M8 19c-3 .9-3-1.5-4-2"></path></svg>GitHub</a>
-                  <a class="project-action" href="https://www.alsaeh.net/" target="_blank" rel="noopener noreferrer">Live<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg></a>
+                  <a class="project-action" href="https://www.alsaeh.net/" target="_blank" rel="noopener noreferrer" data-i18n-text="actions.live">Live<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg></a>
                 </div>
               </div>
-              <h3 class="project-title"><button class="project-title-button" type="button" data-gallery="alsaeh" aria-haspopup="dialog" aria-controls="projectGalleryModal">Alsaeh Tourism Recommender System for Bahrain<svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="8.5" cy="10" r="1.5"></circle><path d="m21 15-5-5L5 19"></path></svg></button></h3>
-              <p class="project-desc">Collaborated on a bilingual AI tourism platform for Bahrain with Supabase Auth and Google sign-in, preference-based Gemini itineraries, chatbot and manual plan editing, saved plans, PDF/image export, and admin analytics.</p>
+              <h3 class="project-title"><button class="project-title-button" type="button" data-gallery="alsaeh" data-i18n-text="projects.alsaeh.name" aria-haspopup="dialog" aria-controls="projectGalleryModal">Alsaeh Tourism Recommender System for Bahrain<svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="8.5" cy="10" r="1.5"></circle><path d="m21 15-5-5L5 19"></path></svg></button></h3>
+              <p class="project-desc" data-i18n="projects.alsaeh.description">Collaborated on a bilingual AI tourism platform for Bahrain with Supabase Auth and Google sign-in, preference-based Gemini itineraries, chatbot and manual plan editing, saved plans, PDF/image export, and admin analytics.</p>
               <ul class="project-tasks">
-                <li>Collaborated on a Next.js frontend, FastAPI backend, and Supabase PostgreSQL database.</li>
-                <li>Implemented preference-based itinerary generation, chatbot and manual editing, saved plans, PDF/image export, and administrative analytics.</li>
+                <li data-i18n="projects.alsaeh.item1">Collaborated on a Next.js frontend, FastAPI backend, and Supabase PostgreSQL database.</li>
+                <li data-i18n="projects.alsaeh.item2">Implemented preference-based itinerary generation, chatbot and manual editing, saved plans, PDF/image export, and administrative analytics.</li>
               </ul>
             </div>
             <div class="project-tags">
@@ -1620,16 +1682,16 @@
             <div class="project-top">
               <div class="project-meta">
                 <span class="project-scope">Go / WebSockets</span>
-                <div class="project-card-actions" aria-label="Real-Time Forum links">
+                <div class="project-card-actions" aria-label="Real-Time Forum links" data-i18n-aria-label="projects.forum.links">
                   <a class="project-action" href="https://github.com/AhmedGTaha/real-time-forum" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3.3-.4 6.8-1.6 6.8-7A5.4 5.4 0 0 0 19.4 4 5 5 0 0 0 19.3.5S18.2.1 15 1.8a13.4 13.4 0 0 0-7 0C4.8.1 3.7.5 3.7.5A5 5 0 0 0 3.6 4a5.4 5.4 0 0 0-1.4 3.7c0 5.4 3.5 6.6 6.8 7A4.8 4.8 0 0 0 8 18v4"></path><path d="M8 19c-3 .9-3-1.5-4-2"></path></svg>GitHub</a>
-                  <a class="project-action" href="https://real-time-forum-lac.vercel.app/" target="_blank" rel="noopener noreferrer">Live<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg></a>
+                  <a class="project-action" href="https://real-time-forum-lac.vercel.app/" target="_blank" rel="noopener noreferrer" data-i18n-text="actions.live">Live<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg></a>
                 </div>
               </div>
               <h3 class="project-title"><button class="project-title-button" type="button" data-gallery="realtimeForum" aria-haspopup="dialog" aria-controls="projectGalleryModal">Real-Time Forum<svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="8.5" cy="10" r="1.5"></circle><path d="m21 15-5-5L5 19"></path></svg></button></h3>
-              <p class="project-desc">Built a Go single-page forum with cookie-based authentication, JSON APIs, posts, comments, moderation, persisted private messaging, online presence, and real-time communication using WebSockets and SQLite.</p>
+              <p class="project-desc" data-i18n="projects.forum.description">Built a Go single-page forum with cookie-based authentication, JSON APIs, posts, comments, moderation, persisted private messaging, online presence, and real-time communication using WebSockets and SQLite.</p>
               <ul class="project-tasks">
-                <li>Implemented the client with vanilla JavaScript and the server and persistence layers with Go and SQLite.</li>
-                <li>Added WebSocket messaging, online presence, moderation, and persisted chat history.</li>
+                <li data-i18n="projects.forum.item1">Implemented the client with vanilla JavaScript and the server and persistence layers with Go and SQLite.</li>
+                <li data-i18n="projects.forum.item2">Added WebSocket messaging, online presence, moderation, and persisted chat history.</li>
               </ul>
             </div>
             <div class="project-tags">
@@ -1641,15 +1703,15 @@
             <div class="project-top">
               <div class="project-meta">
                 <span class="project-scope">Flutter / Firebase</span>
-                <div class="project-card-actions" aria-label="Care Center links">
+                <div class="project-card-actions" aria-label="Care Center links" data-i18n-aria-label="projects.care.links">
                   <a class="project-action" href="https://github.com/AhmedGTaha/care_center_app" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3.3-.4 6.8-1.6 6.8-7A5.4 5.4 0 0 0 19.4 4 5 5 0 0 0 19.3.5S18.2.1 15 1.8a13.4 13.4 0 0 0-7 0C4.8.1 3.7.5 3.7.5A5 5 0 0 0 3.6 4a5.4 5.4 0 0 0-1.4 3.7c0 5.4 3.5 6.6 6.8 7A4.8 4.8 0 0 0 8 18v4"></path><path d="M8 19c-3 .9-3-1.5-4-2"></path></svg>GitHub</a>
                 </div>
               </div>
-              <h3 class="project-title">Care Center | Medical Equipment App</h3>
-              <p class="project-desc">Developed a medical equipment rental and donation app with Firebase Authentication, role-based access, reservation availability and approval workflows, equipment lifecycle tracking, real-time Firebase notifications, overdue monitoring, and usage analytics.</p>
+              <h3 class="project-title" data-i18n="projects.care.name">Care Center | Medical Equipment App</h3>
+              <p class="project-desc" data-i18n="projects.care.description">Developed a medical equipment rental and donation app with Firebase Authentication, role-based access, reservation availability and approval workflows, equipment lifecycle tracking, real-time Firebase notifications, overdue monitoring, and usage analytics.</p>
               <ul class="project-tasks">
-                <li>Managed authenticated roles, rental and donation workflows, equipment availability, and reservation approvals.</li>
-                <li>Added real-time notifications, overdue monitoring, lifecycle tracking, and usage analytics.</li>
+                <li data-i18n="projects.care.item1">Managed authenticated roles, rental and donation workflows, equipment availability, and reservation approvals.</li>
+                <li data-i18n="projects.care.item2">Added real-time notifications, overdue monitoring, lifecycle tracking, and usage analytics.</li>
               </ul>
             </div>
             <div class="project-tags">
@@ -1661,14 +1723,14 @@
             <div class="project-top">
               <div class="project-meta">
                 <span class="project-scope">PHP / MySQL</span>
-                <div class="project-card-actions" aria-label="Rentivo links">
+                <div class="project-card-actions" aria-label="Rentivo links" data-i18n-aria-label="projects.rentivo.links">
                   <a class="project-action" href="https://github.com/AhmedGTaha/Rentivo" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3.3-.4 6.8-1.6 6.8-7A5.4 5.4 0 0 0 19.4 4 5 5 0 0 0 19.3.5S18.2.1 15 1.8a13.4 13.4 0 0 0-7 0C4.8.1 3.7.5 3.7.5A5 5 0 0 0 3.6 4a5.4 5.4 0 0 0-1.4 3.7c0 5.4 3.5 6.6 6.8 7A4.8 4.8 0 0 0 8 18v4"></path><path d="M8 19c-3 .9-3-1.5-4-2"></path></svg>GitHub</a>
                 </div>
               </div>
-              <h3 class="project-title"><button class="project-title-button" type="button" data-gallery="rentivo" aria-haspopup="dialog" aria-controls="projectGalleryModal">Rentivo | Multi-Agency Car Rental Platform<svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="8.5" cy="10" r="1.5"></circle><path d="m21 15-5-5L5 19"></path></svg></button></h3>
-              <p class="project-desc">Built a multi-agency car rental marketplace and management platform for Bahrain with Google OAuth 2.0, tenant-isolated organization data, permission-controlled staff workflows, concurrency-safe booking and rental lifecycles, secure file handling, notifications, and PHPUnit testing.</p>
+              <h3 class="project-title"><button class="project-title-button" type="button" data-gallery="rentivo" data-i18n-text="projects.rentivo.name" aria-haspopup="dialog" aria-controls="projectGalleryModal">Rentivo | Multi-Agency Car Rental Platform<svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="8.5" cy="10" r="1.5"></circle><path d="m21 15-5-5L5 19"></path></svg></button></h3>
+              <p class="project-desc" data-i18n="projects.rentivo.description">Built a multi-agency car rental marketplace and management platform for Bahrain with Google OAuth 2.0, tenant-isolated organization data, permission-controlled staff workflows, concurrency-safe booking and rental lifecycles, secure file handling, notifications, and PHPUnit testing.</p>
               <ul class="project-tasks">
-                <li>Used MySQL PDO for secure database access across customer, agency, and administrative workflows.</li>
+                <li data-i18n="projects.rentivo.item1">Used MySQL PDO for secure database access across customer, agency, and administrative workflows.</li>
               </ul>
             </div>
             <div class="project-tags">
@@ -1682,45 +1744,45 @@
     <section class="section" id="skills">
       <div class="container">
         <div class="section-head reveal">
-          <span class="section-label">Technical Skills</span>
-          <h2 class="section-title">Tools and core areas</h2>
+          <span class="section-label" data-i18n="skills.label">Technical Skills</span>
+          <h2 class="section-title" data-i18n="skills.title">Tools and core areas</h2>
         </div>
 
         <div class="skills-grid">
           <div class="skills-card reveal">
-            <h3>Languages</h3>
+            <h3 data-i18n="skills.languages">Languages</h3>
             <div class="skills-list">
               <span class="tag">Java</span><span class="tag">TypeScript</span><span class="tag">JavaScript</span><span class="tag">Python</span><span class="tag">PHP</span><span class="tag">Dart</span><span class="tag">SQL</span><span class="tag">Go</span><span class="tag">HTML</span><span class="tag">CSS</span>
             </div>
           </div>
           <div class="skills-card reveal">
-            <h3>Frameworks</h3>
+            <h3 data-i18n="skills.frameworks">Frameworks</h3>
             <div class="skills-list">
               <span class="tag">Next.js</span><span class="tag">React</span><span class="tag">FastAPI</span><span class="tag">Flutter</span><span class="tag">Tailwind CSS</span><span class="tag">Bootstrap</span>
             </div>
           </div>
           <div class="skills-card reveal">
-            <h3>Databases &amp; Cloud</h3>
+            <h3 data-i18n="skills.databases">Databases &amp; Cloud</h3>
             <div class="skills-list">
               <span class="tag">PostgreSQL</span><span class="tag">MySQL</span><span class="tag">SQLite</span><span class="tag">Firebase</span><span class="tag">Supabase</span><span class="tag">Neon</span><span class="tag">Vercel</span>
             </div>
           </div>
           <div class="skills-card reveal">
-            <h3>APIs &amp; Integrations</h3>
+            <h3 data-i18n="skills.apis">APIs &amp; Integrations</h3>
             <div class="skills-list">
-              <span class="tag">REST APIs</span><span class="tag">WebSockets</span><span class="tag">Gemini API</span><span class="tag">Resend</span><span class="tag">WhatsApp Integration</span>
+              <span class="tag">REST APIs</span><span class="tag">WebSockets</span><span class="tag">Gemini API</span><span class="tag">Resend</span><span class="tag" data-i18n="skills.whatsapp">WhatsApp Integration</span>
             </div>
           </div>
           <div class="skills-card reveal">
-            <h3>Testing, Version Control &amp; Developer Tools</h3>
+            <h3 data-i18n="skills.testing">Testing, Version Control &amp; Developer Tools</h3>
             <div class="skills-list">
               <span class="tag">Vitest</span><span class="tag">Playwright</span><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">Docker</span>
             </div>
           </div>
           <div class="skills-card reveal">
-            <h3>Security &amp; Access</h3>
+            <h3 data-i18n="skills.security">Security &amp; Access</h3>
             <div class="skills-list">
-              <span class="tag">Authentication</span><span class="tag">Google Authentication</span><span class="tag">OAuth 2.0</span><span class="tag">Authorization</span><span class="tag">Role-Based Access Control (RBAC)</span>
+              <span class="tag" data-i18n="skills.authentication">Authentication</span><span class="tag" data-i18n="skills.googleAuthentication">Google Authentication</span><span class="tag">OAuth 2.0</span><span class="tag" data-i18n="skills.authorization">Authorization</span><span class="tag" data-i18n="skills.rbac">Role-Based Access Control (RBAC)</span>
             </div>
           </div>
         </div>
@@ -1730,8 +1792,8 @@
     <section class="section" id="education">
       <div class="container">
         <div class="section-head reveal">
-          <span class="section-label">Education</span>
-          <h2 class="section-title">Academic background</h2>
+          <span class="section-label" data-i18n="education.label">Education</span>
+          <h2 class="section-title" data-i18n="education.title">Academic background</h2>
         </div>
 
         <div class="timeline-layout education-layout">
@@ -1739,20 +1801,20 @@
             <div class="edu-header">
               <div class="edu-title">
                 <h3>
-                  <button class="education-title-button" type="button" data-gallery="uobDegree" aria-label="View University of Bahrain degree" aria-haspopup="dialog" aria-controls="projectGalleryModal">
+                  <button class="education-title-button" type="button" data-gallery="uobDegree" data-i18n-text="education.degree" aria-label="View University of Bahrain degree" data-i18n-aria-label="education.degreeLabel" aria-haspopup="dialog" aria-controls="projectGalleryModal">
                     B.Sc. Software Engineering
                     <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m8 13 2.5-2.5L15 15l2-2 4 4"></path><circle cx="8.5" cy="9.5" r="1"></circle></svg>
                   </button>
                 </h3>
                 <div class="edu-inst">University of Bahrain</div>
               </div>
-              <span class="edu-date">September 2026</span>
+              <span class="edu-date" data-i18n="education.date">September 2026</span>
             </div>
             <ul class="edu-details">
-              <li>Relevant coursework: Data Structures &amp; Algorithms, Database Management, Software Testing, Software Architecture, Requirements Engineering, Security, Cloud Computing, and Mobile Development.</li>
+              <li data-i18n="education.coursework">Relevant coursework: Data Structures &amp; Algorithms, Database Management, Software Testing, Software Architecture, Requirements Engineering, Security, Cloud Computing, and Mobile Development.</li>
             </ul>
             <div class="gpa-tag">
-              <span class="gpa-lbl">Cumulative GPA</span>
+              <span class="gpa-lbl" data-i18n="education.gpa">Cumulative GPA</span>
               <span class="gpa-val">3.22 / 4.00</span>
             </div>
           </div>
@@ -1763,44 +1825,44 @@
     <section class="section" id="certifications">
       <div class="container">
         <div class="section-head reveal">
-          <span class="section-label">Certifications</span>
-          <h2 class="section-title">Verified qualifications</h2>
+          <span class="section-label" data-i18n="certifications.label">Certifications</span>
+          <h2 class="section-title" data-i18n="certifications.title">Verified qualifications</h2>
         </div>
 
         <div class="cert-list">
-          <button class="cert-card cert-card-button reveal" type="button" data-gallery="nvidiaCertificate" aria-label="View NVIDIA Fundamentals of Accelerated Computing with Modern CUDA C++ certificate" aria-haspopup="dialog" aria-controls="projectGalleryModal">
+          <button class="cert-card cert-card-button reveal" type="button" data-gallery="nvidiaCertificate" aria-label="View NVIDIA Fundamentals of Accelerated Computing with Modern CUDA C++ certificate" data-i18n-aria-label="certifications.nvidiaLabel" aria-haspopup="dialog" aria-controls="projectGalleryModal">
             <span>
               <span class="cert-issuer">NVIDIA</span>
               <span class="cert-title" role="heading" aria-level="3">Fundamentals of Accelerated Computing with Modern CUDA C++</span>
-              <span class="cert-date">Issued December 17, 2025</span>
+              <span class="cert-date" data-i18n="certifications.nvidiaDate">Issued December 17, 2025</span>
             </span>
             <span class="cert-footer">
               <span class="cert-id">ID: AdUiwW1VRmSmMISqT6HMHA</span>
-              <span class="cert-view">View certificate<svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m8 13 2.5-2.5L15 15l2-2 4 4"></path><circle cx="8.5" cy="9.5" r="1"></circle></svg></span>
+              <span class="cert-view" data-i18n-text="actions.viewCertificate">View certificate<svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m8 13 2.5-2.5L15 15l2-2 4 4"></path><circle cx="8.5" cy="9.5" r="1"></circle></svg></span>
             </span>
           </button>
 
-          <button class="cert-card cert-card-button reveal" type="button" data-gallery="dartCertificate" aria-label="View Getting Started with Flutter and Dart certificate" aria-haspopup="dialog" aria-controls="projectGalleryModal">
+          <button class="cert-card cert-card-button reveal" type="button" data-gallery="dartCertificate" aria-label="View Getting Started with Flutter and Dart certificate" data-i18n-aria-label="certifications.dartLabel" aria-haspopup="dialog" aria-controls="projectGalleryModal">
             <span>
               <span class="cert-issuer">Packt · Coursera</span>
               <span class="cert-title" role="heading" aria-level="3">Getting Started with Flutter &amp; Dart</span>
-              <span class="cert-date">Issued October 1, 2025</span>
+              <span class="cert-date" data-i18n="certifications.dartDate">Issued October 1, 2025</span>
             </span>
             <span class="cert-footer">
               <span class="cert-id">ID: AFO0IHGYEXR8</span>
-              <span class="cert-view">View certificate<svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m8 13 2.5-2.5L15 15l2-2 4 4"></path><circle cx="8.5" cy="9.5" r="1"></circle></svg></span>
+              <span class="cert-view" data-i18n-text="actions.viewCertificate">View certificate<svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m8 13 2.5-2.5L15 15l2-2 4 4"></path><circle cx="8.5" cy="9.5" r="1"></circle></svg></span>
             </span>
           </button>
 
-          <button class="cert-card cert-card-button reveal" type="button" data-gallery="mpiCertificate" aria-label="View Parallel Computing with MPI certificate" aria-haspopup="dialog" aria-controls="projectGalleryModal">
+          <button class="cert-card cert-card-button reveal" type="button" data-gallery="mpiCertificate" aria-label="View Parallel Computing with MPI certificate" data-i18n-aria-label="certifications.mpiLabel" aria-haspopup="dialog" aria-controls="projectGalleryModal">
             <span>
               <span class="cert-issuer">University of Colorado Boulder · Coursera</span>
               <span class="cert-title" role="heading" aria-level="3">Parallel Computing with MPI</span>
-              <span class="cert-date">Issued November 17, 2025</span>
+              <span class="cert-date" data-i18n="certifications.mpiDate">Issued November 17, 2025</span>
             </span>
             <span class="cert-footer">
               <span class="cert-id">ID: 93V8XG0UVO96</span>
-              <span class="cert-view">View certificate<svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m8 13 2.5-2.5L15 15l2-2 4 4"></path><circle cx="8.5" cy="9.5" r="1"></circle></svg></span>
+              <span class="cert-view" data-i18n-text="actions.viewCertificate">View certificate<svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m8 13 2.5-2.5L15 15l2-2 4 4"></path><circle cx="8.5" cy="9.5" r="1"></circle></svg></span>
             </span>
           </button>
         </div>
@@ -1810,21 +1872,21 @@
     <section class="section" id="languages">
       <div class="container">
         <div class="section-head reveal">
-          <span class="section-label">Languages</span>
-          <h2 class="section-title">Communication</h2>
+          <span class="section-label" data-i18n="languages.label">Languages</span>
+          <h2 class="section-title" data-i18n="languages.title">Communication</h2>
         </div>
         <div class="cert-list" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
           <div class="cert-card reveal" style="padding: 20px;">
-            <h3 style="font-size:1.1rem; margin-bottom:4px; color:var(--text-strong);">Arabic</h3>
-            <p style="color:var(--text-muted); font-size:0.9rem; font-weight:500;">Native</p>
+            <h3 style="font-size:1.1rem; margin-bottom:4px; color:var(--text-strong);" data-i18n="languages.arabic">Arabic</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem; font-weight:500;" data-i18n="languages.native">Native</p>
           </div>
           <div class="cert-card reveal" style="padding: 20px;">
-            <h3 style="font-size:1.1rem; margin-bottom:4px; color:var(--text-strong);">English</h3>
-            <p style="color:var(--text-muted); font-size:0.9rem; font-weight:500;">IELTS Academic Band 6.0</p>
+            <h3 style="font-size:1.1rem; margin-bottom:4px; color:var(--text-strong);" data-i18n="languages.english">English</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem; font-weight:500;" data-i18n="languages.ielts">IELTS Academic Band 6.0</p>
           </div>
           <div class="cert-card reveal" style="padding: 20px;">
-            <h3 style="font-size:1.1rem; margin-bottom:4px; color:var(--text-strong);">French</h3>
-            <p style="color:var(--text-muted); font-size:0.9rem; font-weight:500;">Beginner</p>
+            <h3 style="font-size:1.1rem; margin-bottom:4px; color:var(--text-strong);" data-i18n="languages.french">French</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem; font-weight:500;" data-i18n="languages.beginner">Beginner</p>
           </div>
         </div>
       </div>
@@ -1834,12 +1896,12 @@
       <div class="container">
         <div class="contact-panel reveal">
           <div class="contact-text">
-            <h2>Let’s build reliable software together.</h2>
-            <p>I am open to software engineering and full-stack development opportunities where I can contribute across the stack, ship production-ready systems, and keep growing with an experienced team.</p>
+            <h2 data-i18n="contact.title">Let’s build reliable software together.</h2>
+            <p data-i18n="contact.description">I am open to software engineering and full-stack development opportunities where I can contribute across the stack, ship production-ready systems, and keep growing with an experienced team.</p>
           </div>
           <div class="contact-grid">
-            <a class="contact-btn" href="mailto:ahmedtahaghodhbani@gmail.com"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>Email</a>
-            <a class="contact-btn" href="tel:+97339916761"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.92z"></path></svg>Phone</a>
+            <a class="contact-btn" href="mailto:ahmedtahaghodhbani@gmail.com" data-i18n-text="contact.email"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>Email</a>
+            <a class="contact-btn" href="tel:+97339916761" data-i18n-text="contact.phone"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.92z"></path></svg>Phone</a>
             <a class="contact-btn" href="https://github.com/AhmedGTaha" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3.3-.4 6.8-1.6 6.8-7A5.4 5.4 0 0 0 19.4 4 5 5 0 0 0 19.3.5S18.2.1 15 1.8a13.4 13.4 0 0 0-7 0C4.8.1 3.7.5 3.7.5A5 5 0 0 0 3.6 4a5.4 5.4 0 0 0-1.4 3.7c0 5.4 3.5 6.6 6.8 7A4.8 4.8 0 0 0 8 18v4"></path><path d="M8 19c-3 .9-3-1.5-4-2"></path></svg>GitHub</a>
             <a class="contact-btn" href="https://www.linkedin.com/in/ahmedtaha-g" target="_blank" rel="noopener noreferrer">LinkedIn<svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg></a>
           </div>
@@ -1851,8 +1913,8 @@
 
   <footer class="footer">
     <div class="container footer-flex">
-      <span>2026 Ahmed Taha Ghodhbani</span>
-      <span>Riffa, Bahrain | Software Engineer &amp; Full-Stack Developer</span>
+      <span data-i18n="footer.copyright">2026 Ahmed Taha Ghodhbani</span>
+      <span data-i18n="footer.summary">Riffa, Bahrain | Software Engineer &amp; Full-Stack Developer</span>
     </div>
   </footer>
 
@@ -1869,25 +1931,25 @@
         </button>
       </header>
 
-      <div class="gallery-actions" aria-label="Project links">
+      <div class="gallery-actions" aria-label="Project links" data-i18n-aria-label="gallery.projectLinks">
         <a class="gallery-action" id="galleryGithub" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3.3-.4 6.8-1.6 6.8-7A5.4 5.4 0 0 0 19.4 4 5 5 0 0 0 19.3.5S18.2.1 15 1.8a13.4 13.4 0 0 0-7 0C4.8.1 3.7.5 3.7.5A5 5 0 0 0 3.6 4a5.4 5.4 0 0 0-1.4 3.7c0 5.4 3.5 6.6 6.8 7A4.8 4.8 0 0 0 8 18v4"></path><path d="M8 19c-3 .9-3-1.5-4-2"></path></svg>GitHub</a>
-        <a class="gallery-action" id="galleryLive" target="_blank" rel="noopener noreferrer">Live<svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg></a>
+        <a class="gallery-action" id="galleryLive" target="_blank" rel="noopener noreferrer" data-i18n-text="actions.live">Live<svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg></a>
       </div>
 
       <div class="gallery-view">
-        <button class="gallery-nav" id="galleryPrevious" type="button" aria-label="Previous screenshot">
+        <button class="gallery-nav" id="galleryPrevious" type="button" aria-label="Previous screenshot" data-i18n-aria-label="gallery.previous">
           <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg>
         </button>
         <div class="gallery-stage">
           <img class="gallery-image" id="galleryImage" alt="">
         </div>
-        <button class="gallery-nav" id="galleryNext" type="button" aria-label="Next screenshot">
+        <button class="gallery-nav" id="galleryNext" type="button" aria-label="Next screenshot" data-i18n-aria-label="gallery.next">
           <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
         </button>
       </div>
 
       <footer class="gallery-footer">
-        <div class="gallery-dots" id="galleryDots" role="group" aria-label="Choose a screenshot"></div>
+        <div class="gallery-dots" id="galleryDots" role="group" aria-label="Choose a screenshot" data-i18n-aria-label="gallery.choose"></div>
         <div class="gallery-counter" id="galleryCounter" aria-hidden="true"></div>
         <p class="sr-only" id="galleryStatus" aria-live="polite"></p>
       </footer>
@@ -1902,111 +1964,254 @@
       const themeMenu = document.getElementById('themeMenu');
       const themeToggleIcon = document.getElementById('themeToggleIcon');
       const themeOptions = Array.from(document.querySelectorAll('[data-theme-option]'));
+      const languageToggle = document.getElementById('languageToggle');
       const menuToggle = document.getElementById('menuToggle');
       const navMenu = document.getElementById('navMenu');
       const body = document.body;
 
+      const translations = {
+        en: {
+          'meta.title': 'Ahmed Taha Ghodhbani | Software Engineer & Full-Stack Developer',
+          'meta.description': 'Ahmed Taha Ghodhbani is a Software Engineering graduate and Full-Stack Developer experienced in production SaaS and AI-integrated applications.',
+          'meta.applicationName': 'Ahmed Taha Ghodhbani Portfolio', 'meta.shortName': 'Ahmed Portfolio',
+          'meta.socialTitle': 'Ahmed Taha Ghodhbani | Software Engineer',
+          'meta.socialDescription': 'Full-stack developer building production-ready SaaS, database-driven, and AI-integrated applications.',
+          'meta.imageAlt': 'Portrait of Ahmed Taha Ghodhbani',
+          'a11y.skip': 'Skip to Main Content', 'a11y.home': 'Ahmed Taha Home', 'a11y.primaryNav': 'Primary Site Navigation', 'a11y.mobileNav': 'Toggle mobile navigation',
+          'nav.experience': 'Experience', 'nav.projects': 'Projects', 'nav.skills': 'Skills', 'nav.background': 'Background', 'nav.certification': 'Certification', 'nav.languages': 'Languages', 'nav.contact': 'Contact',
+          'language.switch': 'Switch language to Arabic',
+          'theme.menu': 'Color theme', 'theme.system': 'System', 'theme.light': 'Light', 'theme.dark': 'Dark', 'theme.control': 'Theme: {theme}. Choose color theme',
+          'hero.tagline': 'Software Engineer | Full-Stack Developer', 'hero.title': 'Building production-ready software from idea to deployment.',
+          'hero.description': 'Software Engineering graduate with professional experience delivering production full-stack, database-driven, and AI-integrated applications. Built and delivered a multi-organization recruitment SaaS purchased and adopted by Script IT Solutions.',
+          'hero.viewProjects': 'View projects', 'hero.emailMe': 'Email me',
+          'profile.summary': 'Profile summary', 'profile.title': 'Profile', 'profile.developer': 'Developer', 'profile.education': 'Education',
+          'profile.educationValue': 'B.Sc. Software Engineering, University of Bahrain', 'profile.experience': 'Experience',
+          'profile.experienceValue': 'Production full-stack, database-driven, and AI-integrated applications', 'profile.location': 'Location', 'profile.locationValue': 'Riffa, Bahrain',
+          'experience.label': 'Professional Experience', 'experience.title': 'Software delivered for real-world use', 'experience.role': 'Software Developer Intern',
+          'experience.company': 'Script IT Solutions · Bahrain', 'experience.date': 'Jul 2026 - Aug 2026',
+          'experience.item1': 'Designed and delivered <strong>Flawless Interviews</strong>, a multi-organization AI recruitment SaaS purchased by Script IT Solutions and adopted in its recruitment workflow.',
+          'experience.item2': 'Engineered end-to-end workflows for job publishing, CV processing, AI-assisted candidate ranking, WhatsApp screening, interviewer review, candidate communication, and interview scheduling.',
+          'experience.item3': 'Developed the full-stack platform using Next.js, React, TypeScript, PostgreSQL, Tailwind CSS, Gemini AI, and Resend, with custom authentication, Google Authentication, and role-based access control (RBAC).',
+          'experience.item4': 'Implemented Vitest, Playwright, authorization controls, and organization-level data isolation, then deployed the platform using Vercel and Neon.',
+          'experience.item5': 'Designed and developed <strong>Canvas</strong>, an AI-assisted website builder prototype with AI editing, live preview, reusable sections, collaboration, version history, and validated export.',
+          'experience.flawlessLink': 'Visit Flawless Interviews website (opens in a new tab)',
+          'experience.flawlessIcon': 'Flawless Interviews icon',
+          'actions.live': 'Live', 'actions.viewGallery': 'View gallery', 'actions.viewCertificate': 'View certificate',
+          'projects.label': 'Projects', 'projects.title': 'Selected production-style projects',
+          'projects.canvas.scope': 'Professional Product Prototype', 'projects.canvas.links': 'Canvas links', 'projects.canvas.name': 'Canvas | AI-Assisted Website Builder',
+          'projects.canvas.description': 'An AI-assisted website-building platform designed for non-technical users to create and evolve complete frontend websites through natural-language instructions while maintaining structured pages, reusable sections, safe previews, and reversible history.',
+          'projects.canvas.item1': 'Built workspaces and projects, a hierarchical page tree, AI page and element-level editing, reusable sections, project-aware AI context, media management, and a sandboxed responsive live preview.',
+          'projects.canvas.item2': 'Implemented durable AI generation jobs, immutable version history, Undo/Redo, checkpoints, collaboration controls, generated-source security validation, and validated Next.js + TypeScript ZIP export.',
+          'projects.alsaeh.scope': 'Senior Project', 'projects.alsaeh.links': 'Alsaeh links', 'projects.alsaeh.name': 'Alsaeh Tourism Recommender System for Bahrain',
+          'projects.alsaeh.description': 'Collaborated on a bilingual AI tourism platform for Bahrain with Supabase Auth and Google sign-in, preference-based Gemini itineraries, chatbot and manual plan editing, saved plans, PDF/image export, and admin analytics.',
+          'projects.alsaeh.item1': 'Collaborated on a Next.js frontend, FastAPI backend, and Supabase PostgreSQL database.',
+          'projects.alsaeh.item2': 'Implemented preference-based itinerary generation, chatbot and manual editing, saved plans, PDF/image export, and administrative analytics.',
+          'projects.forum.links': 'Real-Time Forum links', 'projects.forum.description': 'Built a Go single-page forum with cookie-based authentication, JSON APIs, posts, comments, moderation, persisted private messaging, online presence, and real-time communication using WebSockets and SQLite.',
+          'projects.forum.item1': 'Implemented the client with vanilla JavaScript and the server and persistence layers with Go and SQLite.', 'projects.forum.item2': 'Added WebSocket messaging, online presence, moderation, and persisted chat history.',
+          'projects.care.links': 'Care Center links', 'projects.care.name': 'Care Center | Medical Equipment App',
+          'projects.care.description': 'Developed a medical equipment rental and donation app with Firebase Authentication, role-based access, reservation availability and approval workflows, equipment lifecycle tracking, real-time Firebase notifications, overdue monitoring, and usage analytics.',
+          'projects.care.item1': 'Managed authenticated roles, rental and donation workflows, equipment availability, and reservation approvals.', 'projects.care.item2': 'Added real-time notifications, overdue monitoring, lifecycle tracking, and usage analytics.',
+          'projects.rentivo.links': 'Rentivo links', 'projects.rentivo.name': 'Rentivo | Multi-Agency Car Rental Platform',
+          'projects.rentivo.description': 'Built a multi-agency car rental marketplace and management platform for Bahrain with Google OAuth 2.0, tenant-isolated organization data, permission-controlled staff workflows, concurrency-safe booking and rental lifecycles, secure file handling, notifications, and PHPUnit testing.',
+          'projects.rentivo.item1': 'Used MySQL PDO for secure database access across customer, agency, and administrative workflows.',
+          'skills.label': 'Technical Skills', 'skills.title': 'Tools and core areas', 'skills.languages': 'Languages', 'skills.frameworks': 'Frameworks', 'skills.databases': 'Databases & Cloud', 'skills.apis': 'APIs & Integrations', 'skills.testing': 'Testing, Version Control & Developer Tools', 'skills.security': 'Security & Access',
+          'skills.authentication': 'Authentication', 'skills.googleAuthentication': 'Google Authentication', 'skills.authorization': 'Authorization', 'skills.rbac': 'Role-Based Access Control (RBAC)', 'skills.whatsapp': 'WhatsApp Integration',
+          'education.label': 'Education', 'education.title': 'Academic background', 'education.degree': 'B.Sc. Software Engineering', 'education.degreeLabel': 'View University of Bahrain degree', 'education.date': 'September 2026',
+          'education.coursework': 'Relevant coursework: Data Structures & Algorithms, Database Management, Software Testing, Software Architecture, Requirements Engineering, Security, Cloud Computing, and Mobile Development.', 'education.gpa': 'Cumulative GPA',
+          'certifications.label': 'Certifications', 'certifications.title': 'Verified qualifications',
+          'certifications.nvidiaLabel': 'View NVIDIA Fundamentals of Accelerated Computing with Modern CUDA C++ certificate', 'certifications.nvidiaDate': 'Issued December 17, 2025',
+          'certifications.dartLabel': 'View Getting Started with Flutter and Dart certificate', 'certifications.dartDate': 'Issued October 1, 2025',
+          'certifications.mpiLabel': 'View Parallel Computing with MPI certificate', 'certifications.mpiDate': 'Issued November 17, 2025',
+          'languages.label': 'Languages', 'languages.title': 'Communication', 'languages.arabic': 'Arabic', 'languages.native': 'Native', 'languages.english': 'English', 'languages.ielts': 'IELTS Academic Band 6.0', 'languages.french': 'French', 'languages.beginner': 'Beginner',
+          'contact.title': 'Let’s build reliable software together.', 'contact.description': 'I am open to software engineering and full-stack development opportunities where I can contribute across the stack, ship production-ready systems, and keep growing with an experienced team.', 'contact.email': 'Email', 'contact.phone': 'Phone',
+          'footer.copyright': '2026 Ahmed Taha Ghodhbani', 'footer.summary': 'Riffa, Bahrain | Software Engineer & Full-Stack Developer',
+          'gallery.projectLinks': 'Project links', 'gallery.project': 'Project gallery', 'gallery.credential': 'Education credential', 'gallery.professional': 'Professional certificate',
+          'gallery.previous': 'Previous screenshot', 'gallery.next': 'Next screenshot', 'gallery.choose': 'Choose a screenshot', 'gallery.view': 'View screenshot {current} of {total}', 'gallery.counter': '{current} / {total}',
+          'gallery.status': 'Showing screenshot {current} of {total}: {alt}', 'gallery.close': 'Close {title}', 'gallery.openAction': 'Open {title} {label} in a new tab', 'gallery.github': 'GitHub', 'gallery.liveSite': 'Live site',
+          'gallery.canvas.title': 'Canvas | AI-Assisted Website Builder',
+          'gallery.canvas.alt1': 'Canvas AI page editor showing a Bahrain National Day website preview and assistant panel', 'gallery.canvas.alt2': 'Canvas brand and theme settings with color palettes and a responsive preview', 'gallery.canvas.alt3': 'Canvas reusable section library with navigation layout choices', 'gallery.canvas.alt4': 'Canvas version history and checkpoint controls beside a website preview', 'gallery.canvas.alt5': 'Canvas website export panel showing a validated ZIP ready to download', 'gallery.canvas.alt6': 'Canvas AI settings page for choosing a provider and model', 'gallery.canvas.alt7': 'Canvas AI usage dashboard with request, latency, token, and validation metrics',
+          'gallery.alsaeh.title': 'Alsaeh Tourism Recommender System for Bahrain',
+          'gallery.alsaeh.alt1': 'Alsaeh tourism planner landing page introducing personalized Bahrain itineraries', 'gallery.alsaeh.alt2': 'Alsaeh dashboard listing a saved Bahrain travel plan', 'gallery.alsaeh.alt3': 'Alsaeh form for creating an AI-generated Bahrain travel plan', 'gallery.alsaeh.alt4': 'Alsaeh generated itinerary with the AI trip assistant panel', 'gallery.alsaeh.alt5': 'Alsaeh administration analytics dashboard with usage charts', 'gallery.alsaeh.alt6': 'Alsaeh about page explaining the project, objectives, architecture, and team',
+          'gallery.forum.title': 'Real-Time Forum', 'gallery.forum.alt1': 'Real-Time Forum sign-in screen in dark mode', 'gallery.forum.alt2': 'Real-Time Forum home feed with new-post form and private chat', 'gallery.forum.alt3': 'Real-Time Forum personal posts view with messaging panel', 'gallery.forum.alt4': 'Real-Time Forum dashboard showing posts and private messages', 'gallery.forum.alt5': 'Real-Time Forum administration dashboard for accounts, posts, and comments',
+          'gallery.rentivo.title': 'Rentivo | Multi-Agency Car Rental Platform', 'gallery.rentivo.alt1': 'Rentivo landing page featuring a Toyota Corolla rental in Bahrain', 'gallery.rentivo.alt2': 'Rentivo vehicle catalog with search, filters, and rental listings', 'gallery.rentivo.alt3': 'Rentivo Porsche 911 vehicle details and booking panel', 'gallery.rentivo.alt4': 'Rentivo agency booking details with rental timeline, pricing, and customer information', 'gallery.rentivo.alt5': 'Rentivo agency bookings list with status and payment filters', 'gallery.rentivo.alt6': 'Rentivo agency dashboard with fleet metrics and recent bookings', 'gallery.rentivo.alt7': 'Rentivo fleet management table showing vehicle status, location, and daily rate',
+          'gallery.flawless.title': 'Flawless Interviews', 'gallery.flawless.alt1': 'Flawless Interviews landing page introducing its recruitment workspace', 'gallery.flawless.alt2': 'Flawless recruitment overview dashboard with application pipeline metrics', 'gallery.flawless.alt3': 'Flawless AI candidate match summary with strengths and weaknesses', 'gallery.flawless.alt4': 'Flawless jobs list with publishing status and pending actions', 'gallery.flawless.alt5': 'Flawless candidate workflow board for screening and interview stages', 'gallery.flawless.alt6': 'Flawless employer screenings list with candidate progress states', 'gallery.flawless.alt7': 'Flawless candidate view showing screening and interview progress',
+          'gallery.degree.title': 'Bachelor of Science in Software Engineering', 'gallery.degree.subtitle': 'University of Bahrain', 'gallery.degree.alt': 'University of Bahrain Bachelor of Science in Software Engineering degree awarded to Ahmed Taha Ghodhbani',
+          'gallery.nvidia.title': 'Fundamentals of Accelerated Computing with Modern CUDA C++', 'gallery.nvidia.subtitle': 'NVIDIA · Issued December 17, 2025', 'gallery.nvidia.alt': 'NVIDIA Fundamentals of Accelerated Computing with Modern CUDA C++ certificate awarded to Ahmed Taha Ghodhbani',
+          'gallery.dart.title': 'Getting Started with Flutter & Dart', 'gallery.dart.subtitle': 'Packt and Coursera · Issued October 1, 2025', 'gallery.dart.alt': 'Packt and Coursera Getting Started with Flutter and Dart certificate awarded to Ahmed Ghodhbani',
+          'gallery.mpi.title': 'Parallel Computing with MPI', 'gallery.mpi.subtitle': 'University of Colorado Boulder and Coursera · Issued November 17, 2025', 'gallery.mpi.alt': 'University of Colorado Boulder and Coursera Parallel Computing with MPI certificate awarded to Ahmed Ghodhbani'
+        },
+        ar: {
+          'meta.title': 'أحمد طه الغضباني | مهندس برمجيات ومطوّر متكامل',
+          'meta.description': 'أحمد طه الغضباني خريج هندسة برمجيات ومطوّر متكامل ذو خبرة في تطبيقات SaaS الإنتاجية والتطبيقات المعتمدة على الذكاء الاصطناعي.',
+          'meta.applicationName': 'معرض أعمال أحمد طه الغضباني', 'meta.shortName': 'معرض أحمد',
+          'meta.socialTitle': 'أحمد طه الغضباني | مهندس برمجيات', 'meta.socialDescription': 'مطوّر متكامل يبني تطبيقات SaaS وأنظمة قائمة على قواعد البيانات وحلولاً مدمجة بالذكاء الاصطناعي وجاهزة للإنتاج.', 'meta.imageAlt': 'صورة شخصية لأحمد طه الغضباني',
+          'a11y.skip': 'انتقل إلى المحتوى الرئيسي', 'a11y.home': 'صفحة أحمد طه الرئيسية', 'a11y.primaryNav': 'التنقل الرئيسي في الموقع', 'a11y.mobileNav': 'فتح أو إغلاق قائمة التنقل على الهاتف',
+          'nav.experience': 'الخبرة', 'nav.projects': 'المشاريع', 'nav.skills': 'المهارات', 'nav.background': 'المؤهلات', 'nav.certification': 'الشهادات', 'nav.languages': 'اللغات', 'nav.contact': 'التواصل',
+          'language.switch': 'تغيير اللغة إلى الإنجليزية',
+          'theme.menu': 'سمة الألوان', 'theme.system': 'النظام', 'theme.light': 'فاتح', 'theme.dark': 'داكن', 'theme.control': 'السمة: {theme}. اختر سمة الألوان',
+          'hero.tagline': 'مهندس برمجيات | مطوّر متكامل', 'hero.title': 'أبني برمجيات جاهزة للإنتاج من الفكرة حتى النشر.',
+          'hero.description': 'خريج هندسة برمجيات ذو خبرة مهنية في تقديم تطبيقات متكاملة جاهزة للإنتاج، قائمة على قواعد البيانات ومدمجة بالذكاء الاصطناعي. صممت وسلّمت منصة SaaS للتوظيف متعددة المؤسسات اشترتها شركة Script IT Solutions واعتمدتها.',
+          'hero.viewProjects': 'عرض المشاريع', 'hero.emailMe': 'راسلني',
+          'profile.summary': 'ملخص الملف الشخصي', 'profile.title': 'الملف الشخصي', 'profile.developer': 'المطوّر', 'profile.education': 'التعليم', 'profile.educationValue': 'بكالوريوس هندسة البرمجيات، جامعة البحرين',
+          'profile.experience': 'الخبرة', 'profile.experienceValue': 'تطبيقات متكاملة جاهزة للإنتاج، قائمة على قواعد البيانات ومدمجة بالذكاء الاصطناعي', 'profile.location': 'الموقع', 'profile.locationValue': 'الرفاع، البحرين',
+          'experience.label': 'الخبرة المهنية', 'experience.title': 'برمجيات قُدّمت للاستخدام الفعلي', 'experience.role': 'متدرب مطوّر برمجيات', 'experience.company': 'Script IT Solutions · البحرين', 'experience.date': 'يوليو 2026 - أغسطس 2026',
+          'experience.item1': 'صممت وسلّمت <strong>Flawless Interviews</strong>، وهي منصة SaaS للتوظيف بالذكاء الاصطناعي متعددة المؤسسات، اشترتها شركة Script IT Solutions واعتمدتها ضمن سير عمل التوظيف لديها.',
+          'experience.item2': 'طوّرت مسارات عمل متكاملة لنشر الوظائف، ومعالجة السير الذاتية، وترتيب المرشحين بمساعدة الذكاء الاصطناعي، والفحص عبر WhatsApp، ومراجعة المقابلين، والتواصل مع المرشحين، وجدولة المقابلات.',
+          'experience.item3': 'طوّرت المنصة المتكاملة باستخدام Next.js وReact وTypeScript وPostgreSQL وTailwind CSS وGemini AI وResend، مع مصادقة مخصصة، ومصادقة Google، وتحكم في الوصول قائم على الأدوار (RBAC).',
+          'experience.item4': 'طبّقت Vitest وPlaywright وضوابط التفويض وعزل البيانات على مستوى المؤسسة، ثم نشرت المنصة باستخدام Vercel وNeon.',
+          'experience.item5': 'صممت وطوّرت <strong>Canvas</strong>، وهو نموذج أولي لمنشئ مواقع بمساعدة الذكاء الاصطناعي يضم التحرير الذكي، والمعاينة المباشرة، والأقسام القابلة لإعادة الاستخدام، والتعاون، وسجل الإصدارات، والتصدير المتحقق منه.',
+          'experience.flawlessLink': 'زيارة موقع Flawless Interviews (يفتح في علامة تبويب جديدة)',
+          'experience.flawlessIcon': 'أيقونة Flawless Interviews',
+          'actions.live': 'الموقع', 'actions.viewGallery': 'عرض المعرض', 'actions.viewCertificate': 'عرض الشهادة',
+          'projects.label': 'المشاريع', 'projects.title': 'مشاريع مختارة بمستوى إنتاجي',
+          'projects.canvas.scope': 'نموذج أولي لمنتج احترافي', 'projects.canvas.links': 'روابط Canvas', 'projects.canvas.name': 'Canvas | منشئ مواقع بمساعدة الذكاء الاصطناعي',
+          'projects.canvas.description': 'منصة لبناء المواقع بمساعدة الذكاء الاصطناعي، صُممت لتمكين المستخدمين غير التقنيين من إنشاء مواقع واجهات أمامية متكاملة وتطويرها عبر تعليمات باللغة الطبيعية، مع الحفاظ على صفحات منظمة وأقسام قابلة لإعادة الاستخدام ومعاينات آمنة وسجل تغييرات قابل للتراجع.',
+          'projects.canvas.item1': 'أنشأت مساحات العمل والمشاريع، وشجرة صفحات هرمية، وتحريراً بالذكاء الاصطناعي على مستوى الصفحة والعنصر، وأقساماً قابلة لإعادة الاستخدام، وسياقاً ذكياً مدركاً للمشروع، وإدارة للوسائط، ومعاينة مباشرة متجاوبة ومعزولة.',
+          'projects.canvas.item2': 'طبّقت مهام توليد موثوقة بالذكاء الاصطناعي، وسجل إصدارات غير قابل للتغيير، والتراجع والإعادة، ونقاط الحفظ، وضوابط التعاون، والتحقق الأمني من الشيفرة المولدة، وتصدير ZIP متحقق منه لمشاريع Next.js وTypeScript.',
+          'projects.alsaeh.scope': 'مشروع التخرج', 'projects.alsaeh.links': 'روابط Alsaeh', 'projects.alsaeh.name': 'Alsaeh | نظام توصية سياحي للبحرين',
+          'projects.alsaeh.description': 'شاركت في تطوير منصة سياحية ثنائية اللغة للبحرين مدعومة بالذكاء الاصطناعي، تضم Supabase Auth وتسجيل الدخول عبر Google، ومسارات Gemini المبنية على التفضيلات، وروبوت محادثة وتحريراً يدوياً للخطط، وحفظ الخطط، والتصدير إلى PDF أو صورة، وتحليلات إدارية.',
+          'projects.alsaeh.item1': 'شاركت في تطوير واجهة أمامية باستخدام Next.js، وخلفية باستخدام FastAPI، وقاعدة بيانات Supabase PostgreSQL.', 'projects.alsaeh.item2': 'طبّقت توليد برامج الرحلات وفق التفضيلات، والتحرير عبر روبوت المحادثة أو يدوياً، وحفظ الخطط، والتصدير إلى PDF أو صورة، والتحليلات الإدارية.',
+          'projects.forum.links': 'روابط Real-Time Forum', 'projects.forum.description': 'أنشأت منتدى أحادي الصفحة بلغة Go يضم مصادقة معتمدة على ملفات تعريف الارتباط، وواجهات JSON، ومنشورات وتعليقات وإشرافاً، ومراسلة خاصة محفوظة، وحالة اتصال مباشرة، واتصالاً لحظياً باستخدام WebSockets وSQLite.',
+          'projects.forum.item1': 'طوّرت العميل باستخدام JavaScript دون إطار عمل، والخادم وطبقات التخزين باستخدام Go وSQLite.', 'projects.forum.item2': 'أضفت المراسلة عبر WebSocket، وحالة الاتصال، والإشراف، وسجل محادثات محفوظاً.',
+          'projects.care.links': 'روابط Care Center', 'projects.care.name': 'Care Center | تطبيق للمعدات الطبية',
+          'projects.care.description': 'طوّرت تطبيقاً لتأجير المعدات الطبية والتبرع بها، يضم Firebase Authentication، وصلاحيات قائمة على الأدوار، ومسارات لتوافر الحجوزات والموافقة عليها، وتتبع دورة حياة المعدات، وإشعارات Firebase لحظية، ومراقبة حالات التأخير، وتحليلات الاستخدام.',
+          'projects.care.item1': 'أدرت الأدوار الموثقة، ومسارات التأجير والتبرع، وتوافر المعدات، والموافقة على الحجوزات.', 'projects.care.item2': 'أضفت إشعارات لحظية، ومراقبة التأخير، وتتبع دورة الحياة، وتحليلات الاستخدام.',
+          'projects.rentivo.links': 'روابط Rentivo', 'projects.rentivo.name': 'Rentivo | منصة متعددة الوكالات لتأجير السيارات',
+          'projects.rentivo.description': 'أنشأت سوقاً ومنصة إدارة متعددة الوكالات لتأجير السيارات في البحرين، تضم Google OAuth 2.0، وعزل بيانات المؤسسات المستأجرة، ومسارات عمل للموظفين محكومة بالصلاحيات، ودورات حجز وتأجير آمنة من تعارض العمليات، ومعالجة آمنة للملفات، وإشعارات، واختبارات PHPUnit.',
+          'projects.rentivo.item1': 'استخدمت MySQL PDO للوصول الآمن إلى قاعدة البيانات عبر مسارات عمل العملاء والوكالات والإدارة.',
+          'skills.label': 'المهارات التقنية', 'skills.title': 'الأدوات والمجالات الأساسية', 'skills.languages': 'لغات البرمجة', 'skills.frameworks': 'أطر العمل', 'skills.databases': 'قواعد البيانات والسحابة', 'skills.apis': 'واجهات البرمجة والتكاملات', 'skills.testing': 'الاختبار والتحكم في الإصدارات وأدوات المطور', 'skills.security': 'الأمان وإدارة الوصول',
+          'skills.authentication': 'المصادقة', 'skills.googleAuthentication': 'مصادقة Google', 'skills.authorization': 'التفويض', 'skills.rbac': 'التحكم في الوصول القائم على الأدوار (RBAC)', 'skills.whatsapp': 'تكامل WhatsApp',
+          'education.label': 'التعليم', 'education.title': 'الخلفية الأكاديمية', 'education.degree': 'بكالوريوس هندسة البرمجيات', 'education.degreeLabel': 'عرض شهادة جامعة البحرين', 'education.date': 'سبتمبر 2026',
+          'education.coursework': 'المقررات ذات الصلة: هياكل البيانات والخوارزميات، وإدارة قواعد البيانات، واختبار البرمجيات، ومعمارية البرمجيات، وهندسة المتطلبات، والأمن، والحوسبة السحابية، وتطوير تطبيقات الهاتف.', 'education.gpa': 'المعدل التراكمي',
+          'certifications.label': 'الشهادات', 'certifications.title': 'مؤهلات موثقة',
+          'certifications.nvidiaLabel': 'عرض شهادة NVIDIA في أساسيات الحوسبة المسرّعة باستخدام Modern CUDA C++', 'certifications.nvidiaDate': 'صدرت في 17 ديسمبر 2025',
+          'certifications.dartLabel': 'عرض شهادة البدء باستخدام Flutter وDart', 'certifications.dartDate': 'صدرت في 1 أكتوبر 2025',
+          'certifications.mpiLabel': 'عرض شهادة الحوسبة المتوازية باستخدام MPI', 'certifications.mpiDate': 'صدرت في 17 نوفمبر 2025',
+          'languages.label': 'اللغات', 'languages.title': 'التواصل', 'languages.arabic': 'العربية', 'languages.native': 'اللغة الأم', 'languages.english': 'الإنجليزية', 'languages.ielts': 'IELTS الأكاديمي: 6.0', 'languages.french': 'الفرنسية', 'languages.beginner': 'مبتدئ',
+          'contact.title': 'لنبنِ برمجيات موثوقة معاً.', 'contact.description': 'أنا منفتح على فرص هندسة البرمجيات والتطوير المتكامل التي أستطيع فيها المساهمة عبر كامل المنظومة، وإطلاق أنظمة جاهزة للإنتاج، ومواصلة التطور ضمن فريق ذي خبرة.', 'contact.email': 'البريد الإلكتروني', 'contact.phone': 'الهاتف',
+          'footer.copyright': '2026 أحمد طه الغضباني', 'footer.summary': 'الرفاع، البحرين | مهندس برمجيات ومطوّر متكامل',
+          'gallery.projectLinks': 'روابط المشروع', 'gallery.project': 'معرض المشروع', 'gallery.credential': 'وثيقة تعليمية', 'gallery.professional': 'شهادة مهنية',
+          'gallery.previous': 'لقطة الشاشة السابقة', 'gallery.next': 'لقطة الشاشة التالية', 'gallery.choose': 'اختر لقطة شاشة', 'gallery.view': 'عرض لقطة الشاشة {current} من {total}', 'gallery.counter': '{current} / {total}',
+          'gallery.status': 'تُعرض لقطة الشاشة {current} من {total}: {alt}', 'gallery.close': 'إغلاق {title}', 'gallery.openAction': 'فتح {label} لمشروع {title} في علامة تبويب جديدة', 'gallery.github': 'GitHub', 'gallery.liveSite': 'الموقع المباشر',
+          'gallery.canvas.title': 'Canvas | منشئ مواقع بمساعدة الذكاء الاصطناعي',
+          'gallery.canvas.alt1': 'محرر الصفحات الذكي في Canvas يعرض معاينة لموقع اليوم الوطني البحريني ولوحة المساعد', 'gallery.canvas.alt2': 'إعدادات العلامة التجارية والسمة في Canvas مع لوحات الألوان ومعاينة متجاوبة', 'gallery.canvas.alt3': 'مكتبة الأقسام القابلة لإعادة الاستخدام في Canvas مع خيارات تخطيط التنقل', 'gallery.canvas.alt4': 'سجل الإصدارات وأدوات نقاط الحفظ في Canvas بجانب معاينة الموقع', 'gallery.canvas.alt5': 'لوحة تصدير الموقع في Canvas تعرض ملف ZIP متحققاً منه وجاهزاً للتنزيل', 'gallery.canvas.alt6': 'صفحة إعدادات الذكاء الاصطناعي في Canvas لاختيار المزوّد والنموذج', 'gallery.canvas.alt7': 'لوحة استخدام الذكاء الاصطناعي في Canvas تعرض مقاييس الطلبات وزمن الاستجابة والرموز والتحقق',
+          'gallery.alsaeh.title': 'Alsaeh | نظام توصية سياحي للبحرين',
+          'gallery.alsaeh.alt1': 'الصفحة الرئيسية لمخطط الرحلات Alsaeh وتقديم برامج سياحية مخصصة للبحرين', 'gallery.alsaeh.alt2': 'لوحة Alsaeh تعرض خطة سفر محفوظة للبحرين', 'gallery.alsaeh.alt3': 'نموذج Alsaeh لإنشاء خطة سفر للبحرين بالذكاء الاصطناعي', 'gallery.alsaeh.alt4': 'برنامج رحلة مولد في Alsaeh مع لوحة مساعد الرحلات الذكي', 'gallery.alsaeh.alt5': 'لوحة التحليلات الإدارية في Alsaeh مع مخططات الاستخدام', 'gallery.alsaeh.alt6': 'صفحة التعريف بمشروع Alsaeh وتوضيح أهدافه ومعماريته وفريقه',
+          'gallery.forum.title': 'Real-Time Forum', 'gallery.forum.alt1': 'شاشة تسجيل الدخول إلى Real-Time Forum في الوضع الداكن', 'gallery.forum.alt2': 'الصفحة الرئيسية في Real-Time Forum مع نموذج منشور جديد ومحادثة خاصة', 'gallery.forum.alt3': 'عرض المنشورات الشخصية في Real-Time Forum مع لوحة المراسلة', 'gallery.forum.alt4': 'لوحة Real-Time Forum التي تعرض المنشورات والرسائل الخاصة', 'gallery.forum.alt5': 'لوحة إدارة Real-Time Forum للحسابات والمنشورات والتعليقات',
+          'gallery.rentivo.title': 'Rentivo | منصة متعددة الوكالات لتأجير السيارات', 'gallery.rentivo.alt1': 'الصفحة الرئيسية لـRentivo تعرض سيارة Toyota Corolla للإيجار في البحرين', 'gallery.rentivo.alt2': 'كتالوج المركبات في Rentivo مع البحث والفلاتر وقوائم التأجير', 'gallery.rentivo.alt3': 'تفاصيل مركبة Porsche 911 ولوحة الحجز في Rentivo', 'gallery.rentivo.alt4': 'تفاصيل حجز الوكالة في Rentivo مع المخطط الزمني للتأجير والأسعار ومعلومات العميل', 'gallery.rentivo.alt5': 'قائمة حجوزات الوكالة في Rentivo مع فلاتر الحالة والدفع', 'gallery.rentivo.alt6': 'لوحة الوكالة في Rentivo مع مقاييس الأسطول والحجوزات الأخيرة', 'gallery.rentivo.alt7': 'جدول إدارة الأسطول في Rentivo يعرض حالة المركبات ومواقعها وأسعارها اليومية',
+          'gallery.flawless.title': 'Flawless Interviews', 'gallery.flawless.alt1': 'الصفحة الرئيسية لـFlawless Interviews وتقديم مساحة عمل التوظيف', 'gallery.flawless.alt2': 'لوحة نظرة عامة على التوظيف في Flawless مع مقاييس مسار الطلبات', 'gallery.flawless.alt3': 'ملخص مطابقة المرشح بالذكاء الاصطناعي في Flawless مع نقاط القوة والضعف', 'gallery.flawless.alt4': 'قائمة الوظائف في Flawless مع حالة النشر والإجراءات المعلقة', 'gallery.flawless.alt5': 'لوحة سير عمل المرشحين في Flawless لمراحل الفحص والمقابلة', 'gallery.flawless.alt6': 'قائمة فحوصات أصحاب العمل في Flawless مع حالات تقدم المرشحين', 'gallery.flawless.alt7': 'واجهة المرشح في Flawless تعرض تقدم الفحص والمقابلة',
+          'gallery.degree.title': 'بكالوريوس العلوم في هندسة البرمجيات', 'gallery.degree.subtitle': 'جامعة البحرين', 'gallery.degree.alt': 'شهادة بكالوريوس العلوم في هندسة البرمجيات من جامعة البحرين الممنوحة لأحمد طه الغضباني',
+          'gallery.nvidia.title': 'Fundamentals of Accelerated Computing with Modern CUDA C++', 'gallery.nvidia.subtitle': 'NVIDIA · صدرت في 17 ديسمبر 2025', 'gallery.nvidia.alt': 'شهادة NVIDIA في أساسيات الحوسبة المسرّعة باستخدام Modern CUDA C++ الممنوحة لأحمد طه الغضباني',
+          'gallery.dart.title': 'Getting Started with Flutter & Dart', 'gallery.dart.subtitle': 'Packt وCoursera · صدرت في 1 أكتوبر 2025', 'gallery.dart.alt': 'شهادة البدء باستخدام Flutter وDart من Packt وCoursera الممنوحة لأحمد الغضباني',
+          'gallery.mpi.title': 'Parallel Computing with MPI', 'gallery.mpi.subtitle': 'University of Colorado Boulder وCoursera · صدرت في 17 نوفمبر 2025', 'gallery.mpi.alt': 'شهادة الحوسبة المتوازية باستخدام MPI من University of Colorado Boulder وCoursera الممنوحة لأحمد الغضباني'
+        }
+      };
+
+      let activeLanguage = htmlEl.lang === 'ar' ? 'ar' : 'en';
+      const t = (key, values = {}) => {
+        const template = translations[activeLanguage][key] ?? translations.en[key] ?? key;
+        return template.replace(/\{(\w+)\}/g, (_, name) => values[name] ?? `{${name}}`);
+      };
+
+      const translateDirectText = (element, value) => {
+        const textNode = Array.from(element.childNodes).find(node => node.nodeType === Node.TEXT_NODE && node.textContent.trim());
+        if (!textNode) {
+          element.prepend(document.createTextNode(value));
+          return;
+        }
+        const leading = textNode.textContent.match(/^\s*/)[0];
+        const trailing = textNode.textContent.match(/\s*$/)[0];
+        textNode.textContent = `${leading}${value}${trailing}`;
+      };
+
+      const translateStaticContent = () => {
+        document.querySelectorAll('[data-i18n]').forEach(element => { element.textContent = t(element.dataset.i18n); });
+        document.querySelectorAll('[data-i18n-html]').forEach(element => { element.innerHTML = t(element.dataset.i18nHtml); });
+        document.querySelectorAll('[data-i18n-text]').forEach(element => translateDirectText(element, t(element.dataset.i18nText)));
+        document.querySelectorAll('[data-i18n-aria-label]').forEach(element => { element.setAttribute('aria-label', t(element.dataset.i18nAriaLabel)); });
+        document.querySelectorAll('[data-i18n-alt]').forEach(element => { element.alt = t(element.dataset.i18nAlt); });
+      };
+
       const projectGalleries = {
         canvas: {
-          title: 'Canvas | AI-Assisted Website Builder',
+          titleKey: 'gallery.canvas.title',
           github: 'https://github.com/AhmedGTaha/canvas',
           live: 'https://canvas-pi-one.vercel.app/',
           images: [
-            { src: 'images/canvas-website-builder/ai-page-editor.jpg', alt: 'Canvas AI page editor showing a Bahrain National Day website preview and assistant panel' },
-            { src: 'images/canvas-website-builder/brand-theme-settings.jpg', alt: 'Canvas brand and theme settings with color palettes and a responsive preview' },
-            { src: 'images/canvas-website-builder/reusable-section-library.jpg', alt: 'Canvas reusable section library with navigation layout choices' },
-            { src: 'images/canvas-website-builder/version-history-checkpoint.jpg', alt: 'Canvas version history and checkpoint controls beside a website preview' },
-            { src: 'images/canvas-website-builder/website-export-panel.jpg', alt: 'Canvas website export panel showing a validated ZIP ready to download' },
-            { src: 'images/canvas-website-builder/ai-model-settings.jpg', alt: 'Canvas AI settings page for choosing a provider and model' },
-            { src: 'images/canvas-website-builder/ai-usage-dashboard.jpg', alt: 'Canvas AI usage dashboard with request, latency, token, and validation metrics' }
+            { src: 'images/canvas-website-builder/ai-page-editor.jpg', altKey: 'gallery.canvas.alt1' }, { src: 'images/canvas-website-builder/brand-theme-settings.jpg', altKey: 'gallery.canvas.alt2' },
+            { src: 'images/canvas-website-builder/reusable-section-library.jpg', altKey: 'gallery.canvas.alt3' }, { src: 'images/canvas-website-builder/version-history-checkpoint.jpg', altKey: 'gallery.canvas.alt4' },
+            { src: 'images/canvas-website-builder/website-export-panel.jpg', altKey: 'gallery.canvas.alt5' }, { src: 'images/canvas-website-builder/ai-model-settings.jpg', altKey: 'gallery.canvas.alt6' },
+            { src: 'images/canvas-website-builder/ai-usage-dashboard.jpg', altKey: 'gallery.canvas.alt7' }
           ]
         },
         alsaeh: {
-          title: 'Alsaeh Tourism Recommender System for Bahrain',
+          titleKey: 'gallery.alsaeh.title',
           github: 'https://github.com/HADrawer/Senior-Project',
           live: 'https://www.alsaeh.net/',
           images: [
-            { src: 'images/alsaeh-tourism/landing-page.jpg', alt: 'Alsaeh tourism planner landing page introducing personalized Bahrain itineraries' },
-            { src: 'images/alsaeh-tourism/plans-dashboard.jpg', alt: 'Alsaeh dashboard listing a saved Bahrain travel plan' },
-            { src: 'images/alsaeh-tourism/create-plan-form.jpg', alt: 'Alsaeh form for creating an AI-generated Bahrain travel plan' },
-            { src: 'images/alsaeh-tourism/itinerary-ai-assistant.jpg', alt: 'Alsaeh generated itinerary with the AI trip assistant panel' },
-            { src: 'images/alsaeh-tourism/admin-analytics-dashboard.jpg', alt: 'Alsaeh administration analytics dashboard with usage charts' },
-            { src: 'images/alsaeh-tourism/about-project-page.jpg', alt: 'Alsaeh about page explaining the project, objectives, architecture, and team' }
+            { src: 'images/alsaeh-tourism/landing-page.jpg', altKey: 'gallery.alsaeh.alt1' }, { src: 'images/alsaeh-tourism/plans-dashboard.jpg', altKey: 'gallery.alsaeh.alt2' },
+            { src: 'images/alsaeh-tourism/create-plan-form.jpg', altKey: 'gallery.alsaeh.alt3' }, { src: 'images/alsaeh-tourism/itinerary-ai-assistant.jpg', altKey: 'gallery.alsaeh.alt4' },
+            { src: 'images/alsaeh-tourism/admin-analytics-dashboard.jpg', altKey: 'gallery.alsaeh.alt5' }, { src: 'images/alsaeh-tourism/about-project-page.jpg', altKey: 'gallery.alsaeh.alt6' }
           ]
         },
         realtimeForum: {
-          title: 'Real-Time Forum',
+          titleKey: 'gallery.forum.title',
           github: 'https://github.com/AhmedGTaha/real-time-forum',
           live: 'https://real-time-forum-lac.vercel.app/',
           images: [
-            { src: 'images/realtime-forum/sign-in-page.jpg', alt: 'Real-Time Forum sign-in screen in dark mode' },
-            { src: 'images/realtime-forum/forum-home-and-chat.jpg', alt: 'Real-Time Forum home feed with new-post form and private chat' },
-            { src: 'images/realtime-forum/my-posts-and-messages.jpg', alt: 'Real-Time Forum personal posts view with messaging panel' },
-            { src: 'images/realtime-forum/forum-dashboard.jpg', alt: 'Real-Time Forum dashboard showing posts and private messages' },
-            { src: 'images/realtime-forum/admin-dashboard.jpg', alt: 'Real-Time Forum administration dashboard for accounts, posts, and comments' }
+            { src: 'images/realtime-forum/sign-in-page.jpg', altKey: 'gallery.forum.alt1' }, { src: 'images/realtime-forum/forum-home-and-chat.jpg', altKey: 'gallery.forum.alt2' },
+            { src: 'images/realtime-forum/my-posts-and-messages.jpg', altKey: 'gallery.forum.alt3' }, { src: 'images/realtime-forum/forum-dashboard.jpg', altKey: 'gallery.forum.alt4' },
+            { src: 'images/realtime-forum/admin-dashboard.jpg', altKey: 'gallery.forum.alt5' }
           ]
         },
         rentivo: {
-          title: 'Rentivo | Multi-Agency Car Rental Platform',
+          titleKey: 'gallery.rentivo.title',
           github: 'https://github.com/AhmedGTaha/Rentivo',
           live: null,
           images: [
-            { src: 'images/rentivo-car-rental/landing-page.webp', alt: 'Rentivo landing page featuring a Toyota Corolla rental in Bahrain' },
-            { src: 'images/rentivo-car-rental/vehicle-catalog.webp', alt: 'Rentivo vehicle catalog with search, filters, and rental listings' },
-            { src: 'images/rentivo-car-rental/vehicle-details.webp', alt: 'Rentivo Porsche 911 vehicle details and booking panel' },
-            { src: 'images/rentivo-car-rental/booking-details-admin.webp', alt: 'Rentivo agency booking details with rental timeline, pricing, and customer information' },
-            { src: 'images/rentivo-car-rental/bookings-list-admin.webp', alt: 'Rentivo agency bookings list with status and payment filters' },
-            { src: 'images/rentivo-car-rental/agency-dashboard.webp', alt: 'Rentivo agency dashboard with fleet metrics and recent bookings' },
-            { src: 'images/rentivo-car-rental/fleet-management.webp', alt: 'Rentivo fleet management table showing vehicle status, location, and daily rate' }
+            { src: 'images/rentivo-car-rental/landing-page.webp', altKey: 'gallery.rentivo.alt1' }, { src: 'images/rentivo-car-rental/vehicle-catalog.webp', altKey: 'gallery.rentivo.alt2' },
+            { src: 'images/rentivo-car-rental/vehicle-details.webp', altKey: 'gallery.rentivo.alt3' }, { src: 'images/rentivo-car-rental/booking-details-admin.webp', altKey: 'gallery.rentivo.alt4' },
+            { src: 'images/rentivo-car-rental/bookings-list-admin.webp', altKey: 'gallery.rentivo.alt5' }, { src: 'images/rentivo-car-rental/agency-dashboard.webp', altKey: 'gallery.rentivo.alt6' },
+            { src: 'images/rentivo-car-rental/fleet-management.webp', altKey: 'gallery.rentivo.alt7' }
           ]
         },
         flawless: {
-          title: 'Flawless Interviews',
+          titleKey: 'gallery.flawless.title',
           github: null,
           live: 'https://flawless.onl',
           images: [
-            { src: 'images/flawless-interviews/landing-page.jpg', alt: 'Flawless Interviews landing page introducing its recruitment workspace' },
-            { src: 'images/flawless-interviews/recruitment-overview-dashboard.jpg', alt: 'Flawless recruitment overview dashboard with application pipeline metrics' },
-            { src: 'images/flawless-interviews/candidate-ai-match-summary.jpg', alt: 'Flawless AI candidate match summary with strengths and weaknesses' },
-            { src: 'images/flawless-interviews/jobs-list.jpg', alt: 'Flawless jobs list with publishing status and pending actions' },
-            { src: 'images/flawless-interviews/candidate-workflow-board.jpg', alt: 'Flawless candidate workflow board for screening and interview stages' },
-            { src: 'images/flawless-interviews/screenings-list.jpg', alt: 'Flawless employer screenings list with candidate progress states' },
-            { src: 'images/flawless-interviews/candidate-screening-progress.jpg', alt: 'Flawless candidate view showing screening and interview progress' }
+            { src: 'images/flawless-interviews/landing-page.jpg', altKey: 'gallery.flawless.alt1' }, { src: 'images/flawless-interviews/recruitment-overview-dashboard.jpg', altKey: 'gallery.flawless.alt2' },
+            { src: 'images/flawless-interviews/candidate-ai-match-summary.jpg', altKey: 'gallery.flawless.alt3' }, { src: 'images/flawless-interviews/jobs-list.jpg', altKey: 'gallery.flawless.alt4' },
+            { src: 'images/flawless-interviews/candidate-workflow-board.jpg', altKey: 'gallery.flawless.alt5' }, { src: 'images/flawless-interviews/screenings-list.jpg', altKey: 'gallery.flawless.alt6' },
+            { src: 'images/flawless-interviews/candidate-screening-progress.jpg', altKey: 'gallery.flawless.alt7' }
           ]
         },
         uobDegree: {
           type: 'credential',
-          title: 'Bachelor of Science in Software Engineering',
-          subtitle: 'University of Bahrain',
+          titleKey: 'gallery.degree.title', subtitleKey: 'gallery.degree.subtitle',
           images: [
-            { src: 'images/education-credentials/university-of-bahrain-degree.jpg', alt: 'University of Bahrain Bachelor of Science in Software Engineering degree awarded to Ahmed Taha Ghodhbani' }
+            { src: 'images/education-credentials/university-of-bahrain-degree.jpg', altKey: 'gallery.degree.alt' }
           ]
         },
         nvidiaCertificate: {
           type: 'credential',
-          eyebrow: 'Professional certificate',
-          title: 'Fundamentals of Accelerated Computing with Modern CUDA C++',
-          subtitle: 'NVIDIA · Issued December 17, 2025',
+          eyebrowKey: 'gallery.professional', titleKey: 'gallery.nvidia.title', subtitleKey: 'gallery.nvidia.subtitle',
           images: [
-            { src: 'images/education-credentials/nvidia.jpg', alt: 'NVIDIA Fundamentals of Accelerated Computing with Modern CUDA C++ certificate awarded to Ahmed Taha Ghodhbani' }
+            { src: 'images/education-credentials/nvidia.jpg', altKey: 'gallery.nvidia.alt' }
           ]
         },
         dartCertificate: {
           type: 'credential',
-          eyebrow: 'Professional certificate',
-          title: 'Getting Started with Flutter & Dart',
-          subtitle: 'Packt and Coursera · Issued October 1, 2025',
+          eyebrowKey: 'gallery.professional', titleKey: 'gallery.dart.title', subtitleKey: 'gallery.dart.subtitle',
           images: [
-            { src: 'images/education-credentials/dart.jpg', alt: 'Packt and Coursera Getting Started with Flutter and Dart certificate awarded to Ahmed Ghodhbani' }
+            { src: 'images/education-credentials/dart.jpg', altKey: 'gallery.dart.alt' }
           ]
         },
         mpiCertificate: {
           type: 'credential',
-          eyebrow: 'Professional certificate',
-          title: 'Parallel Computing with MPI',
-          subtitle: 'University of Colorado Boulder and Coursera · Issued November 17, 2025',
+          eyebrowKey: 'gallery.professional', titleKey: 'gallery.mpi.title', subtitleKey: 'gallery.mpi.subtitle',
           images: [
-            { src: 'images/education-credentials/mpi.jpg', alt: 'University of Colorado Boulder and Coursera Parallel Computing with MPI certificate awarded to Ahmed Ghodhbani' }
+            { src: 'images/education-credentials/mpi.jpg', altKey: 'gallery.mpi.alt' }
           ]
         }
       };
@@ -2034,7 +2239,7 @@
       let galleryCloseTimer = null;
       let galleryIsClosing = false;
 
-      const setGalleryAction = (element, url, label, projectTitle) => {
+      const setGalleryAction = (element, url, labelKey, projectTitle) => {
         element.hidden = !url;
 
         if (!url) {
@@ -2044,7 +2249,7 @@
         }
 
         element.href = url;
-        element.setAttribute('aria-label', `Open ${projectTitle} ${label} in a new tab`);
+        element.setAttribute('aria-label', t('gallery.openAction', { title: projectTitle, label: t(labelKey) }));
       };
 
       const preloadAdjacentScreenshots = () => {
@@ -2070,9 +2275,10 @@
         const screenshot = activeGallery.images[activeScreenshotIndex];
 
         galleryImage.src = screenshot.src;
-        galleryImage.alt = screenshot.alt;
-        galleryCounter.textContent = `${activeScreenshotIndex + 1} / ${total}`;
-        galleryStatus.textContent = `Showing screenshot ${activeScreenshotIndex + 1} of ${total}: ${screenshot.alt}`;
+        const alt = t(screenshot.altKey);
+        galleryImage.alt = alt;
+        galleryCounter.textContent = t('gallery.counter', { current: activeScreenshotIndex + 1, total });
+        galleryStatus.textContent = t('gallery.status', { current: activeScreenshotIndex + 1, total, alt });
 
         galleryDots.querySelectorAll('.gallery-dot').forEach((dot, dotIndex) => {
           dot.setAttribute('aria-pressed', String(dotIndex === activeScreenshotIndex));
@@ -2088,37 +2294,31 @@
           const dot = document.createElement('button');
           dot.className = 'gallery-dot';
           dot.type = 'button';
-          dot.setAttribute('aria-label', `View screenshot ${index + 1} of ${activeGallery.images.length}`);
+          dot.setAttribute('aria-label', t('gallery.view', { current: index + 1, total: activeGallery.images.length }));
           dot.addEventListener('click', () => renderScreenshot(index));
           galleryDots.appendChild(dot);
         });
       };
 
-      const openGallery = (projectKey, opener) => {
-        const gallery = projectGalleries[projectKey];
-        if (!gallery) return;
-
+      const renderGalleryContent = (gallery, resetScreenshot = false) => {
         const isCredential = gallery.type === 'credential';
         const hasMultipleImages = gallery.images.length > 1;
+        const title = t(gallery.titleKey);
 
-        window.clearTimeout(galleryCloseTimer);
-        activeGallery = gallery;
-        galleryOpener = opener;
-        galleryIsClosing = false;
         galleryModal.classList.toggle('is-credential', isCredential);
-        galleryEyebrow.textContent = gallery.eyebrow || (isCredential ? 'Education credential' : 'Project gallery');
-        galleryTitle.textContent = gallery.title;
-        gallerySubtitle.textContent = gallery.subtitle || '';
-        gallerySubtitle.hidden = !gallery.subtitle;
-        galleryClose.setAttribute('aria-label', `Close ${gallery.title}`);
+        galleryEyebrow.textContent = t(gallery.eyebrowKey || (isCredential ? 'gallery.credential' : 'gallery.project'));
+        galleryTitle.textContent = title;
+        gallerySubtitle.textContent = gallery.subtitleKey ? t(gallery.subtitleKey) : '';
+        gallerySubtitle.hidden = !gallery.subtitleKey;
+        galleryClose.setAttribute('aria-label', t('gallery.close', { title }));
         galleryActions.hidden = isCredential || (!gallery.github && !gallery.live);
         galleryPrevious.hidden = !hasMultipleImages;
         galleryNext.hidden = !hasMultipleImages;
         galleryFooter.hidden = !hasMultipleImages;
 
         if (!isCredential) {
-          setGalleryAction(galleryGithub, gallery.github, 'GitHub', gallery.title);
-          setGalleryAction(galleryLive, gallery.live, 'Live site', gallery.title);
+          setGalleryAction(galleryGithub, gallery.github, 'gallery.github', title);
+          setGalleryAction(galleryLive, gallery.live, 'gallery.liveSite', title);
         }
 
         if (hasMultipleImages) {
@@ -2126,7 +2326,19 @@
         } else {
           galleryDots.replaceChildren();
         }
-        renderScreenshot(0);
+        renderScreenshot(resetScreenshot ? 0 : activeScreenshotIndex);
+      };
+
+      const openGallery = (projectKey, opener) => {
+        const gallery = projectGalleries[projectKey];
+        if (!gallery) return;
+
+        window.clearTimeout(galleryCloseTimer);
+        activeGallery = gallery;
+        activeScreenshotIndex = 0;
+        galleryOpener = opener;
+        galleryIsClosing = false;
+        renderGalleryContent(gallery, true);
 
         galleryBackdrop.hidden = false;
         body.classList.add('modal-open');
@@ -2191,13 +2403,13 @@
 
         if (event.key === 'ArrowLeft' && activeGallery.images.length > 1) {
           event.preventDefault();
-          moveGallery(-1);
+          moveGallery(htmlEl.dir === 'rtl' ? 1 : -1);
           return;
         }
 
         if (event.key === 'ArrowRight' && activeGallery.images.length > 1) {
           event.preventDefault();
-          moveGallery(1);
+          moveGallery(htmlEl.dir === 'rtl' ? -1 : 1);
           return;
         }
 
@@ -2217,6 +2429,38 @@
         }
       });
 
+      const updateMetadata = () => {
+        document.title = t('meta.title');
+        document.querySelector('meta[name="description"]').content = t('meta.description');
+        document.querySelector('meta[name="application-name"]').content = t('meta.applicationName');
+        document.querySelector('meta[name="apple-mobile-web-app-title"]').content = t('meta.shortName');
+        document.querySelector('meta[property="og:site_name"]').content = t('meta.applicationName');
+        document.querySelector('meta[property="og:title"]').content = t('meta.socialTitle');
+        document.querySelector('meta[property="og:description"]').content = t('meta.socialDescription');
+        document.querySelector('meta[property="og:locale"]').content = activeLanguage === 'ar' ? 'ar_BH' : 'en_US';
+        document.querySelector('meta[property="og:image:alt"]').content = t('meta.imageAlt');
+        document.querySelector('meta[name="twitter:title"]').content = t('meta.socialTitle');
+        document.querySelector('meta[name="twitter:description"]').content = t('meta.socialDescription');
+        document.querySelector('meta[name="twitter:image:alt"]').content = t('meta.imageAlt');
+      };
+
+      const applyLanguage = (language, persist = false) => {
+        activeLanguage = language === 'ar' ? 'ar' : 'en';
+        htmlEl.lang = activeLanguage;
+        htmlEl.dir = activeLanguage === 'ar' ? 'rtl' : 'ltr';
+        translateStaticContent();
+        updateMetadata();
+
+        languageToggle.textContent = activeLanguage === 'en' ? 'AR' : 'EN';
+        languageToggle.setAttribute('aria-label', t('language.switch'));
+        languageToggle.title = t('language.switch');
+
+        if (persist) localStorage.setItem('portfolio-language', activeLanguage);
+        if (activeGallery) renderGalleryContent(activeGallery);
+        if (typeof updateThemeControls === 'function') updateThemeControls();
+        htmlEl.classList.add('i18n-ready');
+      };
+
       // Theme setup
       const systemThemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
       const getSystemTheme = () => systemThemeQuery.matches ? 'dark' : 'light';
@@ -2230,10 +2474,10 @@
       let activeThemePreference = supportedThemes.has(cachedTheme) ? cachedTheme : 'system';
 
       const updateThemeControls = () => {
-        const label = activeThemePreference.charAt(0).toUpperCase() + activeThemePreference.slice(1);
+        const label = t(`theme.${activeThemePreference}`);
         themeToggleIcon.innerHTML = themeIcons[activeThemePreference];
-        themeToggle.setAttribute('aria-label', `Theme: ${label}. Choose color theme`);
-        themeToggle.title = `Theme: ${label}`;
+        themeToggle.setAttribute('aria-label', t('theme.control', { theme: label }));
+        themeToggle.title = t('theme.control', { theme: label });
 
         themeOptions.forEach(option => {
           option.setAttribute('aria-checked', String(option.dataset.themeOption === activeThemePreference));
@@ -2269,6 +2513,11 @@
       };
 
       applyTheme(activeThemePreference);
+      applyLanguage(activeLanguage);
+
+      languageToggle.addEventListener('click', () => {
+        applyLanguage(activeLanguage === 'en' ? 'ar' : 'en', true);
+      });
 
       themeToggle.addEventListener('click', () => {
         if (themeMenu.hidden) {
