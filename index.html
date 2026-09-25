@@ -7,6 +7,25 @@
   <meta name="theme-color" content="#09090b">
   <title>Ahmed Taha Ghodhbani | Software Engineer &amp; Full-Stack Developer</title>
   <link rel="canonical" href="https://ahmedgtaha.github.io/My-Portfolio/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="Ahmed Taha Ghodhbani Portfolio">
+  <meta property="og:url" content="https://ahmedgtaha.github.io/My-Portfolio/">
+  <meta property="og:title" content="Ahmed Taha Ghodhbani | Software Engineer">
+  <meta property="og:description" content="Full-stack developer building production-ready SaaS, database-driven, and AI-integrated applications.">
+  <meta property="og:image" content="https://ahmedgtaha.github.io/My-Portfolio/images/profile/ahmed-taha-share.jpg?v=2">
+  <meta property="og:image:secure_url" content="https://ahmedgtaha.github.io/My-Portfolio/images/profile/ahmed-taha-share.jpg?v=2">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1254">
+  <meta property="og:image:height" content="1254">
+  <meta property="og:image:alt" content="Portrait of Ahmed Taha Ghodhbani">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Ahmed Taha Ghodhbani | Software Engineer">
+  <meta name="twitter:description" content="Full-stack developer building production-ready SaaS, database-driven, and AI-integrated applications.">
+  <meta name="twitter:image" content="https://ahmedgtaha.github.io/My-Portfolio/images/profile/ahmed-taha-share.jpg?v=2">
+  <meta name="twitter:image:alt" content="Portrait of Ahmed Taha Ghodhbani">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -151,13 +170,14 @@
     }
 
     .logo-avatar-frame {
-      width: 38px;
-      height: 38px;
-      flex: 0 0 38px;
+      width: 40px;
+      height: 40px;
+      flex: 0 0 40px;
       overflow: hidden;
       background: var(--bg-muted);
       border: 1px solid var(--border);
       border-radius: 50%;
+      box-shadow: 0 0 0 2px var(--bg-card);
     }
 
     .logo-avatar {
@@ -165,8 +185,8 @@
       height: 100%;
       display: block;
       object-fit: cover;
-      transform: scale(2.05);
-      transform-origin: 50% 28%;
+      transform: scale(1.35);
+      transform-origin: 50% 32%;
     }
 
     .nav-menu {
@@ -208,6 +228,71 @@
     .btn-toggle:hover {
       background: var(--bg-muted);
       border-color: var(--border-strong);
+    }
+
+    .theme-picker {
+      position: relative;
+    }
+
+    .theme-menu {
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      z-index: 300;
+      width: 176px;
+      padding: 6px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .theme-menu[hidden] {
+      display: none;
+    }
+
+    .theme-option {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 20px 1fr 16px;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 10px;
+      color: var(--text);
+      background: transparent;
+      border: 0;
+      border-radius: var(--radius-sm);
+      font: inherit;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .theme-option:hover,
+    .theme-option:focus-visible {
+      color: var(--text-strong);
+      background: var(--bg-muted);
+    }
+
+    .theme-option[aria-checked="true"] {
+      color: var(--primary);
+      background: var(--accent-bg);
+    }
+
+    .theme-option-icon,
+    .theme-option-check {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .theme-option-check {
+      opacity: 0;
+    }
+
+    .theme-option[aria-checked="true"] .theme-option-check {
+      opacity: 1;
     }
 
     .btn-menu {
@@ -1347,9 +1432,28 @@
       </nav>
 
       <div class="nav-actions">
-        <button class="btn-toggle" id="themeToggle" type="button" aria-label="Toggle theme" title="Toggle theme">
-          <svg class="theme-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93 1.41 1.41M17.66 17.66 1.41 1.41M2 12h2M20 12h2M6.34 17.66-1.41 1.41M19.07 4.93-1.41 1.41"></path></svg>
-        </button>
+        <div class="theme-picker" id="themePicker">
+          <button class="btn-toggle" id="themeToggle" type="button" aria-label="Choose color theme" aria-haspopup="menu" aria-controls="themeMenu" aria-expanded="false" title="Choose color theme">
+            <span id="themeToggleIcon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></span>
+          </button>
+          <div class="theme-menu" id="themeMenu" role="menu" aria-label="Color theme" hidden>
+            <button class="theme-option" type="button" role="menuitemradio" aria-checked="false" data-theme-option="system">
+              <span class="theme-option-icon" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"></rect><path d="M8 21h8M12 18v3"></path></svg></span>
+              <span>System</span>
+              <span class="theme-option-check" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"></path></svg></span>
+            </button>
+            <button class="theme-option" type="button" role="menuitemradio" aria-checked="false" data-theme-option="light">
+              <span class="theme-option-icon" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.41M17.66 6.34l1.41-1.41"></path></svg></span>
+              <span>Light</span>
+              <span class="theme-option-check" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"></path></svg></span>
+            </button>
+            <button class="theme-option" type="button" role="menuitemradio" aria-checked="false" data-theme-option="dark">
+              <span class="theme-option-icon" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></span>
+              <span>Dark</span>
+              <span class="theme-option-check" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"></path></svg></span>
+            </button>
+          </div>
+        </div>
         <button class="btn-menu" id="menuToggle" type="button" aria-label="Toggle contextual mobile configuration drawer" aria-controls="navMenu" aria-expanded="false">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="18" x2="20" y2="18"></line></svg>
         </button>
@@ -1789,6 +1893,10 @@
     document.addEventListener('DOMContentLoaded', () => {
       const htmlEl = document.documentElement;
       const themeToggle = document.getElementById('themeToggle');
+      const themePicker = document.getElementById('themePicker');
+      const themeMenu = document.getElementById('themeMenu');
+      const themeToggleIcon = document.getElementById('themeToggleIcon');
+      const themeOptions = Array.from(document.querySelectorAll('[data-theme-option]'));
       const menuToggle = document.getElementById('menuToggle');
       const navMenu = document.getElementById('navMenu');
       const body = document.body;
@@ -2105,33 +2213,105 @@
       });
 
       // Theme setup
-      const getSystemTheme = () => window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      const systemThemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      const getSystemTheme = () => systemThemeQuery.matches ? 'dark' : 'light';
+      const themeIcons = {
+        system: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"></rect><path d="M8 21h8M12 18v3"></path></svg>`,
+        light: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.41M17.66 6.34l1.41-1.41"></path></svg>`,
+        dark: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>`
+      };
+      const supportedThemes = new Set(['system', 'light', 'dark']);
       const cachedTheme = localStorage.getItem('portfolio-theme');
-      
-      const applyTheme = (theme, persist = false) => {
-        htmlEl.setAttribute('data-theme', theme);
+      let activeThemePreference = supportedThemes.has(cachedTheme) ? cachedTheme : 'system';
+
+      const updateThemeControls = () => {
+        const label = activeThemePreference.charAt(0).toUpperCase() + activeThemePreference.slice(1);
+        themeToggleIcon.innerHTML = themeIcons[activeThemePreference];
+        themeToggle.setAttribute('aria-label', `Theme: ${label}. Choose color theme`);
+        themeToggle.title = `Theme: ${label}`;
+
+        themeOptions.forEach(option => {
+          option.setAttribute('aria-checked', String(option.dataset.themeOption === activeThemePreference));
+        });
+      };
+
+      const applyTheme = (preference, persist = false) => {
+        activeThemePreference = supportedThemes.has(preference) ? preference : 'system';
+        const resolvedTheme = activeThemePreference === 'system' ? getSystemTheme() : activeThemePreference;
+
+        htmlEl.setAttribute('data-theme', resolvedTheme);
+        htmlEl.setAttribute('data-theme-preference', activeThemePreference);
+        document.querySelector('meta[name="theme-color"]').content = resolvedTheme === 'dark' ? '#09090b' : '#fafafa';
+
         if (persist) {
-          localStorage.setItem('portfolio-theme', theme);
+          localStorage.setItem('portfolio-theme', activeThemePreference);
         }
-        updateThemeToggleIcon(theme);
+
+        updateThemeControls();
       };
 
-      const updateThemeToggleIcon = (theme) => {
-        themeToggle.innerHTML = theme === 'dark' 
-          ? `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>`
-          : `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93 1.41 1.41M17.66 17.66 1.41 1.41M2 12h2M20 12h2M6.34 17.66-1.41 1.41M19.07 4.93-1.41 1.41"></path></svg>`;
+      const closeThemeMenu = (returnFocus = false) => {
+        themeMenu.hidden = true;
+        themeToggle.setAttribute('aria-expanded', 'false');
+        if (returnFocus) themeToggle.focus();
       };
 
-      applyTheme(cachedTheme || getSystemTheme());
+      const openThemeMenu = () => {
+        themeMenu.hidden = false;
+        themeToggle.setAttribute('aria-expanded', 'true');
+        const selectedOption = themeOptions.find(option => option.dataset.themeOption === activeThemePreference);
+        (selectedOption || themeOptions[0]).focus();
+      };
+
+      applyTheme(activeThemePreference);
 
       themeToggle.addEventListener('click', () => {
-        const currentTheme = htmlEl.getAttribute('data-theme');
-        applyTheme(currentTheme === 'dark' ? 'light' : 'dark', true);
+        if (themeMenu.hidden) {
+          openThemeMenu();
+        } else {
+          closeThemeMenu();
+        }
       });
 
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-        if (!localStorage.getItem('portfolio-theme')) {
-          applyTheme(e.matches ? 'dark' : 'light');
+      themeOptions.forEach(option => {
+        option.addEventListener('click', () => {
+          applyTheme(option.dataset.themeOption, true);
+          closeThemeMenu(true);
+        });
+      });
+
+      themeMenu.addEventListener('keydown', event => {
+        const currentIndex = themeOptions.indexOf(document.activeElement);
+
+        if (event.key === 'Escape') {
+          event.preventDefault();
+          closeThemeMenu(true);
+          return;
+        }
+
+        if (!['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) return;
+
+        event.preventDefault();
+        if (event.key === 'Home') {
+          themeOptions[0].focus();
+        } else if (event.key === 'End') {
+          themeOptions[themeOptions.length - 1].focus();
+        } else {
+          const direction = event.key === 'ArrowDown' ? 1 : -1;
+          const nextIndex = (currentIndex + direction + themeOptions.length) % themeOptions.length;
+          themeOptions[nextIndex].focus();
+        }
+      });
+
+      document.addEventListener('click', event => {
+        if (!themeMenu.hidden && !themePicker.contains(event.target)) {
+          closeThemeMenu();
+        }
+      });
+
+      systemThemeQuery.addEventListener('change', () => {
+        if (activeThemePreference === 'system') {
+          applyTheme('system');
         }
       });
 
