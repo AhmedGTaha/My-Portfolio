@@ -48,7 +48,7 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -66,7 +66,7 @@
       --accent-text: #1e40af;
       --accent-border: #bfdbfe;
       --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-arabic: 'Noto Sans Arabic', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-arabic: 'Alexandria', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
       --shadow: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.02);
       --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
@@ -117,6 +117,7 @@
 
     html[lang="ar"] body {
       font-family: var(--font-arabic);
+      line-height: 1.75;
     }
 
     html[lang="ar"]:not(.i18n-ready) body {
@@ -147,6 +148,34 @@
     html[dir="rtl"] .gallery-title {
       unicode-bidi: plaintext;
       text-align: start;
+    }
+
+    html[lang="ar"] .hero-title,
+    html[lang="ar"] .section-title,
+    html[lang="ar"] .edu-title h3,
+    html[lang="ar"] .project-title,
+    html[lang="ar"] .cert-title,
+    html[lang="ar"] .contact-text h2,
+    html[lang="ar"] .gallery-title {
+      letter-spacing: 0;
+      line-height: 1.4;
+    }
+
+    html[lang="ar"] .hero-desc,
+    html[lang="ar"] .project-desc,
+    html[lang="ar"] .edu-details,
+    html[lang="ar"] .project-tasks,
+    html[lang="ar"] .contact-text p,
+    html[lang="ar"] .gallery-subtitle {
+      line-height: 1.9;
+    }
+
+    html[lang="ar"] .nav-link,
+    html[lang="ar"] .btn,
+    html[lang="ar"] .product-gallery-trigger,
+    html[lang="ar"] .gallery-action,
+    html[lang="ar"] .theme-option {
+      font-weight: 600;
     }
 
     body.menu-open,

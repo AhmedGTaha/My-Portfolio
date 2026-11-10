@@ -20,6 +20,10 @@ assert.match(page, /data-gallery="ilumis" data-i18n-text="actions\.viewGallery"/
 assert.doesNotMatch(page, /projects\.ilumis\.scope[\s\S]{0,500}ilumis-logo\.png/);
 assert.match(page, /'experience\.paralympic\.role':\s*'متدرب مهندس برمجيات'/);
 assert.match(readme, /ILUMIS/);
+assert.match(page, /family=Alexandria:wght@400;500;600;700;800/);
+assert.match(page, /--font-arabic:\s*'Alexandria'/);
+assert.doesNotMatch(page, /Noto Sans Arabic/);
+assert.match(page, /html\[lang="ar"\] body\s*\{\s*font-family: var\(--font-arabic\);\s*line-height: 1\.75;/);
 
 const imagePaths = [
   'dashboard-redesigned.jpg',
