@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Ahmed Taha Ghodhbani is a Software Engineering graduate and Full-Stack Developer experienced in production SaaS and AI-integrated applications.">
+  <meta name="description" content="Ahmed Taha Ghodhbani is a Software Engineering graduate and full-stack developer with experience building new SaaS products and improving established platforms.">
   <meta name="theme-color" content="#09090b">
   <meta name="application-name" content="Ahmed Taha Ghodhbani Portfolio">
   <meta name="apple-mobile-web-app-title" content="Ahmed Portfolio">
@@ -32,7 +32,7 @@
   <meta property="og:site_name" content="Ahmed Taha Ghodhbani Portfolio">
   <meta property="og:url" content="https://ahmedgtaha.github.io/My-Portfolio/">
   <meta property="og:title" content="Ahmed Taha Ghodhbani | Software Engineer">
-  <meta property="og:description" content="Full-stack developer building production-ready SaaS, database-driven, and AI-integrated applications.">
+  <meta property="og:description" content="Full-stack developer building new SaaS products and improving established platforms.">
   <meta property="og:image" content="https://ahmedgtaha.github.io/My-Portfolio/images/profile/ahmed-taha-share.jpg?v=2">
   <meta property="og:image:secure_url" content="https://ahmedgtaha.github.io/My-Portfolio/images/profile/ahmed-taha-share.jpg?v=2">
   <meta property="og:image:type" content="image/jpeg">
@@ -42,7 +42,7 @@
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Ahmed Taha Ghodhbani | Software Engineer">
-  <meta name="twitter:description" content="Full-stack developer building production-ready SaaS, database-driven, and AI-integrated applications.">
+  <meta name="twitter:description" content="Full-stack developer building new SaaS products and improving established platforms.">
   <meta name="twitter:image" content="https://ahmedgtaha.github.io/My-Portfolio/images/profile/ahmed-taha-share.jpg?v=2">
   <meta name="twitter:image:alt" content="Portrait of Ahmed Taha Ghodhbani">
   
@@ -609,6 +609,23 @@
       background: var(--bg-muted);
       padding: 4px 10px;
       border-radius: var(--radius-sm);
+    }
+
+    .ilumis-product-icon {
+      width: 112px;
+      height: 48px;
+      flex: 0 0 112px;
+      padding: 6px 8px;
+      object-fit: contain;
+      background: #ffffff;
+      border: 1px solid #e4e4e7;
+      border-radius: 10px;
+    }
+
+    .ilumis-product-card:hover {
+      border-color: var(--border);
+      box-shadow: none;
+      transform: none;
     }
 
     .project-title {
@@ -1536,7 +1553,7 @@
           <div class="tagline" data-i18n="hero.tagline">Software Engineer | Full-Stack Developer</div>
           <h1 class="hero-title" data-i18n="hero.title">Building production-ready software from idea to deployment.</h1>
           <p class="hero-desc" data-i18n="hero.description">
-            Software Engineering graduate with professional experience delivering production full-stack, database-driven, and AI-integrated applications. Built and delivered a multi-organization recruitment SaaS purchased and adopted by Script IT Solutions.
+            Software Engineering graduate and full-stack developer with experience delivering new SaaS products and improving established platforms. Built a recruitment SaaS adopted by Script IT Solutions and implemented production-released event-draft recovery for ILUMIS at the Bahrain Paralympic Committee.
           </p>
           <div class="hero-btns">
             <a class="btn btn-primary" href="#projects" data-i18n-text="hero.viewProjects">
@@ -1591,6 +1608,37 @@
           <article class="edu-block reveal">
             <div class="edu-header">
               <div class="edu-title">
+                <h3 data-i18n="experience.paralympic.role">Software Engineer Intern</h3>
+                <div class="edu-inst" data-i18n="experience.paralympic.company">Bahrain Paralympic Committee · Bahrain</div>
+              </div>
+              <span class="edu-date" data-i18n="experience.paralympic.date">Sep 2026 - Oct 2026</span>
+            </div>
+            <ul class="edu-details">
+              <li data-i18n="experience.paralympic.item1">Contributed to the established ILUMIS event-management SaaS by redesigning administrative UI/UX across most application pages and making coordinated Python/FastAPI, JavaScript, and database changes.</li>
+              <li data-i18n="experience.paralympic.item2">Implemented recoverable event-draft autosave, later released to production by the organization so users can resume incomplete forms.</li>
+              <li data-i18n="experience.paralympic.item3">Fixed flight-detail visibility and official-specific link reuse issues, strengthening workflow reliability and access control.</li>
+            </ul>
+            <div class="project-tags">
+              <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">JavaScript</span><span class="tag">HTML/CSS</span><span class="tag">MySQL</span><span class="tag">UI/UX</span><span class="tag">SaaS</span>
+            </div>
+            <div class="product-link-row ilumis-product-row">
+              <div class="product-link-card ilumis-product-card">
+                <img class="ilumis-product-icon" src="images/ilumis/ilumis-logo.png" width="112" height="48" alt="ILUMIS logo" data-i18n-alt="experience.ilumisLogo" loading="lazy">
+                <span class="product-link-copy">
+                  <span class="product-link-title" data-i18n="experience.ilumisTitle">ILUMIS</span>
+                  <span class="product-link-url" data-i18n="experience.ilumisSubtitle">Event Operations Platform</span>
+                </span>
+              </div>
+              <button class="product-gallery-trigger" type="button" data-gallery="ilumis" data-i18n-text="actions.viewGallery" aria-haspopup="dialog" aria-controls="projectGalleryModal">
+                View gallery
+                <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="8.5" cy="10" r="1.5"></circle><path d="m21 15-5-5L5 19"></path></svg>
+              </button>
+            </div>
+          </article>
+
+          <article class="edu-block reveal">
+            <div class="edu-header">
+              <div class="edu-title">
                 <h3 data-i18n="experience.role">Software Developer Intern</h3>
                 <div class="edu-inst" data-i18n="experience.company">Script IT Solutions · Bahrain</div>
               </div>
@@ -1636,6 +1684,24 @@
         </div>
 
         <div class="projects-grid">
+          <article class="project-card reveal">
+            <div class="project-top">
+              <div class="project-meta">
+                <span class="project-scope" data-i18n="projects.ilumis.scope">Professional Contribution · Internship</span>
+              </div>
+              <h3 class="project-title"><button class="project-title-button" type="button" data-gallery="ilumis" data-i18n-text="projects.ilumis.name" aria-haspopup="dialog" aria-controls="projectGalleryModal">ILUMIS | Event Operations Platform<svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="8.5" cy="10" r="1.5"></circle><path d="m21 15-5-5L5 19"></path></svg></button></h3>
+              <p class="project-desc" data-i18n="projects.ilumis.description">Enhanced ILUMIS, an established event-management SaaS platform supporting para-sports operations, during a Software Engineer internship at the Bahrain Paralympic Committee. Focused on administrative UI/UX, reliable event drafts, and targeted full-stack bug fixes.</p>
+              <ul class="project-tasks">
+                <li data-i18n="projects.ilumis.item1">Redesigned the interface across most application pages, improving navigation, hierarchy, and usability without rebuilding the underlying product.</li>
+                <li data-i18n="projects.ilumis.item2">Implemented recoverable event-draft autosave that was subsequently deployed to production by the organization.</li>
+                <li data-i18n="projects.ilumis.item3">Fixed flight-detail visibility and official-specific link reuse issues through coordinated frontend, backend, and database changes.</li>
+              </ul>
+            </div>
+            <div class="project-tags">
+              <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">JavaScript</span><span class="tag">MySQL</span><span class="tag">UI/UX</span><span class="tag">SaaS</span>
+            </div>
+          </article>
+
           <article class="project-card reveal">
             <div class="project-top">
               <div class="project-meta">
@@ -1972,17 +2038,17 @@
       const translations = {
         en: {
           'meta.title': 'Ahmed Taha Ghodhbani | Software Engineer & Full-Stack Developer',
-          'meta.description': 'Ahmed Taha Ghodhbani is a Software Engineering graduate and Full-Stack Developer experienced in production SaaS and AI-integrated applications.',
+          'meta.description': 'Ahmed Taha Ghodhbani is a Software Engineering graduate and full-stack developer with experience building new SaaS products and improving established platforms.',
           'meta.applicationName': 'Ahmed Taha Ghodhbani Portfolio', 'meta.shortName': 'Ahmed Portfolio',
           'meta.socialTitle': 'Ahmed Taha Ghodhbani | Software Engineer',
-          'meta.socialDescription': 'Full-stack developer building production-ready SaaS, database-driven, and AI-integrated applications.',
+          'meta.socialDescription': 'Full-stack developer building new SaaS products and improving established platforms.',
           'meta.imageAlt': 'Portrait of Ahmed Taha Ghodhbani',
           'a11y.skip': 'Skip to Main Content', 'a11y.home': 'Ahmed Taha Home', 'a11y.primaryNav': 'Primary Site Navigation', 'a11y.mobileNav': 'Toggle mobile navigation',
           'nav.experience': 'Experience', 'nav.projects': 'Projects', 'nav.skills': 'Skills', 'nav.background': 'Background', 'nav.certification': 'Certification', 'nav.languages': 'Languages', 'nav.contact': 'Contact',
           'language.switch': 'Switch language to Arabic',
           'theme.menu': 'Color theme', 'theme.system': 'System', 'theme.light': 'Light', 'theme.dark': 'Dark', 'theme.control': 'Theme: {theme}. Choose color theme',
           'hero.tagline': 'Software Engineer | Full-Stack Developer', 'hero.title': 'Building production-ready software from idea to deployment.',
-          'hero.description': 'Software Engineering graduate with professional experience delivering production full-stack, database-driven, and AI-integrated applications. Built and delivered a multi-organization recruitment SaaS purchased and adopted by Script IT Solutions.',
+          'hero.description': 'Software Engineering graduate and full-stack developer with experience delivering new SaaS products and improving established platforms. Built a recruitment SaaS adopted by Script IT Solutions and implemented production-released event-draft recovery for ILUMIS at the Bahrain Paralympic Committee.',
           'hero.viewProjects': 'View projects', 'hero.emailMe': 'Email me',
           'profile.summary': 'Profile summary', 'profile.title': 'Profile', 'profile.developer': 'Developer', 'profile.education': 'Education',
           'profile.educationValue': 'B.Sc. Software Engineering, University of Bahrain', 'profile.experience': 'Experience',
@@ -1996,8 +2062,18 @@
           'experience.item5': 'Designed and developed <strong>Canvas</strong>, an AI-assisted website builder prototype with AI editing, live preview, reusable sections, collaboration, version history, and validated export.',
           'experience.flawlessLink': 'Visit Flawless Interviews website (opens in a new tab)',
           'experience.flawlessIcon': 'Flawless Interviews icon',
+          'experience.ilumisTitle': 'ILUMIS', 'experience.ilumisSubtitle': 'Event Operations Platform', 'experience.ilumisLogo': 'ILUMIS logo',
+          'experience.paralympic.role': 'Software Engineer Intern', 'experience.paralympic.company': 'Bahrain Paralympic Committee · Bahrain', 'experience.paralympic.date': 'Sep 2026 - Oct 2026',
+          'experience.paralympic.item1': 'Contributed to the established ILUMIS event-management SaaS by redesigning administrative UI/UX across most application pages and making coordinated Python/FastAPI, JavaScript, and database changes.',
+          'experience.paralympic.item2': 'Implemented recoverable event-draft autosave, later released to production by the organization so users can resume incomplete forms.',
+          'experience.paralympic.item3': 'Fixed flight-detail visibility and official-specific link reuse issues, strengthening workflow reliability and access control.',
           'actions.live': 'Live', 'actions.viewGallery': 'View gallery', 'actions.viewCertificate': 'View certificate',
           'projects.label': 'Projects', 'projects.title': 'Selected production-style projects',
+          'projects.ilumis.scope': 'Professional Contribution · Internship', 'projects.ilumis.name': 'ILUMIS | Event Operations Platform',
+          'projects.ilumis.description': 'Enhanced ILUMIS, an established event-management SaaS platform supporting para-sports operations, during a Software Engineer internship at the Bahrain Paralympic Committee. Focused on administrative UI/UX, reliable event drafts, and targeted full-stack bug fixes.',
+          'projects.ilumis.item1': 'Redesigned the interface across most application pages, improving navigation, hierarchy, and usability without rebuilding the underlying product.',
+          'projects.ilumis.item2': 'Implemented recoverable event-draft autosave that was subsequently deployed to production by the organization.',
+          'projects.ilumis.item3': 'Fixed flight-detail visibility and official-specific link reuse issues through coordinated frontend, backend, and database changes.',
           'projects.canvas.scope': 'Professional Product Prototype', 'projects.canvas.links': 'Canvas links', 'projects.canvas.name': 'Canvas | AI-Assisted Website Builder',
           'projects.canvas.description': 'An AI-assisted website-building platform designed for non-technical users to create and evolve complete frontend websites through natural-language instructions while maintaining structured pages, reusable sections, safe previews, and reversible history.',
           'projects.canvas.item1': 'Built workspaces and projects, a hierarchical page tree, AI page and element-level editing, reusable sections, project-aware AI context, media management, and a sandboxed responsive live preview.',
@@ -2029,6 +2105,8 @@
           'gallery.previous': 'Previous screenshot', 'gallery.next': 'Next screenshot', 'gallery.choose': 'Choose a screenshot', 'gallery.view': 'View screenshot {current} of {total}', 'gallery.counter': '{current} / {total}',
           'gallery.status': 'Showing screenshot {current} of {total}: {alt}', 'gallery.close': 'Close {title}', 'gallery.openAction': 'Open {title} {label} in a new tab', 'gallery.github': 'GitHub', 'gallery.liveSite': 'Live site',
           'gallery.canvas.title': 'Canvas | AI-Assisted Website Builder',
+          'gallery.ilumis.title': 'ILUMIS | Event Operations Platform',
+          'gallery.ilumis.alt1': 'Redesigned ILUMIS dashboard for event operations', 'gallery.ilumis.alt2': 'Redesigned ILUMIS customer management interface', 'gallery.ilumis.alt3': 'ILUMIS events list interface', 'gallery.ilumis.alt4': 'ILUMIS bookings list interface', 'gallery.ilumis.alt5': 'ILUMIS hotels list interface', 'gallery.ilumis.alt6': 'ILUMIS transportation management interface', 'gallery.ilumis.alt7': 'ILUMIS visa management interface', 'gallery.ilumis.alt8': 'ILUMIS support tickets interface',
           'gallery.canvas.alt1': 'Canvas AI page editor showing a Bahrain National Day website preview and assistant panel', 'gallery.canvas.alt2': 'Canvas brand and theme settings with color palettes and a responsive preview', 'gallery.canvas.alt3': 'Canvas reusable section library with navigation layout choices', 'gallery.canvas.alt4': 'Canvas version history and checkpoint controls beside a website preview', 'gallery.canvas.alt5': 'Canvas website export panel showing a validated ZIP ready to download', 'gallery.canvas.alt6': 'Canvas AI settings page for choosing a provider and model', 'gallery.canvas.alt7': 'Canvas AI usage dashboard with request, latency, token, and validation metrics',
           'gallery.alsaeh.title': 'Alsaeh Tourism Recommender System for Bahrain',
           'gallery.alsaeh.alt1': 'Alsaeh tourism planner landing page introducing personalized Bahrain itineraries', 'gallery.alsaeh.alt2': 'Alsaeh dashboard listing a saved Bahrain travel plan', 'gallery.alsaeh.alt3': 'Alsaeh form for creating an AI-generated Bahrain travel plan', 'gallery.alsaeh.alt4': 'Alsaeh generated itinerary with the AI trip assistant panel', 'gallery.alsaeh.alt5': 'Alsaeh administration analytics dashboard with usage charts', 'gallery.alsaeh.alt6': 'Alsaeh about page explaining the project, objectives, architecture, and team',
@@ -2042,15 +2120,15 @@
         },
         ar: {
           'meta.title': 'أحمد طه الغضباني | مهندس برمجيات ومطوّر متكامل',
-          'meta.description': 'أحمد طه الغضباني خريج هندسة برمجيات ومطوّر متكامل ذو خبرة في تطبيقات SaaS الإنتاجية والتطبيقات المعتمدة على الذكاء الاصطناعي.',
+          'meta.description': 'أحمد طه الغضباني خريج هندسة برمجيات ومطوّر متكامل ذو خبرة في بناء منتجات SaaS جديدة وتطوير منصات قائمة.',
           'meta.applicationName': 'معرض أعمال أحمد طه الغضباني', 'meta.shortName': 'معرض أحمد',
-          'meta.socialTitle': 'أحمد طه الغضباني | مهندس برمجيات', 'meta.socialDescription': 'مطوّر متكامل يبني تطبيقات SaaS وأنظمة قائمة على قواعد البيانات وحلولاً مدمجة بالذكاء الاصطناعي وجاهزة للإنتاج.', 'meta.imageAlt': 'صورة شخصية لأحمد طه الغضباني',
+          'meta.socialTitle': 'أحمد طه الغضباني | مهندس برمجيات', 'meta.socialDescription': 'مطوّر متكامل يبني منتجات SaaS جديدة ويساهم في تطوير منصات قائمة.', 'meta.imageAlt': 'صورة شخصية لأحمد طه الغضباني',
           'a11y.skip': 'انتقل إلى المحتوى الرئيسي', 'a11y.home': 'صفحة أحمد طه الرئيسية', 'a11y.primaryNav': 'التنقل الرئيسي في الموقع', 'a11y.mobileNav': 'فتح أو إغلاق قائمة التنقل على الهاتف',
           'nav.experience': 'الخبرة', 'nav.projects': 'المشاريع', 'nav.skills': 'المهارات', 'nav.background': 'المؤهلات', 'nav.certification': 'الشهادات', 'nav.languages': 'اللغات', 'nav.contact': 'التواصل',
           'language.switch': 'تغيير اللغة إلى الإنجليزية',
           'theme.menu': 'سمة الألوان', 'theme.system': 'النظام', 'theme.light': 'فاتح', 'theme.dark': 'داكن', 'theme.control': 'السمة: {theme}. اختر سمة الألوان',
           'hero.tagline': 'مهندس برمجيات | مطوّر متكامل', 'hero.title': 'أبني برمجيات جاهزة للإنتاج من الفكرة حتى النشر.',
-          'hero.description': 'خريج هندسة برمجيات ذو خبرة مهنية في تقديم تطبيقات متكاملة جاهزة للإنتاج، قائمة على قواعد البيانات ومدمجة بالذكاء الاصطناعي. صممت وسلّمت منصة SaaS للتوظيف متعددة المؤسسات اشترتها شركة Script IT Solutions واعتمدتها.',
+          'hero.description': 'خريج هندسة برمجيات ومطور متكامل، لدي خبرة في بناء منتجات SaaS جديدة وتطوير منصات قائمة. طورت منصة توظيف اعتمدتها Script IT Solutions، ونفذت ميزة لاستعادة مسودات الفعاليات في ILUMIS أطلقت لاحقاً في بيئة الإنتاج لدى اللجنة البارالمبية البحرينية.',
           'hero.viewProjects': 'عرض المشاريع', 'hero.emailMe': 'راسلني',
           'profile.summary': 'ملخص الملف الشخصي', 'profile.title': 'الملف الشخصي', 'profile.developer': 'المطوّر', 'profile.education': 'التعليم', 'profile.educationValue': 'بكالوريوس هندسة البرمجيات، جامعة البحرين',
           'profile.experience': 'الخبرة', 'profile.experienceValue': 'تطبيقات متكاملة جاهزة للإنتاج، قائمة على قواعد البيانات ومدمجة بالذكاء الاصطناعي', 'profile.location': 'الموقع', 'profile.locationValue': 'الرفاع، البحرين',
@@ -2062,8 +2140,18 @@
           'experience.item5': 'صممت وطوّرت <strong>Canvas</strong>، وهو نموذج أولي لمنشئ مواقع بمساعدة الذكاء الاصطناعي يضم التحرير الذكي، والمعاينة المباشرة، والأقسام القابلة لإعادة الاستخدام، والتعاون، وسجل الإصدارات، والتصدير المتحقق منه.',
           'experience.flawlessLink': 'زيارة موقع Flawless Interviews (يفتح في علامة تبويب جديدة)',
           'experience.flawlessIcon': 'أيقونة Flawless Interviews',
+          'experience.ilumisTitle': 'ILUMIS', 'experience.ilumisSubtitle': 'منصة لإدارة الفعاليات', 'experience.ilumisLogo': 'شعار ILUMIS',
+          'experience.paralympic.role': 'متدرب مهندس برمجيات', 'experience.paralympic.company': 'اللجنة البارالمبية البحرينية · البحرين', 'experience.paralympic.date': 'سبتمبر 2026 - أكتوبر 2026',
+          'experience.paralympic.item1': 'ساهمت في تطوير منصة ILUMIS القائمة لإدارة الفعاليات، عبر إعادة تصميم واجهات وتجربة المستخدم في معظم الصفحات الإدارية وتنفيذ تعديلات شملت Python/FastAPI وJavaScript وقواعد البيانات.',
+          'experience.paralympic.item2': 'طوّرت ميزة الحفظ التلقائي لمسودات الفعاليات واستعادتها، والتي أطلقتها الجهة لاحقاً في بيئة الإنتاج، لتمكين المستخدمين من متابعة النماذج غير المكتملة.',
+          'experience.paralympic.item3': 'أصلحت مشكلات عدم ظهور تفاصيل الرحلات الجوية وإمكانية إعادة استخدام الروابط المخصصة للمسؤولين، بما عزز موثوقية سير العمل والتحكم في الوصول.',
           'actions.live': 'الموقع', 'actions.viewGallery': 'عرض المعرض', 'actions.viewCertificate': 'عرض الشهادة',
           'projects.label': 'المشاريع', 'projects.title': 'مشاريع مختارة بمستوى إنتاجي',
+          'projects.ilumis.scope': 'مساهمة مهنية · تدريب', 'projects.ilumis.name': 'ILUMIS | منصة لإدارة الفعاليات',
+          'projects.ilumis.description': 'ساهمت في تطوير منصة ILUMIS القائمة لإدارة الفعاليات الرياضية خلال تدريبي في اللجنة البارالمبية البحرينية، مع التركيز على تحسين الواجهات الإدارية، وحفظ مسودات الفعاليات، وإصلاح مشكلات في التطبيق عبر الواجهة الأمامية والخلفية وقاعدة البيانات.',
+          'projects.ilumis.item1': 'أعدت تصميم واجهات معظم صفحات التطبيق لتحسين وضوح المعلومات وسهولة التنقل والاستخدام، دون بناء النظام من الصفر.',
+          'projects.ilumis.item2': 'نفذت الحفظ التلقائي لمسودات الفعاليات واستعادتها، وأطلقت الجهة الميزة لاحقاً في بيئة الإنتاج.',
+          'projects.ilumis.item3': 'أصلحت مشكلة عدم عرض تفاصيل الرحلات الجوية ومشكلة إمكانية إعادة استخدام الروابط المخصصة للمسؤولين، عبر تعديلات شملت مكونات النظام المختلفة.',
           'projects.canvas.scope': 'نموذج أولي لمنتج احترافي', 'projects.canvas.links': 'روابط Canvas', 'projects.canvas.name': 'Canvas | منشئ مواقع بمساعدة الذكاء الاصطناعي',
           'projects.canvas.description': 'منصة لبناء المواقع بمساعدة الذكاء الاصطناعي، صُممت لتمكين المستخدمين غير التقنيين من إنشاء مواقع واجهات أمامية متكاملة وتطويرها عبر تعليمات باللغة الطبيعية، مع الحفاظ على صفحات منظمة وأقسام قابلة لإعادة الاستخدام ومعاينات آمنة وسجل تغييرات قابل للتراجع.',
           'projects.canvas.item1': 'أنشأت مساحات العمل والمشاريع، وشجرة صفحات هرمية، وتحريراً بالذكاء الاصطناعي على مستوى الصفحة والعنصر، وأقساماً قابلة لإعادة الاستخدام، وسياقاً ذكياً مدركاً للمشروع، وإدارة للوسائط، ومعاينة مباشرة متجاوبة ومعزولة.',
@@ -2094,6 +2182,8 @@
           'gallery.previous': 'لقطة الشاشة السابقة', 'gallery.next': 'لقطة الشاشة التالية', 'gallery.choose': 'اختر لقطة شاشة', 'gallery.view': 'عرض لقطة الشاشة {current} من {total}', 'gallery.counter': '{current} / {total}',
           'gallery.status': 'تُعرض لقطة الشاشة {current} من {total}: {alt}', 'gallery.close': 'إغلاق {title}', 'gallery.openAction': 'فتح {label} لمشروع {title} في علامة تبويب جديدة', 'gallery.github': 'GitHub', 'gallery.liveSite': 'الموقع المباشر',
           'gallery.canvas.title': 'Canvas | منشئ مواقع بمساعدة الذكاء الاصطناعي',
+          'gallery.ilumis.title': 'ILUMIS | منصة لإدارة الفعاليات',
+          'gallery.ilumis.alt1': 'لوحة ILUMIS المعاد تصميمها لإدارة الفعاليات', 'gallery.ilumis.alt2': 'واجهة ILUMIS المعاد تصميمها لإدارة العملاء', 'gallery.ilumis.alt3': 'واجهة قائمة الفعاليات في ILUMIS', 'gallery.ilumis.alt4': 'واجهة قائمة الحجوزات في ILUMIS', 'gallery.ilumis.alt5': 'واجهة قائمة الفنادق في ILUMIS', 'gallery.ilumis.alt6': 'واجهة إدارة النقل في ILUMIS', 'gallery.ilumis.alt7': 'واجهة إدارة التأشيرات في ILUMIS', 'gallery.ilumis.alt8': 'واجهة تذاكر الدعم في ILUMIS',
           'gallery.canvas.alt1': 'محرر الصفحات الذكي في Canvas يعرض معاينة لموقع اليوم الوطني البحريني ولوحة المساعد', 'gallery.canvas.alt2': 'إعدادات العلامة التجارية والسمة في Canvas مع لوحات الألوان ومعاينة متجاوبة', 'gallery.canvas.alt3': 'مكتبة الأقسام القابلة لإعادة الاستخدام في Canvas مع خيارات تخطيط التنقل', 'gallery.canvas.alt4': 'سجل الإصدارات وأدوات نقاط الحفظ في Canvas بجانب معاينة الموقع', 'gallery.canvas.alt5': 'لوحة تصدير الموقع في Canvas تعرض ملف ZIP متحققاً منه وجاهزاً للتنزيل', 'gallery.canvas.alt6': 'صفحة إعدادات الذكاء الاصطناعي في Canvas لاختيار المزوّد والنموذج', 'gallery.canvas.alt7': 'لوحة استخدام الذكاء الاصطناعي في Canvas تعرض مقاييس الطلبات وزمن الاستجابة والرموز والتحقق',
           'gallery.alsaeh.title': 'Alsaeh | نظام توصية سياحي للبحرين',
           'gallery.alsaeh.alt1': 'الصفحة الرئيسية لمخطط الرحلات Alsaeh وتقديم برامج سياحية مخصصة للبحرين', 'gallery.alsaeh.alt2': 'لوحة Alsaeh تعرض خطة سفر محفوظة للبحرين', 'gallery.alsaeh.alt3': 'نموذج Alsaeh لإنشاء خطة سفر للبحرين بالذكاء الاصطناعي', 'gallery.alsaeh.alt4': 'برنامج رحلة مولد في Alsaeh مع لوحة مساعد الرحلات الذكي', 'gallery.alsaeh.alt5': 'لوحة التحليلات الإدارية في Alsaeh مع مخططات الاستخدام', 'gallery.alsaeh.alt6': 'صفحة التعريف بمشروع Alsaeh وتوضيح أهدافه ومعماريته وفريقه',
@@ -2133,6 +2223,17 @@
       };
 
       const projectGalleries = {
+        ilumis: {
+          titleKey: 'gallery.ilumis.title',
+          github: null,
+          live: null,
+          images: [
+            { src: 'images/ilumis/dashboard-redesigned.jpg', altKey: 'gallery.ilumis.alt1' }, { src: 'images/ilumis/customers-redesigned.jpg', altKey: 'gallery.ilumis.alt2' },
+            { src: 'images/ilumis/events-list-redesigned.jpg', altKey: 'gallery.ilumis.alt3' }, { src: 'images/ilumis/bookings-list-redesigned.jpg', altKey: 'gallery.ilumis.alt4' },
+            { src: 'images/ilumis/hotels-list-redesigned.jpg', altKey: 'gallery.ilumis.alt5' }, { src: 'images/ilumis/transportation-redesigned.jpg', altKey: 'gallery.ilumis.alt6' },
+            { src: 'images/ilumis/visa-management-redesigned.jpg', altKey: 'gallery.ilumis.alt7' }, { src: 'images/ilumis/support-tickets-redesigned.jpg', altKey: 'gallery.ilumis.alt8' }
+          ]
+        },
         canvas: {
           titleKey: 'gallery.canvas.title',
           github: 'https://github.com/AhmedGTaha/canvas',

@@ -16,6 +16,7 @@ A responsive personal portfolio showcasing my software engineering experience, s
 
 ## Featured work
 
+- **ILUMIS** — professional contribution to an established event-operations platform during an internship at the Bahrain Paralympic Committee; includes administrative UI/UX improvements, event-draft recovery, and targeted full-stack fixes
 - **Flawless Interviews** — a multi-organization AI recruitment SaaS
 - **Canvas** — an AI-assisted website builder
 - **Alsaeh** — a bilingual AI tourism recommender for Bahrain
